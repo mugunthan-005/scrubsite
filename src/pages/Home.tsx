@@ -9,7 +9,6 @@ import ImageTrail from '../components/ImageTrail';
 import ShinyText from '../components/ShinyText';
 import SideRays from '../components/SideRays';
 import SplitText from '../components/SplitText';
-import MagicBento from '../components/MagicBento';
 import Scrub3DViewer from '../components/Scrub3DViewer';
 import Footer from '../components/Footer';
 
@@ -226,42 +225,80 @@ export default function Home() {
         </section>
 
 
-        {/* ==================== SECTION 3: MAGIC BENTO STANDARDS ==================== */}
-        <section className="h-full w-full relative flex-none flex flex-col justify-center overflow-hidden bg-gradient-to-b from-[#0D1B2A] via-[#0F172A] to-[#111C2E]">
-          <div className="container-px relative z-10 py-6">
-            <motion.div
-              className="mx-auto max-w-2xl text-center mb-8"
-              initial={{ opacity: 0, y: 30 }}
-              animate={currentSection === 2 ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6 }}
-            >
-              <p className="text-xs font-semibold uppercase tracking-widest text-teal-400">ZYNEX Fabric & Engineering Standards</p>
-              <h2 className="mt-2 font-display text-2xl sm:text-4xl font-bold text-white text-balance">
-                Knitted fabric engineered to work as hard as you do
-              </h2>
-              <p className="mt-2 text-xs sm:text-sm text-slate-300 max-w-xl mx-auto">
-                200-220 GSM high-density knitted blend (92% Polyester, 8% Spandex) for total freedom of motion and clinical durability.
-              </p>
-            </motion.div>
+        {/* ==================== SECTION 3: REIMAGINED MEDICAL WORKWEAR FEATURES ==================== */}
+        <section className="h-full w-full relative flex-none flex flex-col justify-center overflow-hidden bg-gradient-to-b from-[#0D1B2A] via-[#0F172A] to-[#111C2E] py-8 sm:py-12">
+          <div className="container-px relative z-10 w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              
+              {/* Left Column: Blank Image Canvas Container */}
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                animate={currentSection === 2 ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
+                transition={{ duration: 0.8 }}
+                className="lg:col-span-5 h-[380px] sm:h-[480px] lg:h-[540px] w-full rounded-2xl bg-gradient-to-b from-[#061224]/80 via-[#0A192F]/60 to-[#040D1A]/90 border border-teal-500/20 shadow-2xl backdrop-blur-md relative overflow-hidden flex items-center justify-center group"
+              >
+                {/* Ambient Soft Glow inside blank canvas */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-teal-500/10 via-sky-500/10 to-transparent blur-2xl group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="relative z-10 text-center px-6">
+                  <span className="h-3 w-3 rounded-full bg-teal-400/80 animate-ping inline-block mb-3" />
+                  <p className="font-display text-xs sm:text-sm font-bold uppercase tracking-widest text-teal-300/80">
+                    Product Canvas Placeholder
+                  </p>
+                </div>
+              </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={currentSection === 2 ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-            >
-              <MagicBento
-                textAutoHide={true}
-                enableStars={true}
-                enableSpotlight={true}
-                enableBorderGlow={true}
-                enableTilt={true}
-                enableMagnetism={true}
-                clickEffect={true}
-                spotlightRadius={300}
-                particleCount={12}
-                glowColor="45, 212, 191"
-              />
-            </motion.div>
+              {/* Right Column: 5 Reimagined Feature Highlights */}
+              <div className="lg:col-span-7 flex flex-col gap-4 sm:gap-5 text-left">
+                {[
+                  {
+                    num: "01",
+                    title: "Not Just a Scrub.",
+                    desc: "The next generation of medical workwear.",
+                  },
+                  {
+                    num: "02",
+                    title: "Shield Every Shift.",
+                    desc: "Fluid repellent. Antimicrobial. Ready for the realities of healthcare.",
+                  },
+                  {
+                    num: "03",
+                    title: "Move Freely. Work Comfortably.",
+                    desc: "Breathable bamboo-blend fabric with four-way stretch, designed for long hours on your feet.",
+                  },
+                  {
+                    num: "04",
+                    title: "Designed Around Healthcare Professionals.",
+                    desc: "Every stitch is engineered for comfort, durability, and confidence in demanding clinical environments.",
+                  },
+                  {
+                    num: "05",
+                    title: "Wear the Future of Healthcare.",
+                    desc: "Medease transforms everyday scrubs into performance-driven medical workwear—because those who care for others deserve equipment designed to care for them.",
+                  },
+                ].map((item, index) => (
+                  <motion.div
+                    key={item.num}
+                    initial={{ opacity: 0, y: 25 }}
+                    animate={currentSection === 2 ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
+                    transition={{ duration: 0.5, delay: index * 0.12 }}
+                    className="group relative p-3.5 sm:p-4 rounded-xl bg-slate-900/40 border border-slate-800/80 hover:border-teal-500/40 hover:bg-slate-900/80 transition-all duration-300 shadow-md flex items-start gap-4"
+                  >
+                    <span className="font-display text-xs sm:text-sm font-extrabold text-teal-400/90 bg-teal-500/10 px-2.5 py-1 rounded border border-teal-500/30 flex-none group-hover:bg-teal-500 group-hover:text-white transition-all">
+                      {item.num}
+                    </span>
+                    <div className="flex flex-col gap-0.5">
+                      <h3 className="font-display text-sm sm:text-base lg:text-lg font-bold text-white group-hover:text-teal-300 transition-colors">
+                        {item.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-slate-300/90 leading-relaxed font-medium">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+            </div>
           </div>
         </section>
 
