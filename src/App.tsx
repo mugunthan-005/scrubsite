@@ -5,15 +5,6 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import CartDrawer from './components/CartDrawer';
 import Home from './pages/Home';
-import Shop from './pages/Shop';
-import ProductDetail from './pages/ProductDetail';
-import Checkout from './pages/Checkout';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Collections from './pages/Collections';
-import Account from './pages/Account';
-import AdminDashboard from './pages/AdminDashboard';
-import Model3D from './pages/Model3D';
 import FuzzyText from './components/FuzzyText';
 import SideRays from './components/SideRays';
 import Particles from './components/Particles';
@@ -22,16 +13,8 @@ function Routes() {
   const { path, navigate } = useRouter();
 
   if (path === '/' || path === '') return <Home />;
-  if (path === '/shop') return <Shop />;
-  if (path.startsWith('/product/')) return <ProductDetail slug={path.replace('/product/', '')} />;
-  if (path === '/checkout') return <Checkout />;
-  if (path === '/about') return <About />;
-  if (path === '/contact') return <Contact />;
-  if (path === '/collections') return <Collections />;
-  if (path === '/account') return <Account />;
-  if (path === '/admin') return <AdminDashboard />;
-  if (path === '/model-3d') return <Model3D />;
 
+  // All other pages redirect to Coming Soon screen as requested
   return (
     <div className="relative min-h-[85vh] bg-[#040D1A] text-white flex flex-col items-center justify-center py-20 px-4 text-center overflow-hidden">
       {/* Dynamic Background */}
@@ -78,7 +61,7 @@ function Routes() {
         </FuzzyText>
         
         <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-md leading-relaxed drop-shadow-md">
-          This ZYNEX medical apparel collection and interactive feature is currently under active development.
+          This ZYNEX medical apparel section is currently under active development.
         </p>
 
         <button
