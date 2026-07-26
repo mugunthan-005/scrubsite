@@ -1,21 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Menu, Search, ShoppingBag, User, X } from 'lucide-react';
+import { Search, ShoppingBag, User } from 'lucide-react';
 import { useRouter } from '../context/RouterContext';
 import { useCart } from '../context/CartContext';
-
-const NAV_LINKS = [
-  { label: 'Shop', path: '/shop' },
-  { label: 'Collections', path: '/collections' },
-  { label: 'About Us', path: '/about' },
-  { label: 'Contact', path: '/contact' },
-  { label: 'Admin Inventory', path: '/admin' },
-];
 
 export default function Navbar() {
   const { path, navigate } = useRouter();
   const { totalItems, openCart } = useCart();
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState('');
 
@@ -27,7 +18,6 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    setMobileOpen(false);
     setSearchOpen(false);
   }, [path]);
 
@@ -40,8 +30,6 @@ export default function Navbar() {
     }
   };
 
-  const isActive = (p: string) => path === p || (p !== '/' && path.startsWith(p));
-
   return (
     <header
       className={`sticky top-0 z-40 transition-all duration-300 bg-[#040D1A]/95 backdrop-blur-md text-white border-b border-white/10 ${
@@ -49,19 +37,10 @@ export default function Navbar() {
       }`}
     >
       <nav className="container-px flex h-16 items-center justify-between gap-4 lg:h-20">
-        {/* Mobile menu button */}
-        <button
-          className="lg:hidden -ml-2 p-2 text-slate-300 hover:bg-white/10 rounded-lg transition-colors"
-          onClick={() => setMobileOpen((v) => !v)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
-
-        {/* Logo */}
+        {/* Logo (Left) */}
         <button
           onClick={() => navigate('/')}
-          className="flex items-center gap-2.5 text-xl font-extrabold tracking-wider text-white group"
+          className="flex items-center gap-2.5 text-xl font-extrabold tracking-wider text-white group cursor-pointer"
         >
           <img
             src="/zynex-logo.png"
@@ -71,25 +50,25 @@ export default function Navbar() {
           <span className="font-display tracking-widest text-white">ZYNEX</span>
         </button>
 
-        {/* Right Action Icons */}
+        {/* Right Action Icons (Search, Account, Cart) */}
         <div className="flex items-center gap-2">
           <button
             onClick={() => setSearchOpen((v) => !v)}
-            className="p-2.5 text-slate-300 hover:bg-white/10 hover:text-white rounded-full transition-colors"
+            className="p-2.5 text-slate-300 hover:bg-white/10 hover:text-white rounded-full transition-colors cursor-pointer"
             aria-label="Search"
           >
             <Search size={20} />
           </button>
           <button
             onClick={() => navigate('/account')}
-            className="p-2.5 text-slate-300 hover:bg-white/10 hover:text-white rounded-full transition-colors"
+            className="p-2.5 text-slate-300 hover:bg-white/10 hover:text-white rounded-full transition-colors cursor-pointer"
             aria-label="Account"
           >
             <User size={20} />
           </button>
           <button
             onClick={openCart}
-            className="relative p-2.5 text-slate-300 hover:bg-white/10 hover:text-white rounded-full transition-colors"
+            className="relative p-2.5 text-slate-300 hover:bg-white/10 hover:text-white rounded-full transition-colors cursor-pointer"
             aria-label="Cart"
           >
             <ShoppingBag size={20} />
@@ -117,33 +96,6 @@ export default function Navbar() {
               />
             </div>
           </form>
-        </div>
-      )}
-
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="lg:hidden border-t border-white/10 bg-[#061224] animate-fade-in text-white">
-          <div className="container-px py-4 flex flex-col gap-1">
-            {NAV_LINKS.map((link) => (
-              <button
-                key={link.path}
-                onClick={() => navigate(link.path)}
-                className={`px-4 py-3 text-left rounded-xl font-medium transition-colors ${
-                  isActive(link.path)
-                    ? 'bg-teal-500/20 text-teal-300 font-semibold'
-                    : 'text-slate-300 hover:bg-white/5'
-                }`}
-              >
-                {link.label}
-              </button>
-            ))}
-            <button
-              onClick={() => navigate('/account')}
-              className="px-4 py-3 text-left rounded-xl font-medium text-slate-300 hover:bg-white/5"
-            >
-              Account
-            </button>
-          </div>
         </div>
       )}
     </header>

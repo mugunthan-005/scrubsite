@@ -5,6 +5,8 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import CartDrawer from './components/CartDrawer';
 import Home from './pages/Home';
+import Model3D from './pages/Model3D';
+import TryOnPage from './pages/TryOnPage';
 import FuzzyText from './components/FuzzyText';
 import SideRays from './components/SideRays';
 import Particles from './components/Particles';
@@ -13,8 +15,10 @@ function Routes() {
   const { path, navigate } = useRouter();
 
   if (path === '/' || path === '') return <Home />;
+  if (path === '/model-3d' || path === '/3d-view' || path === '/3d') return <Model3D />;
+  if (path === '/try-on' || path === '/virtual-try-on') return <TryOnPage />;
 
-  // All other pages redirect to Coming Soon screen as requested
+  // Secondary shop pages redirect to Coming Soon screen as requested
   return (
     <div className="relative min-h-[85vh] bg-[#040D1A] text-white flex flex-col items-center justify-center py-20 px-4 text-center overflow-hidden">
       {/* Dynamic Background */}

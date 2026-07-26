@@ -7,11 +7,12 @@ import ShinyText from '../components/ShinyText';
 import SideRays from '../components/SideRays';
 import SplitText from '../components/SplitText';
 import Scrub3DViewer from '../components/Scrub3DViewer';
+import VirtualTryOn from '../components/VirtualTryOn';
 import Footer from '../components/Footer';
 
 const SCRUB_TRAIL_IMAGES = PRODUCTS.flatMap((p) => p.images);
 
-// 5-Subscroll Feature Sequence Content Structure with Video One & Video Two integration
+// 5-Subscroll Feature Sequence Content Structure with Videos 1 through 5
 const FEATURE_STEPS = [
   {
     step: 1,
@@ -26,7 +27,7 @@ const FEATURE_STEPS = [
     primaryImage: '/image1.jpg',
     secondaryImage: '/image1.png',
     fallbackImage: 'https://images.pexels.com/photos/4173251/pexels-photo-4173251.jpeg?auto=compress&cs=tinysrgb&w=1200',
-    imageFirst: true, // Scroll 1: Left Video, Right Text
+    imageFirst: true, // Scroll 1: Left Video 1, Right Text
   },
   {
     step: 2,
@@ -41,7 +42,7 @@ const FEATURE_STEPS = [
     primaryImage: '/image2.jpg',
     secondaryImage: '/image2.png',
     fallbackImage: 'https://images.pexels.com/photos/2629884/pexels-photo-2629884.jpeg?auto=compress&cs=tinysrgb&w=1200',
-    imageFirst: false, // Scroll 2: Left Text, Right Video
+    imageFirst: false, // Scroll 2: Left Text, Right Video 2
   },
   {
     step: 3,
@@ -56,7 +57,7 @@ const FEATURE_STEPS = [
     primaryImage: '/image3.jpg',
     secondaryImage: '/image3.png',
     fallbackImage: 'https://images.pexels.com/photos/4173270/pexels-photo-4173270.jpeg?auto=compress&cs=tinysrgb&w=1200',
-    imageFirst: true, // Scroll 3: Left Image/Media, Right Text
+    imageFirst: true, // Scroll 3: Left Video 3, Right Text
   },
   {
     step: 4,
@@ -71,7 +72,7 @@ const FEATURE_STEPS = [
     primaryImage: '/image4.jpg',
     secondaryImage: '/image4.png',
     fallbackImage: 'https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=1200',
-    imageFirst: false, // Scroll 4: Left Text, Right Image/Media
+    imageFirst: false, // Scroll 4: Left Text, Right Video 4
   },
   {
     step: 5,
@@ -86,11 +87,11 @@ const FEATURE_STEPS = [
     primaryImage: '/image5.jpg',
     secondaryImage: '/image5.png',
     fallbackImage: 'https://images.pexels.com/photos/5452293/pexels-photo-5452293.jpeg?auto=compress&cs=tinysrgb&w=1200',
-    imageFirst: true, // Scroll 5: Left Image/Media, Right Text
+    imageFirst: true, // Scroll 5: Left Video 5, Right Text
   },
 ];
 
-const TOTAL_SECTIONS = 3;
+const TOTAL_SECTIONS = 4;
 
 // Smart Image loader that attempts /imageX.jpg or /imageX.png before falling back gracefully
 function SmartImage({ primary, secondary, fallback, alt, className }: { primary: string; secondary: string; fallback: string; alt: string; className?: string }) {
@@ -122,7 +123,7 @@ function SmartImage({ primary, secondary, fallback, alt, className }: { primary:
   );
 }
 
-// Media renderer with video error fallback handling
+// Media renderer with video preloading and seamless fallback handling
 function FeatureMedia({ feature }: { feature: typeof FEATURE_STEPS[0] }) {
   const [videoError, setVideoError] = useState(false);
 
@@ -140,6 +141,7 @@ function FeatureMedia({ feature }: { feature: typeof FEATURE_STEPS[0] }) {
           muted
           loop
           playsInline
+          preload="auto"
           onError={() => setVideoError(true)}
           className="h-full w-full object-cover rounded-3xl"
         />
@@ -202,11 +204,15 @@ export default function Home() {
       } else if (sec === 2) {
         if (step < FEATURE_STEPS.length - 1) {
           updateSectionAndStep(2, step + 1);
+        } else {
+          updateSectionAndStep(3, 0); // Advance to Virtual Try-On Section
         }
       }
     } else {
       // Direction 'prev'
-      if (sec === 2) {
+      if (sec === 3) {
+        updateSectionAndStep(2, FEATURE_STEPS.length - 1); // Back to Step 5 of Section 3
+      } else if (sec === 2) {
         if (step > 0) {
           updateSectionAndStep(2, step - 1);
         } else {
@@ -419,10 +425,9 @@ export default function Home() {
                   ) : (
                     /* Page Text Content - Enlarged Typography */
                     <div className="flex flex-col justify-center text-left space-y-6">
-                      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 text-sm font-bold font-mono tracking-widest w-fit">
-                        <span className="h-2.5 w-2.5 rounded-full bg-teal-400 animate-pulse" />
+                      <span className="text-white text-sm font-bold font-mono tracking-widest uppercase">
                         {currentFeature.tag}
-                      </div>
+                      </span>
 
                       <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.15] text-balance drop-shadow-xl">
                         {currentFeature.headline}
@@ -449,10 +454,9 @@ export default function Home() {
                   ) : (
                     /* Page Text Content - Enlarged Typography */
                     <div className="flex flex-col justify-center text-left space-y-6">
-                      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 text-sm font-bold font-mono tracking-widest w-fit">
-                        <span className="h-2.5 w-2.5 rounded-full bg-teal-400 animate-pulse" />
+                      <span className="text-white text-sm font-bold font-mono tracking-widest uppercase">
                         {currentFeature.tag}
-                      </div>
+                      </span>
 
                       <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.15] text-balance drop-shadow-xl">
                         {currentFeature.headline}
@@ -474,13 +478,17 @@ export default function Home() {
               </motion.div>
             </AnimatePresence>
           </div>
+        </section>
 
-          {/* Footer attached cleanly when on Step 5 */}
-          {featureStep === FEATURE_STEPS.length - 1 && (
+
+        {/* ==================== SECTION 4: BROWSER-BASED VIRTUAL TRY-ON STUDIO ==================== */}
+        <section className="h-full w-full relative flex-none overflow-y-auto bg-[#040D1A] text-white">
+          <div className="min-h-full flex flex-col justify-between">
+            <VirtualTryOn />
             <div className="w-full flex-none z-20 border-t border-white/10 bg-[#020812]">
               <Footer />
             </div>
-          )}
+          </div>
         </section>
       </div>
     </div>

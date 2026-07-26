@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { useRouter } from '../context/RouterContext';
-import { Maximize2 } from 'lucide-react';
+import { Box } from 'lucide-react';
 
 export interface Scrub3DViewerProps {
   modelPath?: string;
@@ -41,7 +41,7 @@ export default function Scrub3DViewer({
 
     container.appendChild(renderer.domElement);
 
-    // 4. Pure Neutral White & Navy Blue Lighting System (No Green Tint)
+    // 4. Pure Neutral White & Navy Blue Lighting System
     const ambientLight = new THREE.AmbientLight(0xffffff, 2.4);
     scene.add(ambientLight);
 
@@ -80,7 +80,6 @@ export default function Scrub3DViewer({
         const size = box.getSize(new THREE.Vector3());
 
         const maxDim = Math.max(size.x, size.y, size.z);
-        // Clean scaled size so full scrub top & pants fit nicely inside viewport
         const scale = 2.2 / (maxDim || 1);
         model.scale.set(scale, scale, scale);
 
@@ -119,7 +118,7 @@ export default function Scrub3DViewer({
       }
     );
 
-    // Smooth Cursor Tracking (Stationary model that tilts and turns with cursor movement)
+    // Smooth Cursor Tracking
     let targetRotationY = 0;
     let targetRotationX = 0;
 
@@ -127,7 +126,7 @@ export default function Scrub3DViewer({
       const x = (e.clientX / window.innerWidth) * 2 - 1;
       const y = -(e.clientY / window.innerHeight) * 2 + 1;
 
-      targetRotationY = x * 0.45; // Smooth rotation angle range
+      targetRotationY = x * 0.45;
       targetRotationX = y * 0.25;
     };
 
@@ -145,14 +144,13 @@ export default function Scrub3DViewer({
 
     window.addEventListener('resize', handleResize);
 
-    // 6. Animation Loop - Stationary model smoothly moving in response to cursor
+    // Animation Loop
     let animationFrameId: number;
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
 
       if (model) {
-        // Smoothly interpolate rotation to track cursor position
         model.rotation.y += (targetRotationY - model.rotation.y) * 0.06;
         model.rotation.x += (-targetRotationX - model.rotation.x) * 0.06;
       }
@@ -178,7 +176,7 @@ export default function Scrub3DViewer({
       onClick={() => navigate('/model-3d')}
       className={`relative w-full h-full min-h-[420px] sm:min-h-[500px] flex items-center justify-center cursor-pointer group ${className}`}
     >
-      {/* Background Lighting Radial Glow - Blends Seamlessly into Dark Canvas */}
+      {/* Background Lighting Radial Glow */}
       <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
         <div className="h-[280px] w-[280px] sm:h-[380px] sm:w-[380px] rounded-full bg-gradient-to-r from-sky-500/20 via-blue-600/15 to-indigo-500/10 blur-3xl transition-transform group-hover:scale-110 duration-500" />
       </div>
@@ -196,10 +194,10 @@ export default function Scrub3DViewer({
       {/* 3D Canvas Mount Point */}
       <div ref={mountRef} className="relative z-10 w-full h-full flex items-center justify-center pointer-events-none" />
 
-      {/* Interactive Overlay Button Badge */}
-      <div className="absolute bottom-4 z-20 px-4 py-2 bg-slate-900/90 group-hover:bg-teal-600 text-teal-300 group-hover:text-white border border-teal-500/40 rounded-none text-xs font-bold uppercase tracking-widest backdrop-blur-md shadow-xl transition-all duration-300 flex items-center gap-2">
-        <span>View Full 3D Model 360°</span>
-        <Maximize2 size={13} />
+      {/* Bottom Overlay Badge attached to the bottom of the 3D image */}
+      <div className="absolute bottom-2 z-20 px-6 py-2.5 bg-[#061224]/90 group-hover:bg-teal-500 text-teal-300 group-hover:text-slate-950 border border-teal-500/40 rounded-xl text-xs font-extrabold uppercase tracking-widest backdrop-blur-md shadow-2xl transition-all duration-300 flex items-center gap-2 group-hover:scale-105">
+        <Box size={16} className="text-teal-400 group-hover:text-slate-950 animate-pulse" />
+        <span>3D View</span>
       </div>
     </div>
   );
