@@ -12,7 +12,6 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Collections from './pages/Collections';
 import Account from './pages/Account';
-import GradualBlur from './components/GradualBlur';
 
 function Routes() {
   const { path } = useRouter();
@@ -48,26 +47,6 @@ export default function App() {
           </main>
           <Footer />
           <CartDrawer />
-
-          {/* GradualBlur effects along the sides from top to bottom */}
-          <GradualBlur
-            target="page"
-            position="left"
-            height="5rem"
-            strength={2.5}
-            divCount={6}
-            curve="bezier"
-            exponential={true}
-          />
-          <GradualBlur
-            target="page"
-            position="right"
-            height="5rem"
-            strength={2.5}
-            divCount={6}
-            curve="bezier"
-            exponential={true}
-          />
         </div>
       </CartProvider>
     </RouterProvider>

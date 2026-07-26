@@ -45,9 +45,9 @@ export default function Footer() {
   };
 
   return (
-    <footer className="mt-24 bg-ink-950 text-ink-200">
+    <footer className="bg-[#020812] text-ink-200">
       {/* Newsletter */}
-      <div className="border-b border-white/10">
+      <div>
         <div className="container-px py-14 grid gap-8 lg:grid-cols-2 lg:items-center">
           <div>
             <h3 className="font-display text-2xl text-white sm:text-3xl">
@@ -127,7 +127,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/10">
+      <div>
         <div className="container-px py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ink-500">
           <p>© {new Date().getFullYear()} ZYNEX Medical Wear. All rights reserved.</p>
           <div className="flex gap-6">
