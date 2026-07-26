@@ -1,8 +1,19 @@
 import type { Product, Testimonial, ColorOption } from './types';
 
-// Curated stock photos from Pexels (medical/scrub themed)
-const img = (id: string, w = 800) =>
-  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
+const PUBLIC_IMAGES = [
+  '/Gemini_Generated_Image_nce5j3nce5j3nce5.png',
+  '/Gemini_Generated_Image_nce5j3nce5j3nce5 (1).png',
+  '/Gemini_Generated_Image_nce5j3nce5j3nce5 (2).png',
+  '/Gemini_Generated_Image_nce5j3nce5j3nce5 (3).png',
+  '/Gemini_Generated_Image_q6oe8eq6oe8eq6oe.png',
+  '/Screenshot 2026-07-26 221310.png',
+  '/Screenshot 2026-07-26 221323.png',
+];
+
+const img = (id: string, _w = 800) => {
+  const hash = id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return PUBLIC_IMAGES[hash % PUBLIC_IMAGES.length];
+};
 
 export const BRAND_SPECIFICATION = {
   brandName: 'ZYNEX',
@@ -205,43 +216,43 @@ export const PRODUCTS: Product[] = [
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: 't1',
-    name: 'Dr. Amara Okafor',
-    role: 'Emergency Medicine',
-    location: 'Chicago, IL',
+    author: 'Dr. Marcus Vance',
+    role: 'Emergency Physician',
+    hospital: 'St. Jude Medical Center',
+    content:
+      'The 92/8 knitted fabric is unlike any scrub I have worn in 12 years of practice. Soft, fluid repellent, and doesn’t wrinkle after a 14-hour shift.',
     rating: 5,
-    quote:
-      'ZYNEX scrubs with 4-way stretch and fluid repellent finish are game-changing. After twelve-hour shifts, they still look crisp and feel weightless.',
-    avatar: 'https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=200',
+    avatar: '/Gemini_Generated_Image_nce5j3nce5j3nce5.png',
   },
   {
     id: 't2',
-    name: 'Nurse Julian Reyes',
-    role: 'ICU Registered Nurse',
-    location: 'Austin, TX',
+    author: 'Elena Rostova, RN',
+    role: 'ICU Charge Nurse',
+    hospital: 'Metro General Hospital',
+    content:
+      'The 4-way stretch allows complete freedom of movement when lifting patients. The fluid repellent finish saved my uniform on day one.',
     rating: 5,
-    quote:
-      'The 92/8 Poly-Spandex knit blend (200-220 GSM) is incredibly soft and durable. Antimicrobial & fluid repellent finish means stain-free comfort every single day.',
-    avatar: 'https://images.pexels.com/photos/4173251/pexels-photo-4173251.jpeg?auto=compress&cs=tinysrgb&w=200',
+    avatar: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (1).png',
   },
   {
     id: 't3',
-    name: 'Dr. Priya Sharma',
-    role: 'Pediatric Surgeon',
-    location: 'Seattle, WA',
+    author: 'Dr. Sarah Jenkins',
+    role: 'Surgical Resident',
+    hospital: 'Johns Hopkins Medicine',
+    content:
+      'I replaced all my old scrubs with ZYNEX. The 200-220 GSM weight strikes the perfect balance between durability and breathability.',
     rating: 5,
-    quote:
-      'The Navy Blue color is deep and vibrant. ZYNEX really nailed the knitted fabric weight and wrinkle-free finish.',
-    avatar: 'https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=200',
+    avatar: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (2).png',
   },
   {
     id: 't4',
-    name: 'Marcus Bennett, PA-C',
-    role: 'Physician Assistant',
-    location: 'Denver, CO',
+    author: 'David Chen, PA-C',
+    role: 'Pediatric Care',
+    hospital: 'Children’s Health',
+    content:
+      'Clean modern lines, antimicrobial protection, and deep pockets. The Meridian pants with drawstring are my go-to every morning.',
     rating: 5,
-    quote:
-      'I own six ZYNEX sets in Navy Blue. The fabric doesn\'t fade, the 4-way stretch moves with me, and I get compliments from colleagues every single shift.',
-    avatar: 'https://images.pexels.com/photos/2629884/pexels-photo-2629884.jpeg?auto=compress&cs=tinysrgb&w=200',
+    avatar: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (3).png',
   },
 ];
 

@@ -23,7 +23,7 @@ export default function About() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-ink-950 text-white">
         <div className="absolute inset-0 opacity-30">
-          <Image src="https://images.pexels.com/photos/2633202/pexels-photo-2633202.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" className="h-full w-full" />
+          <Image src="/Gemini_Generated_Image_nce5j3nce5j3nce5 (3).png" alt="" className="h-full w-full" />
           <div className="absolute inset-0 bg-ink-950/60" />
         </div>
         <div className="container-px relative py-24 lg:py-32 text-center">
@@ -72,7 +72,7 @@ export default function About() {
       <section className="bg-ink-50 py-20 lg:py-28">
         <div className="container-px grid gap-12 lg:grid-cols-2 lg:items-center">
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-            <Image src="https://images.pexels.com/photos/4173251/pexels-photo-4173251.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Medical professional in scrubs" className="h-full w-full" />
+            <Image src="/Gemini_Generated_Image_q6oe8eq6oe8eq6oe.png" alt="Medical professional in scrubs" className="h-full w-full" />
           </div>
           <div>
             <p className="text-sm font-semibold uppercase tracking-widest text-brand-700">Our Mission</p>

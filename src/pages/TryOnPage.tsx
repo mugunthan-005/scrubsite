@@ -22,9 +22,9 @@ const COLOR_SWATCHES: ColorOption[] = [
 ];
 
 const SAMPLE_MODELS = {
-  Men: 'https://images.pexels.com/photos/2629884/pexels-photo-2629884.jpeg?auto=compress&cs=tinysrgb&w=800',
-  Women: 'https://images.pexels.com/photos/4173251/pexels-photo-4173251.jpeg?auto=compress&cs=tinysrgb&w=800',
-  Unisex: 'https://images.pexels.com/photos/4173270/pexels-photo-4173270.jpeg?auto=compress&cs=tinysrgb&w=800',
+  Men: '/Gemini_Generated_Image_nce5j3nce5j3nce5.png',
+  Women: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (1).png',
+  Unisex: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (2).png',
 };
 
 export default function TryOnPage() {

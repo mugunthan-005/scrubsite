@@ -10,7 +10,15 @@ import Scrub3DViewer from '../components/Scrub3DViewer';
 import VirtualTryOn from '../components/VirtualTryOn';
 import Footer from '../components/Footer';
 
-const SCRUB_TRAIL_IMAGES = PRODUCTS.flatMap((p) => p.images);
+const SCRUB_TRAIL_IMAGES = [
+  '/Gemini_Generated_Image_nce5j3nce5j3nce5.png',
+  '/Gemini_Generated_Image_nce5j3nce5j3nce5 (1).png',
+  '/Gemini_Generated_Image_nce5j3nce5j3nce5 (2).png',
+  '/Gemini_Generated_Image_nce5j3nce5j3nce5 (3).png',
+  '/Gemini_Generated_Image_q6oe8eq6oe8eq6oe.png',
+  '/Screenshot 2026-07-26 221310.png',
+  '/Screenshot 2026-07-26 221323.png',
+];
 
 // 5-Subscroll Feature Sequence Content Structure with Videos 1 through 5
 const FEATURE_STEPS = [
@@ -24,9 +32,9 @@ const FEATURE_STEPS = [
       'Tailored modern fit that looks professional without restricting movement.',
     ],
     video: '/Video%20One.mp4',
-    primaryImage: '/image1.jpg',
-    secondaryImage: '/image1.png',
-    fallbackImage: 'https://images.pexels.com/photos/4173251/pexels-photo-4173251.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    primaryImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5.png',
+    secondaryImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5.png',
+    fallbackImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5.png',
     imageFirst: true, // Scroll 1: Left Video 1, Right Text
   },
   {
@@ -39,9 +47,9 @@ const FEATURE_STEPS = [
       'Wrinkle-resistant fabric that stays crisp throughout the day.',
     ],
     video: '/Video%20two.mp4',
-    primaryImage: '/image2.jpg',
-    secondaryImage: '/image2.png',
-    fallbackImage: 'https://images.pexels.com/photos/2629884/pexels-photo-2629884.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    primaryImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (1).png',
+    secondaryImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (1).png',
+    fallbackImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (1).png',
     imageFirst: false, // Scroll 2: Left Text, Right Video 2
   },
   {
@@ -54,9 +62,9 @@ const FEATURE_STEPS = [
       'Breathable knitted fabric for all-day comfort across every shift.',
     ],
     video: '/Video%20three.mp4',
-    primaryImage: '/image3.jpg',
-    secondaryImage: '/image3.png',
-    fallbackImage: 'https://images.pexels.com/photos/4173270/pexels-photo-4173270.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    primaryImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (2).png',
+    secondaryImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (2).png',
+    fallbackImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (2).png',
     imageFirst: true, // Scroll 3: Left Video 3, Right Text
   },
   {
@@ -69,9 +77,9 @@ const FEATURE_STEPS = [
       'Soft-touch finish with excellent shape retention after repeated washes.',
     ],
     video: '/Video%20four.mp4',
-    primaryImage: '/image4.jpg',
-    secondaryImage: '/image4.png',
-    fallbackImage: 'https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    primaryImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (3).png',
+    secondaryImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (3).png',
+    fallbackImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (3).png',
     imageFirst: false, // Scroll 4: Left Text, Right Video 4
   },
   {
@@ -84,9 +92,9 @@ const FEATURE_STEPS = [
       'Crafted to make healthcare professionals feel confident every day.',
     ],
     video: '/Video%20five.mp4',
-    primaryImage: '/image5.jpg',
-    secondaryImage: '/image5.png',
-    fallbackImage: 'https://images.pexels.com/photos/5452293/pexels-photo-5452293.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    primaryImage: '/Gemini_Generated_Image_q6oe8eq6oe8eq6oe.png',
+    secondaryImage: '/Gemini_Generated_Image_q6oe8eq6oe8eq6oe.png',
+    fallbackImage: '/Gemini_Generated_Image_q6oe8eq6oe8eq6oe.png',
     imageFirst: true, // Scroll 5: Left Video 5, Right Text
   },
 ];
