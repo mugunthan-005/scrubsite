@@ -1,117 +1,259 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
-import { ArrowRight, Quote, Star } from 'lucide-react';
-import { useRouter } from '../context/RouterContext';
-import { PRODUCTS, TESTIMONIALS } from '../data';
-import { motion } from 'motion/react';
-import ProductCard from '../components/ProductCard';
-import Image from '../components/Image';
+import { PRODUCTS } from '../data';
+import { motion, AnimatePresence } from 'motion/react';
+import { CheckCircle2 } from 'lucide-react';
 import ImageTrail from '../components/ImageTrail';
 import ShinyText from '../components/ShinyText';
 import SideRays from '../components/SideRays';
 import SplitText from '../components/SplitText';
-import MagicBento from '../components/MagicBento';
 import Scrub3DViewer from '../components/Scrub3DViewer';
 import Footer from '../components/Footer';
 
 const SCRUB_TRAIL_IMAGES = PRODUCTS.flatMap((p) => p.images);
 
-const COLLECTIONS = [
+// 5-Subscroll Feature Sequence Content Structure with Video One & Video Two integration
+const FEATURE_STEPS = [
   {
-    title: "Men's Scrubs",
-    desc: 'Tailored fits built for performance',
-    path: '/shop?gender=Men',
-    image: 'https://images.pexels.com/photos/2629884/pexels-photo-2629884.jpeg?auto=compress&cs=tinysrgb&w=900',
+    step: 1,
+    tag: 'PERFORMANCE',
+    headline: 'Engineered for Everyday Performance',
+    usps: [
+      'Premium 4-way stretch fabric that moves effortlessly with every shift.',
+      'Lightweight construction for lasting comfort during extended wear.',
+      'Tailored modern fit that looks professional without restricting movement.',
+    ],
+    video: '/Video%20One.mp4',
+    primaryImage: '/image1.jpg',
+    secondaryImage: '/image1.png',
+    fallbackImage: 'https://images.pexels.com/photos/4173251/pexels-photo-4173251.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    imageFirst: true, // Scroll 1: Left Video, Right Text
   },
   {
-    title: "Women's Scrubs",
-    desc: 'Designed for the female form',
-    path: '/shop?gender=Women',
-    image: 'https://images.pexels.com/photos/4173251/pexels-photo-4173251.jpeg?auto=compress&cs=tinysrgb&w=900',
+    step: 2,
+    tag: 'FABRIC TECH',
+    headline: 'Smart Fabric. Smarter Performance.',
+    usps: [
+      'Antimicrobial finish to help reduce odour-causing bacteria.',
+      'Fluid-repellent coating for protection against everyday spills.',
+      'Wrinkle-resistant fabric that stays crisp throughout the day.',
+    ],
+    video: '/Video%20two.mp4',
+    primaryImage: '/image2.jpg',
+    secondaryImage: '/image2.png',
+    fallbackImage: 'https://images.pexels.com/photos/2629884/pexels-photo-2629884.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    imageFirst: false, // Scroll 2: Left Text, Right Video
   },
   {
-    title: 'New Arrivals',
-    desc: 'The latest in clinical wear',
-    path: '/shop?new=1',
-    image: 'https://images.pexels.com/photos/4173270/pexels-photo-4173270.jpeg?auto=compress&cs=tinysrgb&w=900',
+    step: 3,
+    tag: 'CLINICAL DESIGN',
+    headline: 'Designed Around Real Clinical Needs',
+    usps: [
+      'Functional pocket layout for quick access to daily essentials.',
+      'Reinforced stitching for durability in demanding environments.',
+      'Breathable knitted fabric for all-day comfort across every shift.',
+    ],
+    video: '/Video%20three.mp4',
+    primaryImage: '/image3.jpg',
+    secondaryImage: '/image3.png',
+    fallbackImage: 'https://images.pexels.com/photos/4173270/pexels-photo-4173270.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    imageFirst: true, // Scroll 3: Left Image/Media, Right Text
+  },
+  {
+    step: 4,
+    tag: 'PREMIUM QUALITY',
+    headline: 'Comfort You Can Feel. Quality You Can Trust.',
+    usps: [
+      '92% Polyester and 8% Spandex performance blend.',
+      '200–220 GSM fabric offering durability without feeling bulky.',
+      'Soft-touch finish with excellent shape retention after repeated washes.',
+    ],
+    video: '/Video%20four.mp4',
+    primaryImage: '/image4.jpg',
+    secondaryImage: '/image4.png',
+    fallbackImage: 'https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    imageFirst: false, // Scroll 4: Left Text, Right Image/Media
+  },
+  {
+    step: 5,
+    tag: 'NEXT GEN',
+    headline: 'Designed for the Next Generation of Healthcare',
+    usps: [
+      'Contemporary minimalist design inspired by premium activewear.',
+      'Clean silhouettes that balance style with workplace professionalism.',
+      'Crafted to make healthcare professionals feel confident every day.',
+    ],
+    video: '/Video%20five.mp4',
+    primaryImage: '/image5.jpg',
+    secondaryImage: '/image5.png',
+    fallbackImage: 'https://images.pexels.com/photos/5452293/pexels-photo-5452293.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    imageFirst: true, // Scroll 5: Left Image/Media, Right Text
   },
 ];
 
-const TOTAL_SECTIONS = 6;
+const TOTAL_SECTIONS = 3;
+
+// Smart Image loader that attempts /imageX.jpg or /imageX.png before falling back gracefully
+function SmartImage({ primary, secondary, fallback, alt, className }: { primary: string; secondary: string; fallback: string; alt: string; className?: string }) {
+  const [imgSrc, setImgSrc] = useState(primary);
+  const [attempt, setAttempt] = useState(0);
+
+  useEffect(() => {
+    setImgSrc(primary);
+    setAttempt(0);
+  }, [primary]);
+
+  const handleError = () => {
+    if (attempt === 0) {
+      setAttempt(1);
+      setImgSrc(secondary);
+    } else if (attempt === 1) {
+      setAttempt(2);
+      setImgSrc(fallback);
+    }
+  };
+
+  return (
+    <img
+      src={imgSrc}
+      alt={alt}
+      onError={handleError}
+      className={className}
+    />
+  );
+}
+
+// Media renderer with video error fallback handling
+function FeatureMedia({ feature }: { feature: typeof FEATURE_STEPS[0] }) {
+  const [videoError, setVideoError] = useState(false);
+
+  useEffect(() => {
+    setVideoError(false);
+  }, [feature.video]);
+
+  if (feature.video && !videoError) {
+    return (
+      <div className="relative h-[360px] sm:h-[440px] lg:h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl bg-[#040D1A]">
+        <video
+          key={feature.video}
+          src={feature.video}
+          autoPlay
+          muted
+          loop
+          playsInline
+          onError={() => setVideoError(true)}
+          className="h-full w-full object-cover rounded-3xl"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#040D1A]/40 via-transparent to-transparent pointer-events-none rounded-3xl" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative h-[360px] sm:h-[440px] lg:h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl bg-[#040D1A]">
+      <SmartImage
+        primary={feature.primaryImage}
+        secondary={feature.secondaryImage}
+        fallback={feature.fallbackImage}
+        alt={feature.headline}
+        className="h-full w-full object-cover rounded-3xl transition-transform duration-700 hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#040D1A]/50 via-transparent to-transparent pointer-events-none rounded-3xl" />
+    </div>
+  );
+}
 
 export default function Home() {
-  const { navigate } = useRouter();
-  const featured = PRODUCTS.filter((p) => p.bestSeller).slice(0, 4);
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [currentSection, setCurrentSection] = useState(0);
-  const [isLocked, setIsLocked] = useState(false);
-  
-  // Touch tracking ref
+  const [featureStep, setFeatureStep] = useState(0);
+
+  // Synchronous refs to prevent race conditions on rapid mouse wheel events
+  const currentSectionRef = useRef(0);
+  const featureStepRef = useRef(0);
+  const isLockedRef = useRef(false);
   const touchStartY = useRef<number | null>(null);
 
+  // Synchronized state updater
+  const updateSectionAndStep = useCallback((newSection: number, newStep: number) => {
+    const validSection = Math.max(0, Math.min(TOTAL_SECTIONS - 1, newSection));
+    const validStep = Math.max(0, Math.min(FEATURE_STEPS.length - 1, newStep));
 
+    currentSectionRef.current = validSection;
+    featureStepRef.current = validStep;
 
-  // Rotate testimonials
-  useEffect(() => {
-    const t = setInterval(() => setActiveTestimonial((i) => (i + 1) % TESTIMONIALS.length), 6000);
-    return () => clearInterval(t);
+    setCurrentSection(validSection);
+    setFeatureStep(validStep);
   }, []);
 
-  // Section navigation trigger with 1-second delay pause lock
-  const goToSection = useCallback((targetIndex: number) => {
-    if (isLocked || targetIndex < 0 || targetIndex >= TOTAL_SECTIONS) return;
-    
-    setIsLocked(true);
-    setCurrentSection(targetIndex);
+  // Section & Sub-step scroll handler with synchronous ref lock
+  const handleScrollAction = useCallback((direction: 'next' | 'prev') => {
+    if (isLockedRef.current) return;
 
-    // 1-second delay lock after scrolling each section
+    // Immediately lock synchronously to block rapid repeated wheel events
+    isLockedRef.current = true;
+
+    const sec = currentSectionRef.current;
+    const step = featureStepRef.current;
+
+    if (direction === 'next') {
+      if (sec === 0) {
+        updateSectionAndStep(1, 0);
+      } else if (sec === 1) {
+        updateSectionAndStep(2, 0);
+      } else if (sec === 2) {
+        if (step < FEATURE_STEPS.length - 1) {
+          updateSectionAndStep(2, step + 1);
+        }
+      }
+    } else {
+      // Direction 'prev'
+      if (sec === 2) {
+        if (step > 0) {
+          updateSectionAndStep(2, step - 1);
+        } else {
+          updateSectionAndStep(1, 0);
+        }
+      } else if (sec === 1) {
+        updateSectionAndStep(0, 0);
+      }
+    }
+
+    // Unlock after transition timeout
     setTimeout(() => {
-      setIsLocked(false);
-    }, 1000);
-  }, [isLocked]);
+      isLockedRef.current = false;
+    }, 700);
+  }, [updateSectionAndStep]);
 
-  const handleNext = useCallback(() => {
-    if (currentSection < TOTAL_SECTIONS - 1) {
-      goToSection(currentSection + 1);
-    }
-  }, [currentSection, goToSection]);
-
-  const handlePrev = useCallback(() => {
-    if (currentSection > 0) {
-      goToSection(currentSection - 1);
-    }
-  }, [currentSection, goToSection]);
-
-  // Wheel event listener with 1-second delay lock
+  // Wheel listener
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       if (Math.abs(e.deltaY) < 20) return;
       
       if (e.deltaY > 0) {
-        handleNext();
+        handleScrollAction('next');
       } else if (e.deltaY < 0) {
-        handlePrev();
+        handleScrollAction('prev');
       }
     };
 
     window.addEventListener('wheel', handleWheel, { passive: true });
     return () => window.removeEventListener('wheel', handleWheel);
-  }, [handleNext, handlePrev]);
+  }, [handleScrollAction]);
 
-  // Keyboard navigation listener (ArrowDown, ArrowUp, PageDown, PageUp, Space)
+  // Keyboard navigation listener
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowDown' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey)) {
         e.preventDefault();
-        handleNext();
+        handleScrollAction('next');
       } else if (e.key === 'ArrowUp' || e.key === 'PageUp' || (e.key === ' ' && e.shiftKey)) {
         e.preventDefault();
-        handlePrev();
+        handleScrollAction('prev');
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleNext, handlePrev]);
+  }, [handleScrollAction]);
 
   // Touch Swipe handlers
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -125,13 +267,15 @@ export default function Home() {
 
     if (Math.abs(diff) > 40) {
       if (diff > 0) {
-        handleNext();
+        handleScrollAction('next');
       } else {
-        handlePrev();
+        handleScrollAction('prev');
       }
     }
     touchStartY.current = null;
   };
+
+  const currentFeature = FEATURE_STEPS[featureStep];
 
   return (
     <div 
@@ -141,12 +285,12 @@ export default function Home() {
     >
       {/* Full-Screen Section Transition Stack */}
       <div 
-        className="h-full w-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+        className="h-full w-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] bg-[#040D1A]"
         style={{ transform: `translate3d(0, -${currentSection * 100}%, 0)` }}
       >
         {/* ==================== SECTION 1: HERO ==================== */}
         <section className="h-full w-full relative flex-none flex flex-col justify-center overflow-hidden bg-[#040D1A]">
-          <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 z-0 bg-[#040D1A]">
             <SideRays
               speed={2.5}
               rayColor1="#0DA39C"
@@ -163,7 +307,7 @@ export default function Home() {
           </div>
 
           <div className="container-px relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
-            {/* Left Column: Brand title & Tagline (EXPLORE COLLECTION BUTTON REMOVED) */}
+            {/* Left Column: Brand title & Tagline */}
             <motion.div
               className="lg:col-span-6 text-left flex flex-col gap-5"
               initial={{ opacity: 0, y: 40 }}
@@ -206,7 +350,35 @@ export default function Home() {
 
         {/* ==================== SECTION 2: SPECS & CURSOR CANVAS SHOWCASE ==================== */}
         <section className="h-full w-full relative flex-none flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#040D1A] via-[#061224] to-[#08182D]">
-
+          {/* Specification Banner Bar */}
+          <div className="bg-[#061224]/90 border-b border-white/10 py-4 text-white relative z-20">
+            <div className="container-px flex flex-wrap items-center justify-between gap-4 text-xs font-medium">
+              <div className="flex items-center gap-2">
+                <span className="h-2.5 w-2.5 rounded-full bg-teal-400 animate-pulse" />
+                <span className="text-slate-400 uppercase tracking-wider">Fabric Sample:</span>
+                <span className="text-white font-bold">Sample A</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-slate-400 uppercase tracking-wider">Blend:</span>
+                <span className="text-teal-300 font-bold">92% Poly / 8% Spandex</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-slate-400 uppercase tracking-wider">GSM:</span>
+                <span className="text-white font-bold">200 - 220 GSM</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-slate-400 uppercase tracking-wider">Fabric Type:</span>
+                <span className="text-white font-bold">Knitted Fabric</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-slate-400 uppercase tracking-wider">Preferred Color:</span>
+                <span className="inline-flex items-center gap-1.5 font-bold text-white">
+                  <span className="h-3 w-3 rounded-full bg-[#0B192C] ring-1 ring-white/50" />
+                  Navy Blue
+                </span>
+              </div>
+            </div>
+          </div>
 
           {/* Interactive Scrub Image Trail Canvas */}
           <div className="relative flex-1 w-full bg-gradient-to-br from-[#0B192C]/90 via-[#0F172A]/80 to-[#1E293B]/70 shadow-2xl overflow-hidden cursor-crosshair flex items-center justify-center">
@@ -226,201 +398,89 @@ export default function Home() {
         </section>
 
 
-        {/* ==================== SECTION 3: MAGIC BENTO STANDARDS ==================== */}
-        <section className="h-full w-full relative flex-none flex flex-col justify-center overflow-hidden bg-gradient-to-b from-[#0D1B2A] via-[#0F172A] to-[#111C2E]">
-          <div className="container-px relative z-10 py-6">
-            <motion.div
-              className="mx-auto max-w-2xl text-center mb-8"
-              initial={{ opacity: 0, y: 30 }}
-              animate={currentSection === 2 ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6 }}
-            >
-              <p className="text-xs font-semibold uppercase tracking-widest text-teal-400">ZYNEX Fabric & Engineering Standards</p>
-              <h2 className="mt-2 font-display text-2xl sm:text-4xl font-bold text-white text-balance">
-                Knitted fabric engineered to work as hard as you do
-              </h2>
-              <p className="mt-2 text-xs sm:text-sm text-slate-300 max-w-xl mx-auto">
-                200-220 GSM high-density knitted blend (92% Polyester, 8% Spandex) for total freedom of motion and clinical durability.
-              </p>
-            </motion.div>
+        {/* ==================== SECTION 3: 5-SUBSCROLL PINNED FEATURE SHOWCASE ==================== */}
+        <section className="h-full w-full relative flex-none flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#0D1B2A] via-[#0F172A] to-[#111C2E] py-4">
+          
+          {/* Animated Alternating Content */}
+          <div className="w-full container-px relative z-10 flex-1 flex items-center justify-center min-h-[500px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentFeature.step}
+                initial={{ opacity: 0, x: currentFeature.imageFirst ? -50 : 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: currentFeature.imageFirst ? 50 : -50 }}
+                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-14 items-center w-full"
+              >
+                {/* Render Column 1 (Media if imageFirst, otherwise Text) */}
+                <div className={`lg:col-span-6 ${currentFeature.imageFirst ? 'order-1' : 'order-2 lg:order-1'}`}>
+                  {currentFeature.imageFirst ? (
+                    <FeatureMedia feature={currentFeature} />
+                  ) : (
+                    /* Page Text Content - Enlarged Typography */
+                    <div className="flex flex-col justify-center text-left space-y-6">
+                      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 text-sm font-bold font-mono tracking-widest w-fit">
+                        <span className="h-2.5 w-2.5 rounded-full bg-teal-400 animate-pulse" />
+                        {currentFeature.tag}
+                      </div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={currentSection === 2 ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-            >
-              <MagicBento
-                textAutoHide={true}
-                enableStars={true}
-                enableSpotlight={true}
-                enableBorderGlow={true}
-                enableTilt={true}
-                enableMagnetism={true}
-                clickEffect={true}
-                spotlightRadius={300}
-                particleCount={12}
-                glowColor="45, 212, 191"
-              />
-            </motion.div>
-          </div>
-        </section>
+                      <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.15] text-balance drop-shadow-xl">
+                        {currentFeature.headline}
+                      </h2>
 
-
-        {/* ==================== SECTION 4: FEATURED COLLECTIONS ==================== */}
-        <section className="h-full w-full relative flex-none flex flex-col justify-center overflow-hidden bg-gradient-to-b from-[#111C2E] via-[#0E1A2C] to-[#0A1524]">
-          <div className="container-px relative z-10">
-            <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-widest text-teal-400">Featured Collections</p>
-                <h2 className="mt-2 font-display text-3xl sm:text-4xl font-bold text-white">
-                  Find your perfect fit
-                </h2>
-              </div>
-              <button onClick={() => navigate('/shop')} className="btn-ghost text-xs sm:text-sm text-teal-300 hover:text-white group flex items-center gap-2">
-                View all collections
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-              </button>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-3">
-              {COLLECTIONS.map((c, i) => (
-                <motion.button
-                  key={c.title}
-                  onClick={() => navigate(c.path)}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={currentSection === 3 ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                  transition={{ duration: 0.6, delay: i * 0.15 }}
-                  className="group relative h-[380px] sm:h-[430px] overflow-hidden rounded-2xl text-left shadow-2xl border border-white/10 focus:outline-none cursor-pointer"
-                >
-                  <Image src={c.image} alt={c.title} className="h-full w-full transition-transform duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#040D1A]/95 via-[#040D1A]/40 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-6">
-                    <h3 className="font-display text-2xl font-bold text-white">{c.title}</h3>
-                    <p className="mt-1 text-xs sm:text-sm text-slate-300">{c.desc}</p>
-                    <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-teal-300 group-hover:text-white transition-colors">
-                      Shop now
-                      <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
-                    </span>
-                  </div>
-                </motion.button>
-              ))}
-            </div>
-          </div>
-        </section>
-
-
-        {/* ==================== SECTION 5: BEST SELLERS ==================== */}
-        <section className="h-full w-full relative flex-none flex flex-col justify-center overflow-hidden bg-gradient-to-b from-[#0A1524] via-[#07111D] to-[#040D1A]">
-          <div className="container-px relative z-10">
-            <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-widest text-teal-400">Best Sellers</p>
-                <h2 className="mt-2 font-display text-3xl sm:text-4xl font-bold text-white">
-                  Tried, tested, and trusted
-                </h2>
-              </div>
-              <button onClick={() => navigate('/shop')} className="btn-ghost text-xs sm:text-sm text-teal-300 hover:text-white group flex items-center gap-2">
-                Explore shop
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-              </button>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
-              {featured.map((p, i) => (
-                <motion.div
-                  key={p.id}
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={currentSection === 4 ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                >
-                  <ProductCard product={p} index={i} />
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-
-        {/* ==================== SECTION 6: TESTIMONIALS & FOOTER ==================== */}
-        <section className="h-full w-full relative flex-none flex flex-col justify-between overflow-y-auto overflow-x-hidden bg-gradient-to-b from-[#040D1A] to-[#020812] no-scrollbar">
-          <div className="container-px relative pt-12 pb-8 flex-1 flex flex-col justify-center">
-            <div className="mx-auto max-w-2xl text-center">
-              <p className="text-xs font-semibold uppercase tracking-widest text-teal-300">From the Frontline</p>
-              <h2 className="mt-2 font-display text-3xl sm:text-4xl font-bold text-white">
-                Words from the doctors & nurses who wear ZYNEX
-              </h2>
-            </div>
-
-            <div className="mx-auto mt-8 max-w-3xl w-full">
-              <div className="relative min-h-[190px]">
-                <Quote size={40} className="mx-auto text-teal-500/30" />
-                <div className="mt-4 min-h-[160px] text-center">
-                  {TESTIMONIALS.map((t, i) => (
-                    <div
-                      key={t.id}
-                      className={`absolute inset-0 transition-all duration-500 ${
-                        i === activeTestimonial
-                          ? 'opacity-100 translate-y-0'
-                          : 'opacity-0 translate-y-4 pointer-events-none'
-                      }`}
-                    >
-                      <div className="flex justify-center gap-1">
-                        {Array.from({ length: t.rating }).map((_, s) => (
-                          <Star key={s} size={16} className="fill-amber-400 text-amber-400" />
+                      <div className="mt-2 space-y-4">
+                        {currentFeature.usps.map((usp, uIdx) => (
+                          <div key={uIdx} className="flex items-start gap-4">
+                            <CheckCircle2 size={24} className="text-teal-400 mt-1 shrink-0" />
+                            <p className="text-slate-100 text-base sm:text-xl leading-relaxed font-medium">
+                              {usp}
+                            </p>
+                          </div>
                         ))}
                       </div>
-                      <p className="mt-3 text-lg font-medium leading-relaxed text-slate-200 sm:text-xl text-balance">
-                        "{t.quote}"
-                      </p>
-                      <div className="mt-4 flex items-center justify-center gap-3">
-                        <img src={t.avatar} alt={t.name} className="h-10 w-10 rounded-full object-cover ring-2 ring-teal-400/40" />
-                        <div className="text-left">
-                          <p className="font-semibold text-sm text-white">{t.name}</p>
-                          <p className="text-xs text-slate-400">{t.role} · {t.location}</p>
-                        </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Render Column 2 (Text if imageFirst, otherwise Media) */}
+                <div className={`lg:col-span-6 ${currentFeature.imageFirst ? 'order-2' : 'order-1 lg:order-2'}`}>
+                  {!currentFeature.imageFirst ? (
+                    <FeatureMedia feature={currentFeature} />
+                  ) : (
+                    /* Page Text Content - Enlarged Typography */
+                    <div className="flex flex-col justify-center text-left space-y-6">
+                      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 text-sm font-bold font-mono tracking-widest w-fit">
+                        <span className="h-2.5 w-2.5 rounded-full bg-teal-400 animate-pulse" />
+                        {currentFeature.tag}
+                      </div>
+
+                      <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.15] text-balance drop-shadow-xl">
+                        {currentFeature.headline}
+                      </h2>
+
+                      <div className="mt-2 space-y-4">
+                        {currentFeature.usps.map((usp, uIdx) => (
+                          <div key={uIdx} className="flex items-start gap-4">
+                            <CheckCircle2 size={24} className="text-teal-400 mt-1 shrink-0" />
+                            <p className="text-slate-100 text-base sm:text-xl leading-relaxed font-medium">
+                              {usp}
+                            </p>
+                          </div>
+                        ))}
                       </div>
                     </div>
-                  ))}
+                  )}
                 </div>
-              </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
-              <div className="mt-6 flex items-center justify-center gap-4">
-                <button
-                  onClick={() => setActiveTestimonial((i) => (i - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)}
-                  className="grid h-9 w-9 place-items-center rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
-                  aria-label="Previous testimonial"
-                >
-                  <ArrowRight size={16} className="rotate-180" />
-                </button>
-
-                <div className="flex gap-2">
-                  {TESTIMONIALS.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setActiveTestimonial(i)}
-                      className={`h-2 rounded-full transition-all ${
-                        i === activeTestimonial ? 'w-6 bg-teal-400' : 'w-2 bg-white/30 hover:bg-white/50'
-                      }`}
-                      aria-label={`Go to section ${i + 1}`}
-                    />
-                  ))}
-                </div>
-
-                <button
-                  onClick={() => setActiveTestimonial((i) => (i + 1) % TESTIMONIALS.length)}
-                  className="grid h-9 w-9 place-items-center rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
-                  aria-label="Next testimonial"
-                >
-                  <ArrowRight size={16} />
-                </button>
-              </div>
+          {/* Footer attached cleanly when on Step 5 */}
+          {featureStep === FEATURE_STEPS.length - 1 && (
+            <div className="w-full flex-none z-20 border-t border-white/10 bg-[#020812]">
+              <Footer />
             </div>
-          </div>
-
-          {/* Footer attached seamlessly to the final section */}
-          <div className="w-full flex-none">
-            <Footer />
-          </div>
+          )}
         </section>
       </div>
     </div>

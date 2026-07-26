@@ -7,12 +7,14 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
+    background-color: #040D1A;
   }
   body {
-    @apply bg-white text-ink-900 font-sans antialiased;
+    @apply bg-[#040D1A] text-white font-sans antialiased;
+    background-color: #040D1A;
   }
   ::selection {
-    @apply bg-brand-200 text-brand-900;
+    @apply bg-teal-400 text-slate-950;
   }
 }
 
