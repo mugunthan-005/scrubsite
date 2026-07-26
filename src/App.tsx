@@ -92,20 +92,29 @@ function Routes() {
   );
 }
 
+function MainLayout() {
+  const { path } = useRouter();
+  const isHomePage = path === '/' || path === '';
+
+  return (
+    <div className="flex min-h-screen flex-col relative overflow-hidden bg-[#040D1A]">
+      <Navbar />
+      <main className="flex-1 relative">
+        <Suspense fallback={<div className="container-px py-32 text-center text-slate-400">Loading…</div>}>
+          <Routes />
+        </Suspense>
+      </main>
+      {!isHomePage && <Footer />}
+      <CartDrawer />
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <RouterProvider>
       <CartProvider>
-        <div className="flex min-h-screen flex-col relative">
-          <Navbar />
-          <main className="flex-1 relative">
-            <Suspense fallback={<div className="container-px py-32 text-center text-slate-400">Loading…</div>}>
-              <Routes />
-            </Suspense>
-          </main>
-          <Footer />
-          <CartDrawer />
-        </div>
+        <MainLayout />
       </CartProvider>
     </RouterProvider>
   );
