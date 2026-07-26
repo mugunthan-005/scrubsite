@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { useRouter } from '../context/RouterContext';
+import { Maximize2 } from 'lucide-react';
 
 export interface Scrub3DViewerProps {
   modelPath?: string;
@@ -11,6 +13,7 @@ export default function Scrub3DViewer({
   modelPath = '/medical scrubs 3d model.glb',
   className = '',
 }: Scrub3DViewerProps) {
+  const { navigate } = useRouter();
   const mountRef = useRef<HTMLDivElement | null>(null);
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -171,10 +174,13 @@ export default function Scrub3DViewer({
   }, [modelPath]);
 
   return (
-    <div className={`relative w-full h-full min-h-[420px] sm:min-h-[500px] flex items-center justify-center ${className}`}>
+    <div
+      onClick={() => navigate('/model-3d')}
+      className={`relative w-full h-full min-h-[420px] sm:min-h-[500px] flex items-center justify-center cursor-pointer group ${className}`}
+    >
       {/* Background Lighting Radial Glow - Blends Seamlessly into Dark Canvas */}
       <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
-        <div className="h-[280px] w-[280px] sm:h-[380px] sm:w-[380px] rounded-full bg-gradient-to-r from-sky-500/20 via-blue-600/15 to-indigo-500/10 blur-3xl" />
+        <div className="h-[280px] w-[280px] sm:h-[380px] sm:w-[380px] rounded-full bg-gradient-to-r from-sky-500/20 via-blue-600/15 to-indigo-500/10 blur-3xl transition-transform group-hover:scale-110 duration-500" />
       </div>
 
       {/* Loading Progress Indicator */}
@@ -189,6 +195,12 @@ export default function Scrub3DViewer({
 
       {/* 3D Canvas Mount Point */}
       <div ref={mountRef} className="relative z-10 w-full h-full flex items-center justify-center pointer-events-none" />
+
+      {/* Interactive Overlay Button Badge */}
+      <div className="absolute bottom-4 z-20 px-4 py-2 bg-slate-900/90 group-hover:bg-teal-600 text-teal-300 group-hover:text-white border border-teal-500/40 rounded-none text-xs font-bold uppercase tracking-widest backdrop-blur-md shadow-xl transition-all duration-300 flex items-center gap-2">
+        <span>View Full 3D Model 360°</span>
+        <Maximize2 size={13} />
+      </div>
     </div>
   );
 }

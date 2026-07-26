@@ -47,7 +47,6 @@ export default function Home() {
   const heroBgY = useTransform(scrollY, [0, 600], [0, 180]);
   const heroOpacity = useTransform(scrollY, [0, 500], [1, 0.3]);
 
-  const specBannerY = useTransform(scrollY, [100, 700], [0, 20]);
   const showcaseCardY = useTransform(scrollY, [200, 900], [25, -25]);
   const shinyTextParallaxY = useTransform(scrollY, [200, 900], [-20, 20]);
   const collectionsParallaxY = useTransform(scrollY, [800, 1600], [20, -20]);
@@ -109,35 +108,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Specification Banner Bar - Seamlessly Blended */}
-      <motion.div className="bg-gradient-to-b from-[#040D1A] via-[#061224] to-[#08182D] py-5 text-white relative z-10" style={{ y: specBannerY }}>
-        <div className="container-px flex flex-wrap items-center justify-between gap-4 text-xs font-medium">
-          <div className="flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-teal-400 animate-pulse" />
-            <span className="text-slate-400 uppercase tracking-wider">Fabric Sample:</span>
-            <span className="text-white font-bold">Sample A</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-slate-400 uppercase tracking-wider">Blend:</span>
-            <span className="text-teal-300 font-bold">92% Poly / 8% Spandex</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-slate-400 uppercase tracking-wider">GSM:</span>
-            <span className="text-white font-bold">200 - 220 GSM</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-slate-400 uppercase tracking-wider">Fabric Type:</span>
-            <span className="text-white font-bold">Knitted Fabric</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-slate-400 uppercase tracking-wider">Preferred Color:</span>
-            <span className="inline-flex items-center gap-1.5 font-bold text-white">
-              <span className="h-3 w-3 rounded-full bg-[#0B192C] ring-1 ring-white/50" />
-              Navy Blue
-            </span>
-          </div>
-        </div>
-      </motion.div>
 
       {/* Scrub Image Trail Interactive Showcase Section - End to End Full Width with Increased Vertical Height */}
       <section className="bg-gradient-to-b from-[#08182D] via-[#0B192C] to-[#0D1B2A] py-0 text-white relative overflow-hidden w-full">
