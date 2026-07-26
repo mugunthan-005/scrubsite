@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Menu, Search, ShoppingBag, User, X, Home as HomeIcon, ShoppingBag as ShopIcon, Layers, Info, Mail } from 'lucide-react';
+import { Menu, Search, ShoppingBag, User, X } from 'lucide-react';
 import { useRouter } from '../context/RouterContext';
 import { useCart } from '../context/CartContext';
-import Dock, { DockItemData } from './Dock';
 
 const NAV_LINKS = [
   { label: 'Shop', path: '/shop' },
   { label: 'Collections', path: '/collections' },
   { label: 'About Us', path: '/about' },
   { label: 'Contact', path: '/contact' },
+  { label: 'Admin Inventory', path: '/admin' },
 ];
 
 export default function Navbar() {
@@ -42,58 +42,6 @@ export default function Navbar() {
 
   const isActive = (p: string) => path === p || (p !== '/' && path.startsWith(p));
 
-  const dockItems: DockItemData[] = [
-    {
-      icon: <HomeIcon size={18} />,
-      label: 'Home',
-      onClick: () => navigate('/'),
-    },
-    {
-      icon: <ShopIcon size={18} />,
-      label: 'Shop',
-      onClick: () => navigate('/shop'),
-    },
-    {
-      icon: <Layers size={18} />,
-      label: 'Collections',
-      onClick: () => navigate('/collections'),
-    },
-    {
-      icon: <Info size={18} />,
-      label: 'About Us',
-      onClick: () => navigate('/about'),
-    },
-    {
-      icon: <Mail size={18} />,
-      label: 'Contact',
-      onClick: () => navigate('/contact'),
-    },
-    {
-      icon: <Search size={18} />,
-      label: 'Search',
-      onClick: () => setSearchOpen((v) => !v),
-    },
-    {
-      icon: <User size={18} />,
-      label: 'Account',
-      onClick: () => navigate('/account'),
-    },
-    {
-      icon: (
-        <div className="relative">
-          <ShoppingBag size={18} />
-          {totalItems > 0 && (
-            <span className="absolute -right-2 -top-2 grid h-4 w-4 place-items-center rounded-full bg-teal-600 text-[9px] font-bold text-white">
-              {totalItems > 9 ? '9+' : totalItems}
-            </span>
-          )}
-        </div>
-      ),
-      label: `Cart (${totalItems})`,
-      onClick: openCart,
-    },
-  ];
-
   return (
     <header
       className={`sticky top-0 z-40 transition-all duration-300 bg-gradient-to-r from-white via-teal-50 to-emerald-50 border-b border-teal-200/80 ${
@@ -123,37 +71,26 @@ export default function Navbar() {
           <span className="font-display tracking-widest text-[#0B192C]">ZYNEX</span>
         </button>
 
-        {/* Interactive Magnetic Dock Navigation */}
-        <div className="hidden lg:flex flex-1 justify-center max-w-2xl px-4">
-          <Dock
-            items={dockItems}
-            panelHeight={52}
-            baseItemSize={42}
-            magnification={60}
-            distance={150}
-            dockHeight={75}
-          />
-        </div>
 
-        {/* Right actions (mobile/small tablet) */}
-        <div className="flex lg:hidden items-center gap-1">
+        {/* Right Action Icons */}
+        <div className="flex items-center gap-2">
           <button
             onClick={() => setSearchOpen((v) => !v)}
-            className="p-2.5 text-slate-800 hover:bg-teal-100/50 rounded-full transition-colors"
+            className="p-2.5 text-slate-800 hover:bg-teal-100/60 rounded-full transition-colors"
             aria-label="Search"
           >
             <Search size={20} />
           </button>
           <button
             onClick={() => navigate('/account')}
-            className="hidden sm:grid p-2.5 text-slate-800 hover:bg-teal-100/50 rounded-full transition-colors place-items-center"
+            className="p-2.5 text-slate-800 hover:bg-teal-100/60 rounded-full transition-colors"
             aria-label="Account"
           >
             <User size={20} />
           </button>
           <button
             onClick={openCart}
-            className="relative p-2.5 text-slate-800 hover:bg-teal-100/50 rounded-full transition-colors"
+            className="relative p-2.5 text-slate-800 hover:bg-teal-100/60 rounded-full transition-colors"
             aria-label="Cart"
           >
             <ShoppingBag size={20} />

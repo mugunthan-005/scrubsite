@@ -1,46 +1,18 @@
 import { useEffect, useState } from 'react';
-import {
-  ArrowRight,
-  Shield,
-  Wind,
-  Sparkles,
-  StretchHorizontal,
-  Star,
-  Quote,
-} from 'lucide-react';
+import { ArrowRight, Quote, Star } from 'lucide-react';
 import { useRouter } from '../context/RouterContext';
 import { PRODUCTS, TESTIMONIALS } from '../data';
 import { motion, useScroll, useTransform } from 'motion/react';
 import ProductCard from '../components/ProductCard';
 import Image from '../components/Image';
-import Ferrofluid from '../components/Ferrofluid';
 import ImageTrail from '../components/ImageTrail';
 import ShinyText from '../components/ShinyText';
+import SideRays from '../components/SideRays';
+import SplitText from '../components/SplitText';
+import MagicBento from '../components/MagicBento';
+import Scrub3DViewer from '../components/Scrub3DViewer';
 
 const SCRUB_TRAIL_IMAGES = PRODUCTS.flatMap((p) => p.images);
-
-const FEATURES = [
-  {
-    Icon: StretchHorizontal,
-    title: '4-Way Stretch',
-    desc: 'Maximum flexibility that moves with every reach, bend, and shift.',
-  },
-  {
-    Icon: Shield,
-    title: 'Antimicrobial',
-    desc: 'Specialized finish treatment inhibits bacteria and odor build-up.',
-  },
-  {
-    Icon: Wind,
-    title: 'Fluid Repellent',
-    desc: 'Barrier shield technology causes liquids and spills to bead off.',
-  },
-  {
-    Icon: Sparkles,
-    title: 'Wrinkle-Free',
-    desc: 'High-density knit requires zero ironing and maintains crisp drape.',
-  },
-];
 
 const COLLECTIONS = [
   {
@@ -88,67 +60,51 @@ export default function Home() {
 
   return (
     <div className="bg-[#040D1A] text-white">
-      {/* Hero with Parallax depth */}
-      <section className="relative overflow-hidden bg-[#040D1A]">
-        {/* Ferrofluid interactive fluid WebGL background with Parallax translation */}
+      {/* Hero with SideRays animation background & Parallax depth */}
+      <section className="relative overflow-hidden bg-[#040D1A] min-h-[85vh] flex items-center">
         <motion.div className="absolute inset-0 z-0" style={{ y: heroBgY }}>
-          <Ferrofluid
-            dpr={1}
-            colors={['#0DA39C', '#1C70F0', '#38BDF8', '#7FB2D9', '#5EEAD4']}
-            speed={0.35}
-            scale={1.5}
-            turbulence={0.8}
-            fluidity={0.15}
-            rimWidth={0.25}
-            sharpness={2.2}
-            shimmer={1.0}
-            glow={2.0}
-            flowDirection="down"
-            opacity={0.8}
-            mouseInteraction={true}
-            mouseStrength={1.0}
-            mouseRadius={0.3}
-            mouseDampening={0.15}
+          <SideRays
+            speed={2.5}
+            rayColor1="#0DA39C"
+            rayColor2="#38BDF8"
+            intensity={2}
+            spread={2}
+            origin="top-right"
+            tilt={0}
+            saturation={1.5}
+            blend={0.75}
+            falloff={1.6}
+            opacity={1.0}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#040D1A]/80 via-[#040D1A]/60 to-[#040D1A] pointer-events-none" />
         </motion.div>
 
-        <div className="container-px relative flex min-h-[85vh] items-center py-20">
-          <motion.div className="max-w-2xl animate-fade-up" style={{ y: heroTextY, opacity: heroOpacity }}>
-            <span className="chip bg-white/10 text-white ring-1 ring-white/20 backdrop-blur-sm">
-              <Star size={12} className="fill-accent-400 text-accent-400" />
-              ZYNEX Premium Medical Apparel
-            </span>
-            <h1 className="mt-6 font-display text-4xl font-bold leading-[1.05] text-white text-balance sm:text-5xl lg:text-6xl">
-              Engineered for Comfort.
-              <br />
-              Designed for Performance.
-            </h1>
-            <p className="mt-6 max-w-lg text-lg text-ink-200 leading-relaxed">
-              Crafted from 92% Polyester & 8% Spandex knitted fabric (200-220 GSM). Featuring 4-way stretch, antimicrobial protection, fluid repellent technology, and wrinkle-free finish in preferred Navy Blue.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <button onClick={() => navigate('/shop')} className="btn-primary text-base shadow-lg shadow-teal-500/20">
-                Shop ZYNEX Collection
-                <ArrowRight size={20} />
-              </button>
-              <button
-                onClick={() => navigate('/collections')}
-                className="btn bg-white/10 text-white ring-1 ring-white/25 backdrop-blur-sm hover:bg-white/20 px-6 py-3 text-base"
-              >
-                Explore Collections
-              </button>
-            </div>
-            <div className="mt-10 flex items-center gap-6 text-sm text-ink-300">
-              <div className="flex items-center gap-2">
-                <Shield size={16} className="text-teal-300" />
-                30-day returns
-              </div>
-              <div className="flex items-center gap-2">
-                <Sparkles size={16} className="text-teal-300" />
-                Free shipping over $75
-              </div>
-            </div>
+        {/* Hero 2-Column Grid: Left Title & Subheading, Right 3D Model seamlessly blended */}
+        <div className="container-px relative z-10 py-10 sm:py-14 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[65vh] w-full">
+          {/* Left Column: Animated ZYNEX brand name & SplitText Subheading */}
+          <motion.div className="lg:col-span-6 text-left animate-fade-up flex flex-col gap-4" style={{ y: heroTextY, opacity: heroOpacity }}>
+            <ShinyText
+              text="ZYNEX"
+              speed={2.5}
+              color="rgba(255, 255, 255, 0.95)"
+              shineColor="#2DD4BF"
+              spread={140}
+              className="font-display text-6xl sm:text-8xl lg:text-9xl font-black uppercase tracking-widest select-none drop-shadow-2xl"
+            />
+            <SplitText
+              text="Engineered for Comfort. Designed for Performance."
+              className="font-display text-lg sm:text-2xl lg:text-3xl font-bold text-teal-300 tracking-wide max-w-xl text-left drop-shadow-lg"
+              delay={35}
+              duration={0.7}
+              ease="power3.out"
+              splitType="chars"
+              textAlign="left"
+              tag="p"
+            />
+          </motion.div>
+
+          {/* Right Column: Seamlessly Blended 3D Medical Scrubs Model */}
+          <motion.div className="lg:col-span-6 min-h-[440px] sm:min-h-[520px] w-full relative flex items-center justify-center" style={{ y: heroTextY, opacity: heroOpacity }}>
+            <Scrub3DViewer modelPath="/medical scrubs 3d model.glb" />
           </motion.div>
         </div>
       </section>
@@ -183,33 +139,31 @@ export default function Home() {
         </div>
       </motion.div>
 
-      {/* Scrub Image Trail Interactive Showcase Section - Seamless Blend */}
-      <section className="bg-gradient-to-b from-[#08182D] via-[#0B192C] to-[#0D1B2A] py-6 sm:py-10 text-white relative overflow-hidden">
-        <div className="container-px max-w-6xl mx-auto">
-          <motion.div
-            className="relative h-[320px] sm:h-[380px] rounded-3xl bg-gradient-to-br from-[#0B192C]/90 via-[#0F172A]/80 to-[#1E293B]/70 shadow-2xl overflow-hidden cursor-crosshair"
-            style={{ y: showcaseCardY }}
-          >
-            <ImageTrail items={SCRUB_TRAIL_IMAGES} variant={2} />
-            <motion.div className="absolute inset-0 grid place-items-center pointer-events-none z-0" style={{ y: shinyTextParallaxY }}>
-              <ShinyText
-                text="ZYNEX"
-                speed={3}
-                color="rgba(255, 255, 255, 0.15)"
-                shineColor="#2DD4BF"
-                spread={120}
-                className="font-display text-6xl sm:text-8xl lg:text-9xl font-black uppercase tracking-widest select-none drop-shadow-md"
-              />
-            </motion.div>
+      {/* Scrub Image Trail Interactive Showcase Section - End to End Full Width with Increased Vertical Height */}
+      <section className="bg-gradient-to-b from-[#08182D] via-[#0B192C] to-[#0D1B2A] py-0 text-white relative overflow-hidden w-full">
+        <motion.div
+          className="relative h-[550px] sm:h-[650px] lg:h-[720px] w-full bg-gradient-to-br from-[#0B192C]/90 via-[#0F172A]/80 to-[#1E293B]/70 shadow-2xl overflow-hidden cursor-crosshair"
+          style={{ y: showcaseCardY }}
+        >
+          <ImageTrail items={SCRUB_TRAIL_IMAGES} variant={2} />
+          <motion.div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 text-center w-full" style={{ y: shinyTextParallaxY }}>
+            <ShinyText
+              text="ZYNEX"
+              speed={3}
+              color="rgba(255, 255, 255, 0.18)"
+              shineColor="#2DD4BF"
+              spread={120}
+              className="font-display text-7xl sm:text-9xl lg:text-[14rem] font-black uppercase tracking-widest select-none drop-shadow-md text-center mx-auto"
+            />
           </motion.div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* Features - Seamless Continuous Gradient */}
+      {/* Features Magic Bento Grid - Seamless Continuous Gradient */}
       <section className="bg-gradient-to-b from-[#0D1B2A] via-[#0F172A] to-[#111C2E] py-20 lg:py-28 text-white relative">
         <div className="container-px">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-widest text-teal-400">ZYNEX Fabric Finish Requirements</p>
+          <div className="mx-auto max-w-2xl text-center mb-14">
+            <p className="text-sm font-semibold uppercase tracking-widest text-teal-400">ZYNEX Fabric & Engineering Standards</p>
             <h2 className="mt-3 font-display text-3xl font-bold text-white sm:text-4xl text-balance">
               Knitted performance fabric that works as hard as you do
             </h2>
@@ -217,21 +171,18 @@ export default function Home() {
               Engineered with 200-220 GSM high-density knitted blend (92% Polyester, 8% Spandex) for total freedom of motion and clinical durability.
             </p>
           </div>
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {FEATURES.map(({ Icon, title, desc }, i) => (
-              <div
-                key={title}
-                className="group rounded-2xl bg-slate-900/60 p-6 transition-all duration-300 hover:-translate-y-1.5 hover:bg-slate-800/80 hover:shadow-2xl shadow-lg backdrop-blur-sm animate-fade-up"
-                style={{ animationDelay: `${i * 80}ms` }}
-              >
-                <div className="grid h-12 w-12 place-items-center rounded-xl bg-teal-500/20 text-teal-300 transition-colors group-hover:bg-teal-500 group-hover:text-white">
-                  <Icon size={22} />
-                </div>
-                <h3 className="mt-5 font-semibold text-white">{title}</h3>
-                <p className="mt-2 text-sm text-slate-300 leading-relaxed">{desc}</p>
-              </div>
-            ))}
-          </div>
+          <MagicBento
+            textAutoHide={true}
+            enableStars={true}
+            enableSpotlight={true}
+            enableBorderGlow={true}
+            enableTilt={true}
+            enableMagnetism={true}
+            clickEffect={true}
+            spotlightRadius={300}
+            particleCount={12}
+            glowColor="45, 212, 191"
+          />
         </div>
       </section>
 
