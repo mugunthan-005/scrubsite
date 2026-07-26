@@ -206,35 +206,7 @@ export default function Home() {
 
         {/* ==================== SECTION 2: SPECS & CURSOR CANVAS SHOWCASE ==================== */}
         <section className="h-full w-full relative flex-none flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#040D1A] via-[#061224] to-[#08182D]">
-          {/* Specification Banner Bar */}
-          <div className="bg-[#061224]/90 border-b border-white/10 py-4 text-white relative z-20">
-            <div className="container-px flex flex-wrap items-center justify-between gap-4 text-xs font-medium">
-              <div className="flex items-center gap-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-teal-400 animate-pulse" />
-                <span className="text-slate-400 uppercase tracking-wider">Fabric Sample:</span>
-                <span className="text-white font-bold">Sample A</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-slate-400 uppercase tracking-wider">Blend:</span>
-                <span className="text-teal-300 font-bold">92% Poly / 8% Spandex</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-slate-400 uppercase tracking-wider">GSM:</span>
-                <span className="text-white font-bold">200 - 220 GSM</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-slate-400 uppercase tracking-wider">Fabric Type:</span>
-                <span className="text-white font-bold">Knitted Fabric</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-slate-400 uppercase tracking-wider">Preferred Color:</span>
-                <span className="inline-flex items-center gap-1.5 font-bold text-white">
-                  <span className="h-3 w-3 rounded-full bg-[#0B192C] ring-1 ring-white/50" />
-                  Navy Blue
-                </span>
-              </div>
-            </div>
-          </div>
+
 
           {/* Interactive Scrub Image Trail Canvas */}
           <div className="relative flex-1 w-full bg-gradient-to-br from-[#0B192C]/90 via-[#0F172A]/80 to-[#1E293B]/70 shadow-2xl overflow-hidden cursor-crosshair flex items-center justify-center">
