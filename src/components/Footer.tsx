@@ -82,16 +82,16 @@ export default function Footer() {
       {/* Links */}
       <div className="container-px py-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-2">
-          <button onClick={() => navigate('/')} className="flex items-center gap-2 text-lg font-bold text-white">
-            <span className="grid h-9 w-9 place-items-center rounded-lg bg-brand-600 text-white">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2c-1.5 0-2.5 1-2.5 2.5V9H6v3h3.5v10h5V12H18V9h-3.5V4.5C14.5 3 13.5 2 12 2z" />
-              </svg>
-            </span>
-            BRAND_NAME
+          <button onClick={() => navigate('/')} className="flex items-center gap-3 text-xl font-extrabold tracking-wider text-white">
+            <img
+              src="/zynex-logo.png"
+              alt="ZYNEX Logo"
+              className="h-9 w-9 rounded-lg object-cover ring-1 ring-white/20"
+            />
+            <span className="font-display tracking-widest">ZYNEX</span>
           </button>
-          <p className="mt-4 text-sm text-ink-400 max-w-xs">
-            Premium medical scrubs engineered for the people who keep the world healthy. Made with recycled fibers and built for the longest shift.
+          <p className="mt-4 text-sm text-ink-400 max-w-xs leading-relaxed">
+            Engineered for clinical performance. Featuring 92% Polyester & 8% Spandex knitted fabric (200-220 GSM), 4-way stretch, antimicrobial protection, and fluid repellent finish.
           </p>
           <div className="mt-6 flex gap-2">
             {SOCIALS.map(({ Icon, label, href }) => (
@@ -129,7 +129,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/10">
         <div className="container-px py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ink-500">
-          <p>© {new Date().getFullYear()} BRAND_NAME. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} ZYNEX Medical Wear. All rights reserved.</p>
           <div className="flex gap-6">
             <button className="hover:text-ink-200 transition-colors">Privacy Policy</button>
             <button className="hover:text-ink-200 transition-colors">Terms of Service</button>

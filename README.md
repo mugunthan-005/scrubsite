@@ -1,8 +1,8 @@
-# BRAND_NAME — Premium Medical Scrubs (E-commerce Showcase)
+# ZYNEX — Premium Medical Scrubs
 
-A premium, production-grade e-commerce and showcase website for medical scrubs, built with React, TypeScript, and Tailwind CSS.
+A premium e-commerce and showcase website for **ZYNEX** medical scrubs, built with React, TypeScript, and Tailwind CSS.
 
-> The brand name is a placeholder. Search-and-replace `BRAND_NAME` across the codebase to rebrand the entire site.
+> **Fabric Specification:** Sample A | 92% Polyester, 8% Spandex | 200-220 GSM | Knitted fabric | Preferred Color: Navy Blue | Finish: Antimicrobial, Fluid Repellent, Wrinkle-Free, 4-Way Stretch
 
 ## Tech Stack
 

@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Mail, Phone, MapPin, MessageSquare, Send, CheckCircle2 } from 'lucide-react';
 
 const CONTACTS = [
-  { Icon: Mail, label: 'Email us', value: 'care@BRAND_NAME.com', href: 'mailto:care@BRAND_NAME.com' },
-  { Icon: Phone, label: 'Call us', value: '1-800-BRAND-01', href: 'tel:18002726301' },
+  { Icon: Mail, label: 'Email us', value: 'care@zynex.com', href: 'mailto:care@zynex.com' },
+  { Icon: Phone, label: 'Call us', value: '1-800-ZYNEX-01', href: 'tel:18009963901' },
   { Icon: MapPin, label: 'Visit us', value: '120 Market St, Suite 400, San Francisco, CA', href: '#' },
   { Icon: MessageSquare, label: 'Live chat', value: 'Mon–Fri, 8am–8pm CT', href: '#' },
 ];
@@ -11,8 +11,8 @@ const CONTACTS = [
 const FAQS = [
   { q: 'What is your return policy?', a: 'We offer 30-day free returns on all unworn items with tags attached. Return shipping is on us for orders over $75.' },
   { q: 'How do I find my size?', a: 'Our scrubs run true to size with a modern fit. Check the size guide on each product page for detailed measurements, or chat with our team for a personal recommendation.' },
-  { q: 'Are your scrubs antimicrobial?', a: 'Yes. Our signature fabric features a silver-ion anti-microbial treatment that inhibits odor-causing bacteria and lasts the lifetime of the garment.' },
-  { q: 'Do you offer bulk / hospital orders?', a: 'Absolutely. We offer volume pricing and custom embroidery for orders of 20+ sets. Contact care@BRAND_NAME.com for a quote.' },
+  { q: 'Are ZYNEX scrubs antimicrobial and fluid repellent?', a: 'Yes. Our Sample A knitted fabric (92% Polyester, 8% Spandex, 200-220 GSM) features antimicrobial protection, fluid repellent technology, 4-way stretch, and wrinkle resistance.' },
+  { q: 'Do you offer bulk / hospital orders?', a: 'Absolutely. We offer volume pricing and custom embroidery for orders of 20+ sets. Contact care@zynex.com for a quote.' },
 ];
 
 export default function Contact() {

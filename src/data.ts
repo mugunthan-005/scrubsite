@@ -4,7 +4,22 @@ import type { Product, Testimonial, ColorOption } from './types';
 const img = (id: string, w = 800) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
 
-const navy: ColorOption = { name: 'Navy', hex: '#1e2533' };
+export const BRAND_SPECIFICATION = {
+  brandName: 'ZYNEX',
+  fabricSample: 'Sample A',
+  blend: '92% Polyester and 8% Spandex',
+  gsm: '200-220 GSM',
+  fabricType: 'Knitted fabric',
+  preferredColor: 'Navy Blue',
+  finishRequirements: [
+    'Antimicrobial',
+    'Fluid Repellent',
+    'Wrinkle-Free',
+    '4-Way Stretch',
+  ],
+};
+
+const navy: ColorOption = { name: 'Navy Blue', hex: '#0B192C' };
 const ceilBlue: ColorOption = { name: 'Ceil Blue', hex: '#7fb2d9' };
 const teal: ColorOption = { name: 'Teal', hex: '#0da39c' };
 const black: ColorOption = { name: 'Black', hex: '#1a1a1a' };
@@ -14,6 +29,9 @@ const white: ColorOption = { name: 'White', hex: '#f7f8fa' };
 const hunterGreen: ColorOption = { name: 'Hunter Green', hex: '#1f5e3a' };
 const royal: ColorOption = { name: 'Royal Blue', hex: '#1c70f0' };
 const grey: ColorOption = { name: 'Graphite', hex: '#4a4f57' };
+
+const STANDARD_FABRIC = '92% Polyester, 8% Spandex (Sample A, 200-220 GSM Knitted Fabric)';
+const STANDARD_FEATURES = ['4-Way Stretch', 'Antimicrobial', 'Fluid Repellent', 'Wrinkle-Free'];
 
 export const PRODUCTS: Product[] = [
   {
@@ -30,9 +48,9 @@ export const PRODUCTS: Product[] = [
     bestSeller: true,
     newArrival: false,
     description:
-      'The Atlas scrub top is engineered with our signature 4-way stretch fabric and a modern tailored fit. Five functional pockets, including a dedicated instrument loop, keep essentials close without bulk.',
-    fabric: '72% Recycled Polyester, 21% Rayon, 7% Spandex',
-    features: ['4-Way Stretch', 'Anti-Microbial', 'Moisture-Wicking', 'Wrinkle-Resistant', '5 Pockets'],
+      'The Atlas scrub top is engineered with ZYNEX 92/8 knitted fabric (200-220 GSM) featuring 4-way stretch and fluid repellent finish. Five functional pockets keep essentials close.',
+    fabric: STANDARD_FABRIC,
+    features: [...STANDARD_FEATURES, '5 Pockets'],
     colors: [navy, black, ceilBlue, teal, grey],
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL'],
     images: [img('2629884'), img('2629877'), img('2633202')],
@@ -51,10 +69,10 @@ export const PRODUCTS: Product[] = [
     bestSeller: true,
     newArrival: true,
     description:
-      'The Nova top blends a flattering V-neckline with athletic-grade performance. Contoured side seams and a slightly cropped hem offer a modern silhouette that moves with you through every shift.',
-    fabric: '72% Recycled Polyester, 21% Rayon, 7% Spandex',
-    features: ['4-Way Stretch', 'Anti-Microbial', 'Moisture-Wicking', 'Wrinkle-Resistant', '4 Pockets'],
-    colors: [wine, teal, navy, ceilBlue, black, royal],
+      'The Nova top blends a flattering V-neckline with athletic-grade ZYNEX 200-220 GSM knitted performance fabric. Antimicrobial and wrinkle-free for demanding shifts.',
+    fabric: STANDARD_FABRIC,
+    features: [...STANDARD_FEATURES, '4 Pockets'],
+    colors: [navy, wine, teal, ceilBlue, black, royal],
     sizes: ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL'],
     images: [img('4173251'), img('4173244'), img('4173232')],
   },
@@ -71,9 +89,9 @@ export const PRODUCTS: Product[] = [
     bestSeller: false,
     newArrival: true,
     description:
-      'A tapered-leg pant with an adjustable drawstring waist and a hidden elastic back for all-day comfort. Seven pockets, including a cargo pocket with a secure zip compartment.',
-    fabric: '72% Recycled Polyester, 21% Rayon, 7% Spandex',
-    features: ['4-Way Stretch', 'Moisture-Wicking', 'Wrinkle-Resistant', '7 Pockets', 'Adjustable Waist'],
+      'A tapered-leg pant with adjustable drawstring waist cut from 200-220 GSM 92% Polyester / 8% Spandex knitted fabric. Seven pockets with fluid repellent & wrinkle-free finish.',
+    fabric: STANDARD_FABRIC,
+    features: [...STANDARD_FEATURES, '7 Pockets', 'Adjustable Waist'],
     colors: [navy, black, teal, pewter, hunterGreen],
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL'],
     images: [img('4173270'), img('4173275'), img('4173283')],
@@ -92,10 +110,10 @@ export const PRODUCTS: Product[] = [
     bestSeller: true,
     newArrival: false,
     description:
-      'A refined lab coat cut from a fluid-resistant, soil-release blend. Notched lapel, back vent, and a sculpted fit that elevates the clinical uniform without sacrificing utility.',
-    fabric: '80% Polyester, 20% Cotton (Fluid-Resistant Finish)',
-    features: ['Fluid-Resistant', 'Soil-Release', 'Wrinkle-Resistant', '3 Pockets', 'Back Vent'],
-    colors: [white],
+      'A refined lab coat with fluid-repellent finish, notched lapel, back vent, and sculpted fit that elevates clinical wear without sacrificing utility.',
+    fabric: '92% Polyester, 8% Spandex (200-220 GSM Fluid Repellent Finish)',
+    features: ['Fluid Repellent', 'Antimicrobial', 'Wrinkle-Free', '3 Pockets', 'Back Vent'],
+    colors: [white, navy],
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
     images: [img('4021808'), img('4021814'), img('4021820')],
   },
@@ -113,10 +131,10 @@ export const PRODUCTS: Product[] = [
     bestSeller: false,
     newArrival: true,
     description:
-      'A coordinated top and pant in matching fabric and color. The set is built for value without compromise — the same performance knit, finished as a cohesive look.',
-    fabric: '72% Recycled Polyester, 21% Rayon, 7% Spandex',
-    features: ['4-Way Stretch', 'Anti-Microbial', 'Moisture-Wicking', 'Wrinkle-Resistant', 'Matching Set'],
-    colors: [teal, wine, navy, black, royal],
+      'A coordinated top and pant set in ZYNEX preferred Navy Blue. Built with 200-220 GSM 92/8 knitted fabric — antimicrobial, fluid repellent, and 4-way stretch.',
+    fabric: STANDARD_FABRIC,
+    features: [...STANDARD_FEATURES, 'Matching Set'],
+    colors: [navy, teal, wine, black, royal],
     sizes: ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL'],
     images: [img('4173290'), img('4173296'), img('4173302')],
   },
@@ -134,9 +152,9 @@ export const PRODUCTS: Product[] = [
     bestSeller: true,
     newArrival: false,
     description:
-      'A rugged yet refined top and pant set designed for long shifts. Reinforced seams, a structured waistband, and a full range of motion through the shoulders and knees.',
-    fabric: '72% Recycled Polyester, 21% Rayon, 7% Spandex',
-    features: ['4-Way Stretch', 'Anti-Microbial', 'Moisture-Wicking', 'Wrinkle-Resistant', 'Reinforced Seams'],
+      'A rugged yet refined top and pant set designed for long shifts. 200-220 GSM knitted fabric with reinforced seams, 4-way stretch, and fluid repellent protection.',
+    fabric: STANDARD_FABRIC,
+    features: [...STANDARD_FEATURES, 'Reinforced Seams'],
     colors: [navy, black, ceilBlue, hunterGreen, grey],
     sizes: ['S', 'M', 'L', 'XL', 'XXL', '3XL'],
     images: [img('2629884'), img('2633202'), img('2629877')],
@@ -154,10 +172,10 @@ export const PRODUCTS: Product[] = [
     bestSeller: true,
     newArrival: true,
     description:
-      'A sleek jogger silhouette with ribbed cuffs and a yoga-style waistband for a secure, flattering fit. Six pockets, including two hidden side seam pockets.',
-    fabric: '72% Recycled Polyester, 21% Rayon, 7% Spandex',
-    features: ['4-Way Stretch', 'Anti-Microbial', 'Moisture-Wicking', 'Wrinkle-Resistant', 'Yoga Waistband'],
-    colors: [black, navy, teal, wine, ceilBlue],
+      'A sleek jogger silhouette with ribbed cuffs and yoga waistband. Made from ZYNEX 92% Poly / 8% Spandex knitted fabric (200-220 GSM) with antimicrobial and wrinkle-free technology.',
+    fabric: STANDARD_FABRIC,
+    features: [...STANDARD_FEATURES, 'Yoga Waistband'],
+    colors: [navy, black, teal, wine, ceilBlue],
     sizes: ['XXS', 'XS', 'S', 'M', 'L', 'XL'],
     images: [img('4173275'), img('4173283'), img('4173270')],
   },
@@ -175,9 +193,9 @@ export const PRODUCTS: Product[] = [
     bestSeller: false,
     newArrival: true,
     description:
-      'A clean crew-neck top with a relaxed unisex cut. Built from the same performance knit with a focus on breathability and ease of movement across all body types.',
-    fabric: '72% Recycled Polyester, 21% Rayon, 7% Spandex',
-    features: ['4-Way Stretch', 'Anti-Microbial', 'Moisture-Wicking', 'Wrinkle-Resistant', 'Breathable Knit'],
+      'A clean crew-neck top with relaxed unisex cut. Built from ZYNEX 200-220 GSM knitted fabric for 4-way stretch flexibility and fluid repellency.',
+    fabric: STANDARD_FABRIC,
+    features: [...STANDARD_FEATURES, 'Breathable Knit'],
     colors: [navy, teal, black, ceilBlue, royal, pewter],
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL'],
     images: [img('4173244'), img('4173232'), img('4173251')],
@@ -192,7 +210,7 @@ export const TESTIMONIALS: Testimonial[] = [
     location: 'Chicago, IL',
     rating: 5,
     quote:
-      'After twelve-hour shifts, these are the only scrubs that still feel like they did at hour one. The stretch is unreal and they never lose their shape.',
+      'ZYNEX scrubs with 4-way stretch and fluid repellent finish are game-changing. After twelve-hour shifts, they still look crisp and feel weightless.',
     avatar: 'https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=200',
   },
   {
@@ -202,7 +220,7 @@ export const TESTIMONIALS: Testimonial[] = [
     location: 'Austin, TX',
     rating: 5,
     quote:
-      'The pockets are actually where I need them and the fabric repels stains I used to ruin three sets a week with. Worth every penny.',
+      'The 92/8 Poly-Spandex knit blend (200-220 GSM) is incredibly soft and durable. Antimicrobial & fluid repellent finish means stain-free comfort every single day.',
     avatar: 'https://images.pexels.com/photos/4173251/pexels-photo-4173251.jpeg?auto=compress&cs=tinysrgb&w=200',
   },
   {
@@ -212,7 +230,7 @@ export const TESTIMONIALS: Testimonial[] = [
     location: 'Seattle, WA',
     rating: 5,
     quote:
-      'I finally have scrubs that fit like they were designed for a woman, not just a smaller men\'s cut. The jogger pants are a game changer in the OR.',
+      'The Navy Blue color is deep and vibrant. ZYNEX really nailed the knitted fabric weight and wrinkle-free finish.',
     avatar: 'https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=200',
   },
   {
@@ -222,7 +240,7 @@ export const TESTIMONIALS: Testimonial[] = [
     location: 'Denver, CO',
     rating: 5,
     quote:
-      'I own six sets now. The color doesn\'t fade, the seams don\'t give, and I get compliments from patients and colleagues every single shift.',
+      'I own six ZYNEX sets in Navy Blue. The fabric doesn\'t fade, the 4-way stretch moves with me, and I get compliments from colleagues every single shift.',
     avatar: 'https://images.pexels.com/photos/2629884/pexels-photo-2629884.jpeg?auto=compress&cs=tinysrgb&w=200',
   },
 ];

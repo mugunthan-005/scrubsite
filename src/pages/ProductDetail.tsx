@@ -279,18 +279,48 @@ export default function ProductDetail({ slug }: { slug: string }) {
               ))}
             </div>
 
-            {/* Fabric specs */}
-            <div className="mt-8 rounded-2xl bg-ink-50 p-5">
-              <h3 className="font-semibold text-ink-900">Fabric & Features</h3>
-              <p className="mt-2 text-sm text-ink-600">
-                <span className="font-medium text-ink-900">Fabric:</span> {product.fabric}
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {product.features.map((f) => (
-                  <span key={f} className="chip bg-white text-ink-700 ring-1 ring-ink-200">
-                    <Check size={12} className="text-teal-500" /> {f}
-                  </span>
-                ))}
+            {/* Fabric & Technical Specifications */}
+            <div className="mt-8 rounded-2xl bg-slate-900 text-white p-6 shadow-md border border-slate-800">
+              <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                <h3 className="font-semibold text-base text-white tracking-wide">ZYNEX Technical Specifications</h3>
+                <span className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-brand-500/20 text-brand-300 ring-1 ring-brand-400/30">
+                  Sample A Spec
+                </span>
+              </div>
+              <div className="mt-4 grid grid-cols-2 gap-3 text-xs">
+                <div className="rounded-xl bg-slate-800/60 p-3 border border-slate-700/50">
+                  <span className="text-slate-400 block text-[10px] uppercase tracking-wider">Fabric Sample</span>
+                  <span className="font-semibold text-white text-sm">Sample A</span>
+                </div>
+                <div className="rounded-xl bg-slate-800/60 p-3 border border-slate-700/50">
+                  <span className="text-slate-400 block text-[10px] uppercase tracking-wider">Blend</span>
+                  <span className="font-semibold text-white text-sm">92% Poly & 8% Spandex</span>
+                </div>
+                <div className="rounded-xl bg-slate-800/60 p-3 border border-slate-700/50">
+                  <span className="text-slate-400 block text-[10px] uppercase tracking-wider">GSM</span>
+                  <span className="font-semibold text-white text-sm">200 - 220 GSM</span>
+                </div>
+                <div className="rounded-xl bg-slate-800/60 p-3 border border-slate-700/50">
+                  <span className="text-slate-400 block text-[10px] uppercase tracking-wider">Fabric Type</span>
+                  <span className="font-semibold text-white text-sm">Knitted Fabric</span>
+                </div>
+              </div>
+              <div className="mt-3 rounded-xl bg-slate-800/60 p-3 border border-slate-700/50 flex items-center justify-between">
+                <div>
+                  <span className="text-slate-400 block text-[10px] uppercase tracking-wider">Preferred Color</span>
+                  <span className="font-semibold text-white text-sm">Navy Blue</span>
+                </div>
+                <span className="h-5 w-5 rounded-full bg-[#0B192C] ring-2 ring-white/40 shadow-xs" title="Navy Blue" />
+              </div>
+              <div className="mt-4">
+                <span className="text-slate-400 block text-[10px] uppercase tracking-wider mb-2">Finish Requirements</span>
+                <div className="flex flex-wrap gap-2">
+                  {['Antimicrobial', 'Fluid Repellent', 'Wrinkle-Free', '4-Way Stretch'].map((finish) => (
+                    <span key={finish} className="chip bg-brand-600/30 text-teal-300 ring-1 ring-brand-400/40 text-xs py-1">
+                      <Check size={12} className="text-teal-400" /> {finish}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

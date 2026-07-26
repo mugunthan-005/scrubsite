@@ -19,22 +19,22 @@ const FEATURES = [
   {
     Icon: StretchHorizontal,
     title: '4-Way Stretch',
-    desc: 'Moves with every reach, bend, and twist without losing shape.',
+    desc: 'Maximum flexibility that moves with every reach, bend, and shift.',
   },
   {
     Icon: Shield,
-    title: 'Anti-Microbial',
-    desc: 'Silver-ion treatment inhibits odor-causing bacteria shift after shift.',
+    title: 'Antimicrobial',
+    desc: 'Specialized finish treatment inhibits bacteria and odor build-up.',
   },
   {
     Icon: Wind,
-    title: 'Moisture-Wicking',
-    desc: 'Pulls sweat away from skin and dries fast to keep you cool.',
+    title: 'Fluid Repellent',
+    desc: 'Barrier shield technology causes liquids and spills to bead off.',
   },
   {
     Icon: Sparkles,
-    title: 'Wrinkle-Resistant',
-    desc: 'Wash, dry, wear. No ironing board required, ever.',
+    title: 'Wrinkle-Free',
+    desc: 'High-density knit requires zero ironing and maintains crisp drape.',
   },
 ];
 
@@ -80,13 +80,13 @@ export default function Home() {
             className="h-full w-full"
             loading="eager"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-ink-950/80 via-ink-950/50 to-ink-950/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink-950/85 via-ink-950/60 to-ink-950/30" />
         </div>
         <div className="container-px relative flex min-h-[88vh] items-center py-20">
           <div className="max-w-2xl animate-fade-up">
             <span className="chip bg-white/10 text-white ring-1 ring-white/20 backdrop-blur-sm">
               <Star size={12} className="fill-accent-400 text-accent-400" />
-              Loved by 50,000+ healthcare professionals
+              ZYNEX Premium Medical Apparel
             </span>
             <h1 className="mt-6 font-display text-4xl font-bold leading-[1.05] text-white text-balance sm:text-5xl lg:text-6xl">
               Engineered for Comfort.
@@ -94,11 +94,11 @@ export default function Home() {
               Designed for Performance.
             </h1>
             <p className="mt-6 max-w-lg text-lg text-ink-200 leading-relaxed">
-              Premium medical scrubs built from recycled performance fabric. Anti-microbial, moisture-wicking, and made to outlast the longest shift.
+              Crafted from 92% Polyester & 8% Spandex knitted fabric (200-220 GSM). Featuring 4-way stretch, antimicrobial protection, fluid repellent technology, and wrinkle-free finish in preferred Navy Blue.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <button onClick={() => navigate('/shop')} className="btn-primary text-base">
-                Shop Now
+                Shop ZYNEX Collection
                 <ArrowRight size={20} />
               </button>
               <button
@@ -122,20 +122,45 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Marquee */}
-      <div className="bg-ink-950 py-3 text-center text-xs uppercase tracking-[0.2em] text-ink-400">
-        Trusted in 1,200+ hospitals · 4.9★ average rating · 100% satisfaction guarantee
+      {/* Specification Banner Bar */}
+      <div className="bg-slate-900 border-y border-slate-800 py-4 text-white">
+        <div className="container-px flex flex-wrap items-center justify-between gap-4 text-xs font-medium">
+          <div className="flex items-center gap-2">
+            <span className="h-2.5 w-2.5 rounded-full bg-teal-400 animate-pulse" />
+            <span className="text-slate-400 uppercase tracking-wider">Fabric Sample:</span>
+            <span className="text-white font-bold">Sample A</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-slate-400 uppercase tracking-wider">Blend:</span>
+            <span className="text-teal-300 font-bold">92% Poly / 8% Spandex</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-slate-400 uppercase tracking-wider">GSM:</span>
+            <span className="text-white font-bold">200 - 220 GSM</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-slate-400 uppercase tracking-wider">Fabric Type:</span>
+            <span className="text-white font-bold">Knitted Fabric</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-slate-400 uppercase tracking-wider">Preferred Color:</span>
+            <span className="inline-flex items-center gap-1.5 font-bold text-white">
+              <span className="h-3 w-3 rounded-full bg-[#0B192C] ring-1 ring-white/50" />
+              Navy Blue
+            </span>
+          </div>
+        </div>
       </div>
 
       {/* Features */}
       <section className="container-px py-20 lg:py-28">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-700">Why Choose Us</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand-700">ZYNEX Fabric Finish Requirements</p>
           <h2 className="mt-3 font-display text-3xl font-bold text-ink-900 sm:text-4xl text-balance">
-            Fabric that works as hard as you do
+            Knitted performance fabric that works as hard as you do
           </h2>
           <p className="mt-4 text-ink-600">
-            Every fiber is chosen for a reason. These aren't just scrubs — they're the uniform of people who refuse to compromise.
+            Engineered with 200-220 GSM high-density knitted blend (92% Polyester, 8% Spandex) for total freedom of motion and clinical durability.
           </p>
         </div>
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

@@ -3,17 +3,17 @@ import { useRouter } from '../context/RouterContext';
 import Image from '../components/Image';
 
 const VALUES = [
-  { Icon: Shield, title: 'Performance First', desc: 'Every fabric is lab-tested for durability, stretch, and comfort before it ever reaches a shift.' },
-  { Icon: Leaf, title: 'Sustainably Made', desc: 'Our signature knit uses recycled polyester from post-consumer plastic — over 2M bottles diverted and counting.' },
-  { Icon: Heart, title: 'Built by Clinicians', desc: 'Designed with input from 500+ nurses, doctors, and techs who know exactly what a uniform should do.' },
-  { Icon: Award, title: 'Guaranteed Quality', desc: 'A 2-year guarantee on every seam. If it fails, we replace it. No questions, no fine print.' },
+  { Icon: Shield, title: 'Performance Engineering', desc: 'Crafted with Sample A 92% Polyester & 8% Spandex knitted fabric (200-220 GSM) engineered for demanding healthcare shifts.' },
+  { Icon: Leaf, title: 'Fluid & Antimicrobial Shield', desc: 'Advanced finish requirements provide fluid repellency, antimicrobial protection, wrinkle resistance, and 4-way stretch.' },
+  { Icon: Heart, title: 'Built for Clinicians', desc: 'Designed in our signature preferred Navy Blue with input from 500+ nurses, doctors, and tech professionals.' },
+  { Icon: Award, title: 'Guaranteed Quality', desc: 'A 2-year guarantee on every seam and finish. If it fails, we replace it immediately.' },
 ];
 
 const STATS = [
-  { value: '50K+', label: 'Professionals served' },
-  { value: '1,200+', label: 'Hospitals stocked' },
-  { value: '4.9★', label: 'Average rating' },
-  { value: '2M+', label: 'Plastic bottles recycled' },
+  { value: '200-220', label: 'GSM Knitted Fabric' },
+  { value: '92 / 8', label: '% Poly & Spandex Blend' },
+  { value: '4-Way', label: 'Stretch & Fluid Repellent' },
+  { value: 'Navy Blue', label: 'Signature Preferred Color' },
 ];
 
 export default function About() {
@@ -29,10 +29,10 @@ export default function About() {
         <div className="container-px relative py-24 lg:py-32 text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-teal-300">Our Story</p>
           <h1 className="mt-4 font-display text-4xl font-bold sm:text-5xl lg:text-6xl text-balance">
-            We make the uniform healthcare deserves
+            ZYNEX — The standard healthcare deserves
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-ink-300 leading-relaxed">
-            BRAND_NAME was founded by a team who watched their loved ones come home from double shifts in scrubs that pilled, faded, and fell apart. We knew there had to be a better way.
+            ZYNEX was founded to solve clinical apparel challenges. We engineered Sample A: a premium 92% Polyester / 8% Spandex knitted fabric (200-220 GSM) with antimicrobial, fluid repellent, wrinkle-free, and 4-way stretch performance.
           </p>
         </div>
       </section>
@@ -43,7 +43,7 @@ export default function About() {
           {STATS.map((s) => (
             <div key={s.label} className="text-center">
               <p className="font-display text-3xl font-bold text-brand-700 sm:text-4xl">{s.value}</p>
-              <p className="mt-1 text-xs text-ink-600 sm:text-sm">{s.label}</p>
+              <p className="mt-1 text-xs text-ink-600 sm:text-sm font-medium">{s.label}</p>
             </div>
           ))}
         </div>
@@ -53,7 +53,7 @@ export default function About() {
       <section className="container-px py-20 lg:py-28">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-700">What We Stand For</p>
-          <h2 className="mt-3 font-display text-3xl font-bold text-ink-900 sm:text-4xl">Four principles, no compromises</h2>
+          <h2 className="mt-3 font-display text-3xl font-bold text-ink-900 sm:text-4xl">Four pillars of ZYNEX innovation</h2>
         </div>
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {VALUES.map(({ Icon, title, desc }, i) => (
@@ -80,13 +80,13 @@ export default function About() {
               Comfort is not a luxury on a twelve-hour shift
             </h2>
             <p className="mt-5 text-ink-700 leading-relaxed">
-              We believe the people who care for us deserve a uniform that cares for them. That's why we obsess over every seam, every pocket, and every fiber — so the only thing you have to think about is your patient.
+              We believe medical professionals deserve uniforms engineered to the highest standard. That's why ZYNEX developed our signature 200-220 GSM knitted fabric blend — giving you total confidence with fluid repellency, antimicrobial shield, and 4-way stretch.
             </p>
             <p className="mt-4 text-ink-700 leading-relaxed">
-              From the recycled fibers in our fabric to the reinforced bartacks at every stress point, every decision starts with one question: will this make a healthcare worker's day better?
+              Available in preferred Navy Blue and signature clinical tones, every ZYNEX garment is built to empower healthcare workers.
             </p>
             <button onClick={() => navigate('/shop')} className="btn-primary mt-8">
-              Shop Our Scrubs
+              Shop ZYNEX Scrubs
               <ArrowRight size={18} />
             </button>
           </div>

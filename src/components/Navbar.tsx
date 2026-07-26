@@ -62,14 +62,14 @@ export default function Navbar() {
         {/* Logo */}
         <button
           onClick={() => navigate('/')}
-          className="flex items-center gap-2 text-lg font-bold tracking-tight text-ink-900"
+          className="flex items-center gap-2.5 text-xl font-extrabold tracking-wider text-ink-900 group"
         >
-          <span className="grid h-9 w-9 place-items-center rounded-lg bg-brand-700 text-white">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M12 2c-1.5 0-2.5 1-2.5 2.5V9H6v3h3.5v10h5V12H18V9h-3.5V4.5C14.5 3 13.5 2 12 2z" fill="currentColor" stroke="none"/>
-            </svg>
-          </span>
-          <span className="hidden sm:inline">BRAND_NAME</span>
+          <img
+            src="/zynex-logo.png"
+            alt="ZYNEX Logo"
+            className="h-9 w-9 rounded-lg object-cover ring-1 ring-ink-200 shadow-xs transition-transform group-hover:scale-105"
+          />
+          <span className="font-display tracking-widest text-brand-900">ZYNEX</span>
         </button>
 
         {/* Desktop nav */}
