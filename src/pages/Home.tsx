@@ -1,23 +1,15 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CheckCircle2 } from 'lucide-react';
-import ImageTrail from '../components/ImageTrail';
 import ShinyText from '../components/ShinyText';
 import SideRays from '../components/SideRays';
 import SplitText from '../components/SplitText';
 import Scrub3DViewer from '../components/Scrub3DViewer';
 import VirtualTryOn from '../components/VirtualTryOn';
 import Footer from '../components/Footer';
+import Lanyard from '../components/Lanyard';
 
-const SCRUB_TRAIL_IMAGES = [
-  '/Gemini_Generated_Image_nce5j3nce5j3nce5.png',
-  '/Gemini_Generated_Image_nce5j3nce5j3nce5 (1).png',
-  '/Gemini_Generated_Image_nce5j3nce5j3nce5 (2).png',
-  '/Gemini_Generated_Image_nce5j3nce5j3nce5 (3).png',
-  '/Gemini_Generated_Image_q6oe8eq6oe8eq6oe.png',
-  '/Screenshot 2026-07-26 221310.png',
-  '/Screenshot 2026-07-26 221323.png',
-];
+
 
 // 5-Subscroll Feature Sequence Content Structure with Videos 1 through 5
 const FEATURE_STEPS = [
@@ -207,26 +199,26 @@ export default function Home() {
       if (sec === 0) {
         updateSectionAndStep(1, 0);
       } else if (sec === 1) {
-        updateSectionAndStep(2, 0);
-      } else if (sec === 2) {
         if (step < FEATURE_STEPS.length - 1) {
-          updateSectionAndStep(2, step + 1);
+          updateSectionAndStep(1, step + 1);
         } else {
-          updateSectionAndStep(3, 0); // Advance to Virtual Try-On Section
+          updateSectionAndStep(2, 0); // Advance to Virtual Try-On Section
         }
+      } else if (sec === 2) {
+        updateSectionAndStep(3, 0); // Advance to Lanyard 3D Section
       }
     } else {
       // Direction 'prev'
       if (sec === 3) {
-        updateSectionAndStep(2, FEATURE_STEPS.length - 1); // Back to Step 5 of Section 3
+        updateSectionAndStep(2, 0); // Back to Virtual Try-On Section
       } else if (sec === 2) {
-        if (step > 0) {
-          updateSectionAndStep(2, step - 1);
-        } else {
-          updateSectionAndStep(1, 0);
-        }
+        updateSectionAndStep(1, FEATURE_STEPS.length - 1); // Back to Step 5 of Section 1
       } else if (sec === 1) {
-        updateSectionAndStep(0, 0);
+        if (step > 0) {
+          updateSectionAndStep(1, step - 1);
+        } else {
+          updateSectionAndStep(0, 0);
+        }
       }
     }
 
@@ -361,55 +353,6 @@ export default function Home() {
         </section>
 
 
-        {/* ==================== SECTION 2: SPECS & CURSOR CANVAS SHOWCASE ==================== */}
-        <section className="h-full w-full relative flex-none flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#040D1A] via-[#061224] to-[#08182D]">
-          {/* Specification Banner Bar */}
-          <div className="bg-[#061224]/90 border-b border-white/10 py-4 text-white relative z-20">
-            <div className="container-px flex flex-wrap items-center justify-between gap-4 text-xs font-medium">
-              <div className="flex items-center gap-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-teal-400 animate-pulse" />
-                <span className="text-slate-400 uppercase tracking-wider">Fabric Sample:</span>
-                <span className="text-white font-bold">Sample A</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-slate-400 uppercase tracking-wider">Blend:</span>
-                <span className="text-teal-300 font-bold">92% Poly / 8% Spandex</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-slate-400 uppercase tracking-wider">GSM:</span>
-                <span className="text-white font-bold">200 - 220 GSM</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-slate-400 uppercase tracking-wider">Fabric Type:</span>
-                <span className="text-white font-bold">Knitted Fabric</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-slate-400 uppercase tracking-wider">Preferred Color:</span>
-                <span className="inline-flex items-center gap-1.5 font-bold text-white">
-                  <span className="h-3 w-3 rounded-full bg-[#0B192C] ring-1 ring-white/50" />
-                  Navy Blue
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Interactive Scrub Image Trail Canvas */}
-          <div className="relative flex-1 w-full bg-gradient-to-br from-[#0B192C]/90 via-[#0F172A]/80 to-[#1E293B]/70 shadow-2xl overflow-hidden cursor-crosshair flex items-center justify-center">
-            <ImageTrail items={SCRUB_TRAIL_IMAGES} variant={2} />
-            
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 text-center w-full">
-              <ShinyText
-                text="ZYNEX"
-                speed={3}
-                color="rgba(255, 255, 255, 0.18)"
-                shineColor="#2DD4BF"
-                spread={120}
-                className="font-display text-7xl sm:text-9xl lg:text-[13rem] font-black uppercase tracking-widest select-none drop-shadow-md text-center mx-auto"
-              />
-            </div>
-          </div>
-        </section>
-
 
         {/* ==================== SECTION 3: 5-SUBSCROLL PINNED FEATURE SHOWCASE ==================== */}
         <section className="h-full w-full relative flex-none flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#0D1B2A] via-[#0F172A] to-[#111C2E] py-4">
@@ -488,13 +431,29 @@ export default function Home() {
         </section>
 
 
-        {/* ==================== SECTION 4: BROWSER-BASED VIRTUAL TRY-ON STUDIO ==================== */}
-        <section className="h-full w-full relative flex-none overflow-y-auto bg-[#040D1A] text-white">
-          <div className="min-h-full flex flex-col justify-between">
-            <VirtualTryOn />
-            <div className="w-full flex-none z-20 border-t border-white/10 bg-[#020812]">
-              <Footer />
-            </div>
+        {/* ==================== SECTION 3: BROWSER-BASED VIRTUAL TRY-ON STUDIO ==================== */}
+        <section className="h-full w-full relative flex-none flex flex-col justify-center overflow-y-auto bg-[#040D1A] text-white">
+          <VirtualTryOn />
+        </section>
+
+
+        {/* ==================== SECTION 4: INTERACTIVE 3D LANYARD (LAST SECTION) ==================== */}
+        <section className="h-full w-full relative flex-none flex flex-col justify-between overflow-y-auto bg-gradient-to-b from-[#040D1A] via-[#061224] to-[#020812]">
+          <div className="relative flex-1 w-full flex flex-col items-center justify-center min-h-[500px]">
+            <Lanyard
+              position={[0, 0, 22]}
+              gravity={[0, -40, 0]}
+              frontImage="/zynex-badge-logo.png"
+              backImage="/zynex-logo.png"
+              imageFit="cover"
+              lanyardImage="/lanyard.png"
+              lanyardWidth={1}
+            />
+          </div>
+
+          {/* Site Footer at the very bottom */}
+          <div className="w-full flex-none z-20 border-t border-white/10 bg-[#020812]">
+            <Footer />
           </div>
         </section>
       </div>
