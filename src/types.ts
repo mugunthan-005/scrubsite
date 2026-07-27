@@ -41,10 +41,13 @@ export interface CartItem {
 
 export interface Testimonial {
   id: string;
-  name: string;
+  name?: string;
+  author?: string;
   role: string;
-  location: string;
+  location?: string;
+  hospital?: string;
   rating: number;
-  quote: string;
+  quote?: string;
+  content?: string;
   avatar: string;
 }

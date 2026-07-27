@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Lock } from 'lucide-react';
 import { useRouter } from '../context/RouterContext';
