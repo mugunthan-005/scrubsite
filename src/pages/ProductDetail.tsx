@@ -250,7 +250,7 @@ export default function ProductDetail({ slug }: { slug: string }) {
               <button
                 onClick={handleAddToCart}
                 className={`btn flex-1 px-8 py-3.5 text-base transition-all ${
-                  added ? 'bg-teal-500 text-white' : 'btn-primary'
+                  added ? 'bg-[#2A8B9B] text-white' : 'btn-primary'
                 }`}
               >
                 {added ? (
@@ -316,8 +316,8 @@ export default function ProductDetail({ slug }: { slug: string }) {
                 <span className="text-slate-400 block text-[10px] uppercase tracking-wider mb-2">Finish Requirements</span>
                 <div className="flex flex-wrap gap-2">
                   {['Antimicrobial', 'Fluid Repellent', 'Wrinkle-Free', '4-Way Stretch'].map((finish) => (
-                    <span key={finish} className="chip bg-brand-600/30 text-teal-300 ring-1 ring-brand-400/40 text-xs py-1">
-                      <Check size={12} className="text-teal-400" /> {finish}
+                    <span key={finish} className="chip bg-brand-600/30 text-[#38A7B8] ring-1 ring-brand-400/40 text-xs py-1">
+                      <Check size={12} className="text-[#38A7B8]" /> {finish}
                     </span>
                   ))}
                 </div>

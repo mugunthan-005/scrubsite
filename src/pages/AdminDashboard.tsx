@@ -194,7 +194,7 @@ export default function AdminDashboard() {
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-6">
           <div>
             <div className="flex items-center gap-2">
-              <span className="chip bg-teal-500/20 text-teal-300 ring-1 ring-teal-400/30">
+              <span className="chip bg-[#2A8B9B]/20 text-[#38A7B8] ring-1 ring-[#38A7B8]/30">
                 MERN Stack Admin Portal
               </span>
               <span className="chip bg-indigo-500/20 text-indigo-300 ring-1 ring-indigo-400/30">
@@ -219,7 +219,7 @@ export default function AdminDashboard() {
             </button>
             <button
               onClick={() => handleRestock('ZYN-ATLA-S-NAVY', 100)}
-              className="btn-primary text-sm px-4 py-2.5 flex items-center gap-2 shadow-lg shadow-teal-500/20"
+              className="btn-primary text-sm px-4 py-2.5 flex items-center gap-2 shadow-lg shadow-[#2A8B9B]/20"
             >
               <Plus size={16} />
               Quick Fabric Order
@@ -232,7 +232,7 @@ export default function AdminDashboard() {
           <div className="rounded-2xl bg-slate-900/80 border border-slate-800 p-6 shadow-xl relative overflow-hidden">
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Total SKUs</span>
-              <div className="grid h-10 w-10 place-items-center rounded-xl bg-teal-500/20 text-teal-300">
+              <div className="grid h-10 w-10 place-items-center rounded-xl bg-[#2A8B9B]/20 text-[#38A7B8]">
                 <Boxes size={20} />
               </div>
             </div>
@@ -248,7 +248,7 @@ export default function AdminDashboard() {
               </div>
             </div>
             <p className="mt-4 font-display text-3xl font-bold text-white">{totalUnits.toLocaleString()}</p>
-            <p className="mt-1 text-xs text-teal-300 font-medium">92/8 Poly-Spandex Knitted Fabric</p>
+            <p className="mt-1 text-xs text-[#38A7B8] font-medium">92/8 Poly-Spandex Knitted Fabric</p>
           </div>
 
           <div className="rounded-2xl bg-slate-900/80 border border-slate-800 p-6 shadow-xl relative overflow-hidden">
@@ -265,11 +265,11 @@ export default function AdminDashboard() {
           <div className="rounded-2xl bg-slate-900/80 border border-slate-800 p-6 shadow-xl relative overflow-hidden">
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Inventory Valuation</span>
-              <div className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-500/20 text-emerald-300">
+              <div className="grid h-10 w-10 place-items-center rounded-xl bg-[#38A7B8]/20 text-emerald-300">
                 <DollarSign size={20} />
               </div>
             </div>
-            <p className="mt-4 font-display text-3xl font-bold text-emerald-400">
+            <p className="mt-4 font-display text-3xl font-bold text-[#38A7B8]">
               ${inventoryValuation.toLocaleString(undefined, { minimumFractionDigits: 2 })}
             </p>
             <p className="mt-1 text-xs text-slate-400">Asset cost basis</p>
@@ -279,14 +279,14 @@ export default function AdminDashboard() {
         {/* Fabric Specification Banner */}
         <div className="rounded-2xl bg-gradient-to-r from-slate-900 via-[#0B192C] to-slate-900 border border-slate-800 p-5 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <ShieldCheck size={24} className="text-teal-300" />
+            <ShieldCheck size={24} className="text-[#38A7B8]" />
             <div>
               <p className="text-sm font-semibold text-white">Fabric Specification Profile: Sample A (Navy Preferred)</p>
               <p className="text-xs text-slate-400">92% Polyester, 8% Spandex · 200-220 GSM · Antimicrobial, Fluid Repellent, 4-Way Stretch</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <span className="chip bg-teal-500/20 text-teal-300 border border-teal-500/30 text-xs">
+            <span className="chip bg-[#2A8B9B]/20 text-[#38A7B8] border border-[#2A8B9B]/30 text-xs">
               Quality Rating: 100% Passed
             </span>
           </div>
@@ -301,7 +301,7 @@ export default function AdminDashboard() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search SKU, Product, or Color…"
-                className="w-full rounded-xl border border-slate-700 bg-slate-950 py-2 pl-10 pr-4 text-sm text-white placeholder:text-slate-500 focus:border-teal-400 focus:outline-none"
+                className="w-full rounded-xl border border-slate-700 bg-slate-950 py-2 pl-10 pr-4 text-sm text-white placeholder:text-slate-500 focus:border-[#38A7B8] focus:outline-none"
               />
             </div>
 
@@ -315,7 +315,7 @@ export default function AdminDashboard() {
                   onClick={() => setSelectedSize(sz)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
                     selectedSize === sz
-                      ? 'bg-teal-500 text-white'
+                      ? 'bg-[#2A8B9B] text-white'
                       : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
                   }`}
                 >
@@ -359,7 +359,7 @@ export default function AdminDashboard() {
                   const isLow = item.stockQuantity <= item.reorderThreshold;
                   return (
                     <tr key={item.sku} className="hover:bg-slate-800/40 transition-colors">
-                      <td className="py-4 px-5 font-mono text-xs font-bold text-teal-300">{item.sku}</td>
+                      <td className="py-4 px-5 font-mono text-xs font-bold text-[#38A7B8]">{item.sku}</td>
                       <td className="py-4 px-5 font-medium text-white">{item.productName}</td>
                       <td className="py-4 px-5">
                         <span className="chip bg-slate-800 text-slate-200 border border-slate-700 font-bold">
@@ -386,7 +386,7 @@ export default function AdminDashboard() {
                       </td>
                       <td className="py-4 px-5">
                         <div className="flex items-center gap-2">
-                          <span className={`font-bold ${isLow ? 'text-rose-400' : 'text-emerald-400'}`}>
+                          <span className={`font-bold ${isLow ? 'text-rose-400' : 'text-[#38A7B8]'}`}>
                             {item.stockQuantity} units
                           </span>
                           {isLow && (
@@ -400,7 +400,7 @@ export default function AdminDashboard() {
                         <span
                           className={`chip text-xs font-semibold ${
                             item.fabricStatus === 'In Stock'
-                              ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                              ? 'bg-[#38A7B8]/20 text-emerald-300 border border-[#38A7B8]/30'
                               : item.fabricStatus === 'Bulk Fabric Ordered'
                               ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/30'
                               : item.fabricStatus === 'Dyeing Navy'
@@ -415,7 +415,7 @@ export default function AdminDashboard() {
                       <td className="py-4 px-5">
                         <button
                           onClick={() => handleRestock(item.sku, 50)}
-                          className="btn bg-teal-500/20 hover:bg-teal-500/40 text-teal-300 border border-teal-500/30 text-xs px-3 py-1.5 font-semibold flex items-center gap-1 transition-colors"
+                          className="btn bg-[#2A8B9B]/20 hover:bg-[#2A8B9B]/40 text-[#38A7B8] border border-[#2A8B9B]/30 text-xs px-3 py-1.5 font-semibold flex items-center gap-1 transition-colors"
                         >
                           <Plus size={12} /> Restock +50
                         </button>

@@ -20,13 +20,13 @@ function Routes() {
 
   // Secondary shop pages redirect to Coming Soon screen as requested
   return (
-    <div className="relative min-h-[85vh] bg-[#040D1A] text-white flex flex-col items-center justify-center py-20 px-4 text-center overflow-hidden">
+    <div className="relative min-h-[85vh] bg-[#041117] text-white flex flex-col items-center justify-center py-20 px-4 text-center overflow-hidden">
       {/* Dynamic Background */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-80">
         <SideRays
           speed={2}
-          rayColor1="#0DA39C"
-          rayColor2="#38BDF8"
+          rayColor1="#134752"
+          rayColor2="#287C8C"
           intensity={1.8}
           spread={2}
           origin="top-right"
@@ -38,7 +38,7 @@ function Routes() {
         />
         <div className="absolute inset-0">
           <Particles
-            particleColors={['#2DD4BF', '#38BDF8', '#5EEAD4']}
+            particleColors={['#38A7B8', '#CBD7D7', '#1D6E7D']}
             particleCount={150}
             particleSpread={10}
             speed={0.1}
@@ -55,7 +55,7 @@ function Routes() {
           baseIntensity={0.2}
           hoverIntensity={0.6}
           enableHover={true}
-          color="#2DD4BF"
+          color="#38A7B8"
           fontSize="clamp(2.5rem, 8vw, 7rem)"
           fontWeight={900}
           fuzzRange={25}
@@ -84,7 +84,7 @@ function MainLayout() {
   const isHomePage = path === '/' || path === '';
 
   return (
-    <div className="flex min-h-screen flex-col relative overflow-hidden bg-[#040D1A]">
+    <div className="flex min-h-screen flex-col relative overflow-hidden bg-[#041117]">
       <Navbar />
       <main className="flex-1 relative">
         <Suspense fallback={<div className="container-px py-32 text-center text-slate-400">Loading…</div>}>

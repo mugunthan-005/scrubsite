@@ -44,10 +44,10 @@ class LanyardErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   render() {
     if (this.state.hasError) {
       return (
-        <div className="w-full h-full min-h-[450px] flex flex-col items-center justify-center bg-[#040D1A] text-slate-300 p-8 text-center rounded-3xl border border-white/10 shadow-2xl">
-          <img src="/zyna-logo.jpg" alt="ZYNA Badge" className="h-20 w-20 mb-4 rounded-2xl ring-2 ring-teal-400/50 shadow-xl object-contain" />
+        <div className="w-full h-full min-h-[450px] flex flex-col items-center justify-center bg-[#041117] text-[#CBD7D7] p-8 text-center rounded-3xl border border-[#CBD7D7]/15 shadow-2xl">
+          <img src="/zyna-logo.jpg" alt="ZYNA Badge" className="h-20 w-20 mb-4 rounded-2xl ring-2 ring-[#38A7B8]/50 shadow-xl object-contain" />
           <h3 className="font-display text-2xl font-black text-white tracking-widest uppercase">ZYNA Medical Pass</h3>
-          <p className="mt-2 text-sm text-teal-300 font-medium">Interactive 3D Badge</p>
+          <p className="mt-2 text-sm text-[#38A7B8] font-medium">Interactive 3D Badge</p>
         </div>
       );
     }

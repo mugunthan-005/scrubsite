@@ -45,15 +45,15 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#020812] text-ink-200">
+    <footer className="bg-[#020B0F] text-[#CBD7D7] border-t border-[#CBD7D7]/15">
       {/* Newsletter */}
       <div>
         <div className="container-px py-14 grid gap-8 lg:grid-cols-2 lg:items-center">
           <div>
-            <h3 className="font-display text-2xl text-white sm:text-3xl">
+            <h3 className="font-display text-2xl text-[#F0F5F5] sm:text-3xl">
               Join the healthcare professionals who never settle
             </h3>
-            <p className="mt-2 text-ink-400 max-w-md">
+            <p className="mt-2 text-[#7E969B] max-w-md">
               Get early access to new collections, exclusive offers, and 10% off your first order.
             </p>
           </div>
@@ -64,7 +64,7 @@ export default function Footer() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@hospital.com"
-              className="flex-1 rounded-full border border-white/15 bg-white/5 px-5 py-3 text-white placeholder:text-ink-500 focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-500/20"
+              className="flex-1 rounded-full border border-[#CBD7D7]/20 bg-white/5 px-5 py-3 text-[#F0F5F5] placeholder:text-[#7E969B] focus:border-[#38A7B8] focus:outline-none focus:ring-4 focus:ring-[#38A7B8]/20"
             />
             <button type="submit" className="btn-primary whitespace-nowrap">
               Subscribe
@@ -73,24 +73,24 @@ export default function Footer() {
           </form>
         </div>
         {subscribed && (
-          <div className="container-px pb-6 -mt-6 text-sm text-teal-300 animate-fade-in">
+          <div className="container-px pb-6 -mt-6 text-sm text-[#38A7B8] animate-fade-in font-medium">
             You're in. Check your inbox for a welcome offer.
           </div>
         )}
       </div>
 
       {/* Links */}
-      <div className="container-px py-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="container-px py-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-5 border-t border-[#CBD7D7]/10">
         <div className="lg:col-span-2">
-          <button onClick={() => navigate('/')} className="flex items-center gap-3 text-xl font-extrabold tracking-wider text-white">
+          <button onClick={() => navigate('/')} className="flex items-center gap-3 text-xl font-extrabold tracking-wider text-[#F0F5F5]">
             <img
               src="/zyna-logo.jpg"
               alt="ZYNA Logo"
-              className="h-9 w-9 rounded-lg object-cover ring-1 ring-white/20"
+              className="h-9 w-9 rounded-lg object-cover ring-1 ring-[#38A7B8]/40"
             />
             <span className="font-display tracking-widest">ZYNA</span>
           </button>
-          <p className="mt-4 text-sm text-ink-400 max-w-xs leading-relaxed">
+          <p className="mt-4 text-sm text-[#7E969B] max-w-xs leading-relaxed">
             Engineered for clinical performance. Featuring 92% Polyester & 8% Spandex knitted fabric (200-220 GSM), 4-way stretch, antimicrobial protection, and fluid repellent finish.
           </p>
           <div className="mt-6 flex gap-2">
@@ -99,7 +99,7 @@ export default function Footer() {
                 key={label}
                 href={href}
                 aria-label={label}
-                className="grid h-10 w-10 place-items-center rounded-full bg-white/5 text-ink-300 transition hover:bg-brand-600 hover:text-white"
+                className="grid h-10 w-10 place-items-center rounded-full bg-white/5 text-[#CBD7D7] transition hover:bg-[#38A7B8] hover:text-[#041117]"
               >
                 <Icon size={18} />
               </a>
@@ -109,13 +109,13 @@ export default function Footer() {
 
         {Object.entries(FOOTER_LINKS).map(([heading, links]) => (
           <div key={heading}>
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider">{heading}</h4>
+            <h4 className="text-sm font-semibold text-[#F0F5F5] uppercase tracking-wider">{heading}</h4>
             <ul className="mt-4 space-y-2.5">
               {links.map((link) => (
                 <li key={link.label}>
                   <button
                     onClick={() => navigate(link.path)}
-                    className="text-sm text-ink-400 hover:text-white transition-colors"
+                    className="text-sm text-[#7E969B] hover:text-[#38A7B8] transition-colors"
                   >
                     {link.label}
                   </button>
@@ -127,13 +127,13 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div>
-        <div className="container-px py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ink-500">
+      <div className="border-t border-[#CBD7D7]/10">
+        <div className="container-px py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#7E969B]">
           <p>© {new Date().getFullYear()} ZYNA Medical Wear. All rights reserved.</p>
           <div className="flex gap-6">
-            <button className="hover:text-ink-200 transition-colors">Privacy Policy</button>
-            <button className="hover:text-ink-200 transition-colors">Terms of Service</button>
-            <button className="hover:text-ink-200 transition-colors">Accessibility</button>
+            <button className="hover:text-[#CBD7D7] transition-colors">Privacy Policy</button>
+            <button className="hover:text-[#CBD7D7] transition-colors">Terms of Service</button>
+            <button className="hover:text-[#CBD7D7] transition-colors">Accessibility</button>
           </div>
         </div>
       </div>

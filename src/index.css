@@ -7,14 +7,14 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
-    background-color: #040D1A;
+    background-color: #041117;
   }
   body {
-    @apply bg-[#040D1A] text-white font-sans antialiased;
-    background-color: #040D1A;
+    @apply bg-[#041117] text-[#F0F5F5] font-sans antialiased;
+    background-color: #041117;
   }
   ::selection {
-    @apply bg-teal-400 text-slate-950;
+    @apply bg-[#38A7B8] text-[#041117];
   }
 }
 
@@ -23,28 +23,28 @@
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none;
+    @apply inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38A7B8] focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none;
   }
   .btn-primary {
-    @apply btn bg-brand-700 text-white hover:bg-brand-800 hover:shadow-lift active:scale-[0.98] px-6 py-3;
+    @apply btn bg-[#38A7B8] text-[#041117] font-bold hover:bg-[#4EB8C9] hover:shadow-lg hover:shadow-[#38A7B8]/20 active:scale-[0.98] px-6 py-3;
   }
   .btn-secondary {
-    @apply btn bg-white text-ink-900 ring-1 ring-inset ring-ink-200 hover:bg-ink-50 hover:ring-ink-300 px-6 py-3;
+    @apply btn bg-[#081E26] text-[#CBD7D7] ring-1 ring-inset ring-[#CBD7D7]/20 hover:bg-[#0D2D37] hover:text-white px-6 py-3;
   }
   .btn-ghost {
-    @apply btn text-ink-700 hover:bg-ink-100 px-4 py-2;
+    @apply btn text-[#CBD7D7] hover:bg-[#081E26] hover:text-white px-4 py-2;
   }
   .input {
-    @apply w-full rounded-xl border border-ink-200 bg-white px-4 py-3 text-ink-900 placeholder:text-ink-400 transition focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/15;
+    @apply w-full rounded-xl border border-[#CBD7D7]/20 bg-[#081E26] px-4 py-3 text-[#F0F5F5] placeholder:text-[#7E969B] transition focus:border-[#38A7B8] focus:outline-none focus:ring-4 focus:ring-[#38A7B8]/15;
   }
   .label {
-    @apply block text-sm font-medium text-ink-700 mb-1.5;
+    @apply block text-sm font-medium text-[#CBD7D7] mb-1.5;
   }
   .chip {
-    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium;
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium bg-[#081E26] text-[#CBD7D7] border border-[#CBD7D7]/15;
   }
   .card {
-    @apply rounded-2xl bg-white ring-1 ring-ink-100 shadow-soft;
+    @apply rounded-2xl bg-[#081E26] ring-1 ring-[#CBD7D7]/15 shadow-2xl;
   }
   .link-underline {
     @apply relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full;

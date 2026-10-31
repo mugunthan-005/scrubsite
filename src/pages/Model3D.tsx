@@ -161,7 +161,7 @@ export default function Model3D() {
   };
 
   return (
-    <div className="relative min-h-[92vh] bg-[#040D1A] text-white flex flex-col overflow-hidden">
+    <div className="relative min-h-[92vh] bg-[#041117] text-white flex flex-col overflow-hidden">
       {/* Background Volumetric Lighting - Blends 100% seamlessly into page */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-60">
         <SideRays
@@ -199,7 +199,7 @@ export default function Model3D() {
             onClick={() => setAutoRotate((v) => !v)}
             className={`px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 border ${
               autoRotate
-                ? 'bg-teal-600 text-white border-teal-500 shadow-md'
+                ? 'bg-[#38A7B8] text-[#041117] border-[#38A7B8] shadow-md'
                 : 'bg-slate-900 text-slate-300 border-slate-700 hover:bg-slate-800'
             }`}
           >
@@ -225,8 +225,8 @@ export default function Model3D() {
         {/* Loading Indicator */}
         {loading && (
           <div className="relative z-20 flex flex-col items-center gap-3 text-slate-300">
-            <div className="h-10 w-10 animate-spin rounded-full border-4 border-sky-500/20 border-t-sky-400" />
-            <p className="text-xs font-semibold uppercase tracking-widest text-sky-300">
+            <div className="h-10 w-10 animate-spin rounded-full border-4 border-[#38A7B8]/20 border-t-[#38A7B8]" />
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#38A7B8]">
               Loading 3D Model {progress > 0 ? `(${progress}%)` : ''}
             </p>
           </div>
@@ -234,7 +234,7 @@ export default function Model3D() {
 
         {/* Floating Technical Specifications Card (Overlays without blocking 3D Model) */}
         {showSpecs && (
-          <div className="absolute left-4 top-4 lg:left-8 lg:top-8 z-20 max-w-xs sm:max-w-sm w-full bg-slate-900/70 border border-slate-800/80 p-5 shadow-2xl backdrop-blur-xl animate-fade-in">
+          <div className="absolute left-4 top-4 lg:left-8 lg:top-8 z-20 max-w-xs sm:max-w-sm w-full bg-[#081E26]/80 border border-[#CBD7D7]/20 p-5 shadow-2xl backdrop-blur-xl animate-fade-in">
             <div className="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
               <h1 className="font-display text-base font-bold uppercase tracking-wider text-white">
                 ZYNA Medical Scrub Set
@@ -253,7 +253,7 @@ export default function Model3D() {
             <div className="mt-4 space-y-2 text-[11px] font-medium">
               <div className="flex justify-between items-center py-1 border-b border-slate-800/60">
                 <span className="text-slate-400 uppercase tracking-wider">Fabric Sample</span>
-                <span className="text-teal-300 font-bold">Sample A</span>
+                <span className="text-[#38A7B8] font-bold">Sample A</span>
               </div>
               <div className="flex justify-between items-center py-1 border-b border-slate-800/60">
                 <span className="text-slate-400 uppercase tracking-wider">Material Blend</span>
@@ -278,7 +278,7 @@ export default function Model3D() {
 
             <div className="mt-4 flex flex-wrap gap-1.5">
               {['Antimicrobial', 'Fluid Repellent', '4-Way Stretch', 'Wrinkle-Free'].map((finish) => (
-                <span key={finish} className="px-2 py-0.5 bg-slate-800/80 text-teal-300 border border-slate-700/70 text-[9px] uppercase font-bold tracking-wider">
+                <span key={finish} className="px-2 py-0.5 bg-slate-800/80 text-[#38A7B8] border border-slate-700/70 text-[9px] uppercase font-bold tracking-wider">
                   {finish}
                 </span>
               ))}
@@ -286,7 +286,7 @@ export default function Model3D() {
 
             <button
               onClick={() => navigate('/shop')}
-              className="btn-primary mt-4 w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold uppercase tracking-widest text-[11px] py-3 shadow-lg border-0 transition-all cursor-pointer"
+              className="btn-primary mt-4 w-full bg-[#38A7B8] hover:bg-[#4EB8C9] text-[#041117] font-bold uppercase tracking-widest text-[11px] py-3 shadow-lg border-0 transition-all cursor-pointer"
             >
               Shop This Scrub Set
             </button>

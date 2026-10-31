@@ -4,7 +4,7 @@ import FuzzyText from '../components/FuzzyText';
 
 export default function Account() {
   return (
-    <div className="relative min-h-[90vh] bg-[#040D1A] text-white overflow-hidden flex flex-col items-center justify-center py-20 px-4 text-center">
+    <div className="relative min-h-[90vh] bg-[#041117] text-white overflow-hidden flex flex-col items-center justify-center py-20 px-4 text-center">
       {/* Dynamic WebGL SideRays & Particles Animation Background */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-90">
         <SideRays

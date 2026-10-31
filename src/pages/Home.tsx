@@ -132,7 +132,7 @@ function FeatureMedia({ feature }: { feature: typeof FEATURE_STEPS[0] }) {
 
   if (feature.video && !videoError) {
     return (
-      <div className="relative h-[360px] sm:h-[440px] lg:h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl bg-[#040D1A]">
+      <div className="relative h-[360px] sm:h-[440px] lg:h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl bg-[#041117]">
         <video
           key={feature.video}
           src={feature.video}
@@ -144,13 +144,13 @@ function FeatureMedia({ feature }: { feature: typeof FEATURE_STEPS[0] }) {
           onError={() => setVideoError(true)}
           className="h-full w-full object-cover rounded-3xl"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#040D1A]/40 via-transparent to-transparent pointer-events-none rounded-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#041117]/40 via-transparent to-transparent pointer-events-none rounded-3xl" />
       </div>
     );
   }
 
   return (
-    <div className="relative h-[360px] sm:h-[440px] lg:h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl bg-[#040D1A]">
+    <div className="relative h-[360px] sm:h-[440px] lg:h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl bg-[#041117]">
       <SmartImage
         primary={feature.primaryImage}
         secondary={feature.secondaryImage}
@@ -158,7 +158,7 @@ function FeatureMedia({ feature }: { feature: typeof FEATURE_STEPS[0] }) {
         alt={feature.headline}
         className="h-full w-full object-cover rounded-3xl transition-transform duration-700 hover:scale-105"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#040D1A]/50 via-transparent to-transparent pointer-events-none rounded-3xl" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#041117]/50 via-transparent to-transparent pointer-events-none rounded-3xl" />
     </div>
   );
 }
@@ -284,22 +284,22 @@ export default function Home() {
 
   return (
     <div 
-      className="relative h-[calc(100vh-4rem)] w-full overflow-hidden bg-[#040D1A] text-white select-none"
+      className="relative h-[calc(100vh-4rem)] w-full overflow-hidden bg-[#041117] text-[#F0F5F5] select-none"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
       {/* Full-Screen Section Transition Stack */}
       <div 
-        className="h-full w-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] bg-[#040D1A]"
+        className="h-full w-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] bg-[#041117]"
         style={{ transform: `translate3d(0, -${currentSection * 100}%, 0)` }}
       >
         {/* ==================== SECTION 1: HERO ==================== */}
-        <section className="h-full w-full relative flex-none flex flex-col justify-center overflow-hidden bg-[#040D1A]">
-          <div className="absolute inset-0 z-0 bg-[#040D1A]">
+        <section className="h-full w-full relative flex-none flex flex-col justify-center overflow-hidden bg-[#041117]">
+          <div className="absolute inset-0 z-0 bg-[#041117]">
             <SideRays
               speed={2.5}
-              rayColor1="#0DA39C"
-              rayColor2="#38BDF8"
+              rayColor1="#134752"
+              rayColor2="#287C8C"
               intensity={2}
               spread={2}
               origin="top-right"
@@ -322,15 +322,15 @@ export default function Home() {
               <ShinyText
                 text="ZYNA"
                 speed={2.5}
-                color="rgba(255, 255, 255, 0.95)"
-                shineColor="#2DD4BF"
+                color="rgba(240, 245, 245, 0.98)"
+                shineColor="#38A7B8"
                 spread={140}
                 className="font-display text-6xl sm:text-8xl lg:text-9xl font-black uppercase tracking-widest select-none drop-shadow-2xl"
               />
               
               <SplitText
                 text="Engineered for Comfort. Designed for Performance."
-                className="font-display text-lg sm:text-2xl lg:text-3xl font-bold text-teal-300 tracking-wide max-w-xl text-left drop-shadow-lg"
+                className="font-display text-lg sm:text-2xl lg:text-3xl font-bold text-[#CBD7D7] tracking-wide max-w-xl text-left drop-shadow-lg"
                 delay={35}
                 duration={0.7}
                 ease="power3.out"
@@ -355,7 +355,7 @@ export default function Home() {
 
 
         {/* ==================== SECTION 3: 5-SUBSCROLL PINNED FEATURE SHOWCASE ==================== */}
-        <section className="h-full w-full relative flex-none flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#0D1B2A] via-[#0F172A] to-[#111C2E] py-4">
+        <section className="h-full w-full relative flex-none flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#041117] via-[#081E26] to-[#041117] py-4">
           
           {/* Animated Alternating Content */}
           <div className="w-full container-px relative z-10 flex-1 flex items-center justify-center min-h-[500px]">
@@ -375,7 +375,7 @@ export default function Home() {
                   ) : (
                     /* Page Text Content - Enlarged Typography */
                     <div className="flex flex-col justify-center text-left space-y-6">
-                      <span className="text-white text-sm font-bold font-mono tracking-widest uppercase">
+                      <span className="text-[#38A7B8] text-sm font-bold font-mono tracking-widest uppercase">
                         {currentFeature.tag}
                       </span>
 
@@ -386,8 +386,8 @@ export default function Home() {
                       <div className="mt-2 space-y-4">
                         {currentFeature.usps.map((usp, uIdx) => (
                           <div key={uIdx} className="flex items-start gap-4">
-                            <CheckCircle2 size={24} className="text-teal-400 mt-1 shrink-0" />
-                            <p className="text-slate-100 text-base sm:text-xl leading-relaxed font-medium">
+                            <CheckCircle2 size={24} className="text-[#38A7B8] mt-1 shrink-0" />
+                            <p className="text-[#CBD7D7] text-base sm:text-xl leading-relaxed font-medium">
                               {usp}
                             </p>
                           </div>
@@ -404,7 +404,7 @@ export default function Home() {
                   ) : (
                     /* Page Text Content - Enlarged Typography */
                     <div className="flex flex-col justify-center text-left space-y-6">
-                      <span className="text-white text-sm font-bold font-mono tracking-widest uppercase">
+                      <span className="text-[#38A7B8] text-sm font-bold font-mono tracking-widest uppercase">
                         {currentFeature.tag}
                       </span>
 
@@ -415,8 +415,8 @@ export default function Home() {
                       <div className="mt-2 space-y-4">
                         {currentFeature.usps.map((usp, uIdx) => (
                           <div key={uIdx} className="flex items-start gap-4">
-                            <CheckCircle2 size={24} className="text-teal-400 mt-1 shrink-0" />
-                            <p className="text-slate-100 text-base sm:text-xl leading-relaxed font-medium">
+                            <CheckCircle2 size={24} className="text-[#38A7B8] mt-1 shrink-0" />
+                            <p className="text-[#CBD7D7] text-base sm:text-xl leading-relaxed font-medium">
                               {usp}
                             </p>
                           </div>
@@ -432,13 +432,13 @@ export default function Home() {
 
 
         {/* ==================== SECTION 3: BROWSER-BASED VIRTUAL TRY-ON STUDIO ==================== */}
-        <section className="h-full w-full relative flex-none flex flex-col justify-center overflow-y-auto bg-[#040D1A] text-white">
+        <section className="h-full w-full relative flex-none flex flex-col justify-center overflow-y-auto bg-[#041117] text-white">
           <VirtualTryOn />
         </section>
 
 
         {/* ==================== SECTION 4: INTERACTIVE 3D LANYARD (LAST SECTION) ==================== */}
-        <section className="h-full w-full relative flex-none flex flex-col justify-between overflow-y-auto bg-gradient-to-b from-[#040D1A] via-[#061224] to-[#020812]">
+        <section className="h-full w-full relative flex-none flex flex-col justify-between overflow-y-auto bg-gradient-to-b from-[#041117] via-[#081E26] to-[#020B0F]">
           <div className="relative flex-1 w-full flex flex-col items-center justify-center min-h-[500px]">
             <Lanyard
               position={[0, 0, 22]}
@@ -452,7 +452,7 @@ export default function Home() {
           </div>
 
           {/* Site Footer at the very bottom */}
-          <div className="w-full flex-none z-20 border-t border-white/10 bg-[#020812]">
+          <div className="w-full flex-none z-20 border-t border-[#CBD7D7]/15 bg-[#020B0F]">
             <Footer />
           </div>
         </section>

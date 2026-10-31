@@ -178,7 +178,7 @@ export default function TryOnPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#040D1A] text-white flex flex-col justify-between select-none">
+    <div className="min-h-screen bg-[#041117] text-white flex flex-col justify-between select-none">
       
       {/* Top Header Bar */}
       <div className="w-full border-b border-white/10 py-4 px-6 sm:px-12 flex items-center justify-between">
@@ -208,8 +208,8 @@ export default function TryOnPage() {
               transition={{ duration: 0.4 }}
               className="w-full max-w-3xl py-12 px-6 sm:px-12 text-left space-y-8"
             >
-              <div className="flex items-center gap-3 text-emerald-400 font-display font-black text-3xl uppercase tracking-wider border-b border-white/10 pb-6">
-                <ShieldCheck className="h-9 w-9 text-emerald-400" />
+              <div className="flex items-center gap-3 text-[#38A7B8] font-display font-black text-3xl uppercase tracking-wider border-b border-white/10 pb-6">
+                <ShieldCheck className="h-9 w-9 text-[#38A7B8]" />
                 <span>TERMS & PRIVACY POLICY</span>
               </div>
 
@@ -218,11 +218,11 @@ export default function TryOnPage() {
                   Please review and accept our privacy guarantee before entering the AI Virtual Try-On Studio:
                 </p>
 
-                <div className="p-6 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 text-emerald-200 space-y-2">
+                <div className="p-6 rounded-2xl bg-[#06171E]/40 border border-[#38A7B8]/40 text-[#CBD7D7] space-y-2">
                   <div className="font-bold flex items-center gap-2 text-white text-lg">
-                    <Lock className="h-6 w-6 text-emerald-400" /> Zero Server Storage Guarantee
+                    <Lock className="h-6 w-6 text-[#38A7B8]" /> Zero Server Storage Guarantee
                   </div>
-                  <p className="text-sm text-emerald-100 leading-relaxed">
+                  <p className="text-sm text-[#CBD7D7] leading-relaxed">
                     Your uploaded photo is processed <strong>strictly inside your device's browser memory</strong> using client-side HTML5 canvas logic. We do <strong>NOT</strong> upload, store, or transmit your images to any remote server or database.
                   </p>
                 </div>
@@ -235,12 +235,12 @@ export default function TryOnPage() {
               </div>
 
               {/* Checkbox agreement */}
-              <label className="flex items-center gap-4 text-base text-white cursor-pointer p-5 rounded-2xl bg-slate-900/90 border border-white/10 hover:border-emerald-500/40 transition-all">
+              <label className="flex items-center gap-4 text-base text-white cursor-pointer p-5 rounded-2xl bg-slate-900/90 border border-white/10 hover:border-[#38A7B8]/40 transition-all">
                 <input
                   type="checkbox"
                   checked={agreedToTerms}
                   onChange={(e) => setAgreedToTerms(e.target.checked)}
-                  className="accent-emerald-400 h-6 w-6 rounded cursor-pointer"
+                  className="accent-[#38A7B8] h-6 w-6 rounded cursor-pointer"
                 />
                 <span className="font-bold">I agree to the Terms & Privacy Policy</span>
               </label>
@@ -250,7 +250,7 @@ export default function TryOnPage() {
                 <button
                   disabled={!agreedToTerms}
                   onClick={() => setTermsApproved(true)}
-                  className="flex-1 py-5 px-8 rounded-2xl bg-emerald-500 hover:bg-emerald-400 disabled:opacity-40 disabled:cursor-not-allowed text-black font-display font-black text-xl uppercase tracking-wider flex items-center justify-center gap-3 cursor-pointer transition-all shadow-xl shadow-emerald-500/25"
+                  className="flex-1 py-5 px-8 rounded-2xl bg-[#38A7B8] hover:bg-[#38A7B8] disabled:opacity-40 disabled:cursor-not-allowed text-black font-display font-black text-xl uppercase tracking-wider flex items-center justify-center gap-3 cursor-pointer transition-all shadow-xl shadow-[#38A7B8]/25"
                 >
                   <span>APPROVE & ENTER STUDIO</span>
                   <ArrowRight className="h-6 w-6" />
@@ -280,7 +280,7 @@ export default function TryOnPage() {
                 {/* Header bar over preview */}
                 <div className="flex items-center justify-between font-mono text-xs text-slate-300 border-b border-white/10 pb-3">
                   <span className="font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#38A7B8] animate-pulse" />
                     AI PREVIEW CANVAS
                   </span>
 
@@ -290,7 +290,7 @@ export default function TryOnPage() {
                       onMouseUp={() => setShowOriginal(false)}
                       onTouchStart={() => setShowOriginal(true)}
                       onTouchEnd={() => setShowOriginal(false)}
-                      className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-400 font-bold text-xs flex items-center gap-2 border border-white/10 cursor-pointer active:scale-95 transition-all"
+                      className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-[#38A7B8] font-bold text-xs flex items-center gap-2 border border-white/10 cursor-pointer active:scale-95 transition-all"
                     >
                       <Eye className="h-4 w-4" />
                       <span>HOLD ORIGINAL</span>
@@ -307,7 +307,7 @@ export default function TryOnPage() {
                     />
                   ) : (
                     <div className="flex flex-col items-center justify-center p-8 text-center space-y-4">
-                      <Upload className="h-16 w-16 text-emerald-400/60 animate-bounce" />
+                      <Upload className="h-16 w-16 text-[#38A7B8]/60 animate-bounce" />
                       <p className="text-white text-base font-bold">UPLOAD YOUR FULL BODY PHOTO</p>
                       <p className="text-slate-400 text-xs">Supports PNG, JPG up to 10MB</p>
                     </div>
@@ -315,8 +315,8 @@ export default function TryOnPage() {
 
                   {/* AI Generating Loading Overlay */}
                   {isGenerating && (
-                    <div className="absolute inset-0 bg-black/75 backdrop-blur-md flex flex-col items-center justify-center space-y-3 text-emerald-400 font-mono font-bold text-base">
-                      <RefreshCw className="h-10 w-10 animate-spin text-emerald-400" />
+                    <div className="absolute inset-0 bg-black/75 backdrop-blur-md flex flex-col items-center justify-center space-y-3 text-[#38A7B8] font-mono font-bold text-base">
+                      <RefreshCw className="h-10 w-10 animate-spin text-[#38A7B8]" />
                       <span>PROCESSING AI FIT & COLOR MASK...</span>
                     </div>
                   )}
@@ -336,7 +336,7 @@ export default function TryOnPage() {
                     onClick={() => fileInputRef.current?.click()}
                     className="py-4 px-5 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-white/10 cursor-pointer transition-all"
                   >
-                    <Upload className="h-4 w-4 text-emerald-400" />
+                    <Upload className="h-4 w-4 text-[#38A7B8]" />
                     UPLOAD PHOTO
                   </button>
 
@@ -373,7 +373,7 @@ export default function TryOnPage() {
                         onClick={() => setGender(g)}
                         className={`py-4 px-3 rounded-2xl border text-sm font-bold uppercase tracking-wider transition-all cursor-pointer ${
                           gender === g
-                            ? 'bg-emerald-500 text-black border-emerald-400 shadow-lg font-black scale-105'
+                            ? 'bg-[#38A7B8] text-black border-[#38A7B8] shadow-lg font-black scale-105'
                             : 'bg-slate-900/80 text-slate-300 border-white/10 hover:border-slate-600'
                         }`}
                       >
@@ -393,7 +393,7 @@ export default function TryOnPage() {
                       onClick={() => setSelectedGarment('set')}
                       className={`py-4 px-4 rounded-2xl border text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                         selectedGarment === 'set'
-                          ? 'bg-emerald-500 text-black border-emerald-400 shadow-lg font-black scale-105'
+                          ? 'bg-[#38A7B8] text-black border-[#38A7B8] shadow-lg font-black scale-105'
                           : 'bg-slate-900/80 text-slate-300 border-white/10 hover:border-slate-600'
                       }`}
                     >
@@ -404,7 +404,7 @@ export default function TryOnPage() {
                       onClick={() => setSelectedGarment('top')}
                       className={`py-4 px-4 rounded-2xl border text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                         selectedGarment === 'top'
-                          ? 'bg-emerald-500 text-black border-emerald-400 shadow-lg font-black scale-105'
+                          ? 'bg-[#38A7B8] text-black border-[#38A7B8] shadow-lg font-black scale-105'
                           : 'bg-slate-900/80 text-slate-300 border-white/10 hover:border-slate-600'
                       }`}
                     >
@@ -419,7 +419,7 @@ export default function TryOnPage() {
                     <label className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300">
                       3. SCRUB COLOR
                     </label>
-                    <span className="text-xs font-bold text-emerald-400 font-mono uppercase">
+                    <span className="text-xs font-bold text-[#38A7B8] font-mono uppercase">
                       {selectedColor.name}
                     </span>
                   </div>
@@ -431,7 +431,7 @@ export default function TryOnPage() {
                         onClick={() => setSelectedColor(swatch)}
                         className={`flex flex-col items-center gap-2 p-2.5 rounded-2xl border transition-all cursor-pointer ${
                           selectedColor.name === swatch.name
-                            ? 'border-emerald-400 bg-emerald-950/60 ring-2 ring-emerald-400/40 scale-105'
+                            ? 'border-[#38A7B8] bg-[#06171E]/60 ring-2 ring-[#38A7B8]/40 scale-105'
                             : 'border-white/5 bg-slate-900/80 hover:border-slate-600'
                         }`}
                       >
@@ -453,7 +453,7 @@ export default function TryOnPage() {
                 <div className="pt-4 space-y-4">
                   <button
                     onClick={handleGenerateClick}
-                    className="w-full py-6 px-6 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-display font-black text-2xl uppercase tracking-wider flex items-center justify-center gap-3 transition-all transform hover:scale-[1.02] shadow-2xl shadow-emerald-500/30 cursor-pointer"
+                    className="w-full py-6 px-6 rounded-2xl bg-[#38A7B8] hover:bg-[#38A7B8] text-black font-display font-black text-2xl uppercase tracking-wider flex items-center justify-center gap-3 transition-all transform hover:scale-[1.02] shadow-2xl shadow-[#38A7B8]/30 cursor-pointer"
                   >
                     <Sparkles className="h-7 w-7 text-black" />
                     <span>GENERATE AI LOOK</span>
@@ -464,7 +464,7 @@ export default function TryOnPage() {
                       onClick={handleDownload}
                       className="w-full py-4 px-6 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-white/10 cursor-pointer transition-all"
                     >
-                      <Download className="h-4 w-4 text-emerald-400" />
+                      <Download className="h-4 w-4 text-[#38A7B8]" />
                       <span>DOWNLOAD TRY-ON IMAGE</span>
                     </button>
                   )}

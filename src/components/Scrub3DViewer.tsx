@@ -178,14 +178,14 @@ export default function Scrub3DViewer({
     >
       {/* Background Lighting Radial Glow */}
       <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
-        <div className="h-[280px] w-[280px] sm:h-[380px] sm:w-[380px] rounded-full bg-gradient-to-r from-sky-500/20 via-blue-600/15 to-indigo-500/10 blur-3xl transition-transform group-hover:scale-110 duration-500" />
+        <div className="h-[280px] w-[280px] sm:h-[380px] sm:w-[380px] rounded-full bg-gradient-to-r from-[#184E59]/25 via-[#0D2D34]/20 to-transparent blur-3xl transition-transform group-hover:scale-110 duration-500" />
       </div>
 
       {/* Loading Progress Indicator */}
       {loading && (
         <div className="relative z-20 flex flex-col items-center gap-3 text-slate-300 mx-auto">
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-sky-500/20 border-t-sky-400" />
-          <p className="text-xs font-semibold uppercase tracking-widest text-sky-300">
+          <div className="h-10 w-10 animate-spin rounded-full border-4 border-[#38A7B8]/20 border-t-[#38A7B8]" />
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#38A7B8]">
             Loading 3D Model {progress > 0 ? `(${progress}%)` : ''}
           </p>
         </div>
@@ -195,8 +195,8 @@ export default function Scrub3DViewer({
       <div ref={mountRef} className="relative z-10 w-full h-full flex items-center justify-center pointer-events-none" />
 
       {/* Bottom Overlay Badge attached to the bottom of the 3D image */}
-      <div className="absolute bottom-2 z-20 px-6 py-2.5 bg-[#061224]/90 group-hover:bg-teal-500 text-teal-300 group-hover:text-slate-950 border border-teal-500/40 rounded-xl text-xs font-extrabold uppercase tracking-widest backdrop-blur-md shadow-2xl transition-all duration-300 flex items-center gap-2 group-hover:scale-105">
-        <Box size={16} className="text-teal-400 group-hover:text-slate-950 animate-pulse" />
+      <div className="absolute bottom-2 z-20 px-6 py-2.5 bg-[#081E26]/90 group-hover:bg-[#38A7B8] text-[#38A7B8] group-hover:text-[#041117] border border-[#38A7B8]/40 rounded-xl text-xs font-extrabold uppercase tracking-widest backdrop-blur-md shadow-2xl transition-all duration-300 flex items-center gap-2 group-hover:scale-105">
+        <Box size={16} className="text-[#38A7B8] group-hover:text-[#041117] animate-pulse" />
         <span>3D View</span>
       </div>
     </div>

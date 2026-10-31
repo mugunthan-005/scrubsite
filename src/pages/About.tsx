@@ -27,7 +27,7 @@ export default function About() {
           <div className="absolute inset-0 bg-ink-950/60" />
         </div>
         <div className="container-px relative py-24 lg:py-32 text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-teal-300">Our Story</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-[#38A7B8]">Our Story</p>
           <h1 className="mt-4 font-display text-4xl font-bold sm:text-5xl lg:text-6xl text-balance">
             ZYNA — The standard healthcare deserves
           </h1>
