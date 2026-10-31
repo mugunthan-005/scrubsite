@@ -7,7 +7,7 @@ const apiRoutes = require('./routes/api');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/zynex_scrubs';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/zyna_scrubs';
 
 // Middleware
 app.use(cors());
@@ -20,7 +20,7 @@ app.use('/api', apiRoutes);
 app.get('/health', (req, res) => {
   res.json({
     status: 'OK',
-    service: 'ZYNEX Scrubs MERN Stack API & Inventory Server',
+    service: 'ZYNA Scrubs MERN Stack API & Inventory Server',
     database: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected'
   });
 });
@@ -29,14 +29,14 @@ app.get('/health', (req, res) => {
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
-    console.log('✅ Connected to MongoDB Database: zynex_scrubs');
+    console.log('✅ Connected to MongoDB Database: zyna_scrubs');
     app.listen(PORT, () => {
-      console.log(`🚀 ZYNEX Scrubs API Server running at http://localhost:${PORT}`);
+      console.log(`🚀 ZYNA Scrubs API Server running at http://localhost:${PORT}`);
     });
   })
   .catch((err) => {
     console.warn('⚠️ MongoDB connection warning (Running in memory/standalone mode):', err.message);
     app.listen(PORT, () => {
-      console.log(`🚀 ZYNEX Scrubs API Server running at http://localhost:${PORT}`);
+      console.log(`🚀 ZYNA Scrubs API Server running at http://localhost:${PORT}`);
     });
   });

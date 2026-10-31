@@ -29,10 +29,10 @@ export default function About() {
         <div className="container-px relative py-24 lg:py-32 text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-teal-300">Our Story</p>
           <h1 className="mt-4 font-display text-4xl font-bold sm:text-5xl lg:text-6xl text-balance">
-            ZYNEX — The standard healthcare deserves
+            ZYNA — The standard healthcare deserves
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-ink-300 leading-relaxed">
-            ZYNEX was founded to solve clinical apparel challenges. We engineered Sample A: a premium 92% Polyester / 8% Spandex knitted fabric (200-220 GSM) with antimicrobial, fluid repellent, wrinkle-free, and 4-way stretch performance.
+            ZYNA was founded to solve clinical apparel challenges. We engineered Sample A: a premium 92% Polyester / 8% Spandex knitted fabric (200-220 GSM) with antimicrobial, fluid repellent, wrinkle-free, and 4-way stretch performance.
           </p>
         </div>
       </section>
@@ -53,7 +53,7 @@ export default function About() {
       <section className="container-px py-20 lg:py-28">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-700">What We Stand For</p>
-          <h2 className="mt-3 font-display text-3xl font-bold text-ink-900 sm:text-4xl">Four pillars of ZYNEX innovation</h2>
+          <h2 className="mt-3 font-display text-3xl font-bold text-ink-900 sm:text-4xl">Four pillars of ZYNA innovation</h2>
         </div>
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {VALUES.map(({ Icon, title, desc }, i) => (
@@ -80,13 +80,13 @@ export default function About() {
               Comfort is not a luxury on a twelve-hour shift
             </h2>
             <p className="mt-5 text-ink-700 leading-relaxed">
-              We believe medical professionals deserve uniforms engineered to the highest standard. That's why ZYNEX developed our signature 200-220 GSM knitted fabric blend — giving you total confidence with fluid repellency, antimicrobial shield, and 4-way stretch.
+              We believe medical professionals deserve uniforms engineered to the highest standard. That's why ZYNA developed our signature 200-220 GSM knitted fabric blend — giving you total confidence with fluid repellency, antimicrobial shield, and 4-way stretch.
             </p>
             <p className="mt-4 text-ink-700 leading-relaxed">
-              Available in preferred Navy Blue and signature clinical tones, every ZYNEX garment is built to empower healthcare workers.
+              Available in preferred Navy Blue and signature clinical tones, every ZYNA garment is built to empower healthcare workers.
             </p>
             <button onClick={() => navigate('/shop')} className="btn-primary mt-8">
-              Shop ZYNEX Scrubs
+              Shop ZYNA Scrubs
               <ArrowRight size={18} />
             </button>
           </div>

@@ -43,11 +43,11 @@ export default function Navbar() {
           className="flex items-center gap-2.5 text-xl font-extrabold tracking-wider text-white group cursor-pointer"
         >
           <img
-            src="/zynex-logo.png"
-            alt="ZYNEX Logo"
+            src="/zyna-logo.jpg"
+            alt="ZYNA Logo"
             className="h-9 w-9 rounded-lg object-cover ring-1 ring-teal-400/50 shadow-xs transition-transform group-hover:scale-105"
           />
-          <span className="font-display tracking-widest text-white">ZYNEX</span>
+          <span className="font-display tracking-widest text-white">ZYNA</span>
         </button>
 
         {/* Right Action Icons (Search, Account, Cart) */}

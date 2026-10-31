@@ -205,7 +205,7 @@ export default function AdminDashboard() {
               Inventory & Stock Management System
             </h1>
             <p className="mt-1 text-sm text-slate-400">
-              Real-time SKU tracking, automated low-stock warnings, and bulk fabric ordering for ZYNEX Scrubs.
+              Real-time SKU tracking, automated low-stock warnings, and bulk fabric ordering for ZYNA Scrubs.
             </p>
           </div>
 

@@ -237,7 +237,7 @@ export default function Model3D() {
           <div className="absolute left-4 top-4 lg:left-8 lg:top-8 z-20 max-w-xs sm:max-w-sm w-full bg-slate-900/70 border border-slate-800/80 p-5 shadow-2xl backdrop-blur-xl animate-fade-in">
             <div className="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
               <h1 className="font-display text-base font-bold uppercase tracking-wider text-white">
-                ZYNEX Medical Scrub Set
+                ZYNA Medical Scrub Set
               </h1>
               <button
                 onClick={() => setShowSpecs(false)}

@@ -16,7 +16,7 @@ const img = (id: string, _w = 800) => {
 };
 
 export const BRAND_SPECIFICATION = {
-  brandName: 'ZYNEX',
+  brandName: 'ZYNA',
   fabricSample: 'Sample A',
   blend: '92% Polyester and 8% Spandex',
   gsm: '200-220 GSM',
@@ -59,7 +59,7 @@ export const PRODUCTS: Product[] = [
     bestSeller: true,
     newArrival: false,
     description:
-      'The Atlas scrub top is engineered with ZYNEX 92/8 knitted fabric (200-220 GSM) featuring 4-way stretch and fluid repellent finish. Five functional pockets keep essentials close.',
+      'The Atlas scrub top is engineered with ZYNA 92/8 knitted fabric (200-220 GSM) featuring 4-way stretch and fluid repellent finish. Five functional pockets keep essentials close.',
     fabric: STANDARD_FABRIC,
     features: [...STANDARD_FEATURES, '5 Pockets'],
     colors: [navy, black, ceilBlue, teal, grey],
@@ -80,7 +80,7 @@ export const PRODUCTS: Product[] = [
     bestSeller: true,
     newArrival: true,
     description:
-      'The Nova top blends a flattering V-neckline with athletic-grade ZYNEX 200-220 GSM knitted performance fabric. Antimicrobial and wrinkle-free for demanding shifts.',
+      'The Nova top blends a flattering V-neckline with athletic-grade ZYNA 200-220 GSM knitted performance fabric. Antimicrobial and wrinkle-free for demanding shifts.',
     fabric: STANDARD_FABRIC,
     features: [...STANDARD_FEATURES, '4 Pockets'],
     colors: [navy, wine, teal, ceilBlue, black, royal],
@@ -142,7 +142,7 @@ export const PRODUCTS: Product[] = [
     bestSeller: false,
     newArrival: true,
     description:
-      'A coordinated top and pant set in ZYNEX preferred Navy Blue. Built with 200-220 GSM 92/8 knitted fabric — antimicrobial, fluid repellent, and 4-way stretch.',
+      'A coordinated top and pant set in ZYNA preferred Navy Blue. Built with 200-220 GSM 92/8 knitted fabric — antimicrobial, fluid repellent, and 4-way stretch.',
     fabric: STANDARD_FABRIC,
     features: [...STANDARD_FEATURES, 'Matching Set'],
     colors: [navy, teal, wine, black, royal],
@@ -183,7 +183,7 @@ export const PRODUCTS: Product[] = [
     bestSeller: true,
     newArrival: true,
     description:
-      'A sleek jogger silhouette with ribbed cuffs and yoga waistband. Made from ZYNEX 92% Poly / 8% Spandex knitted fabric (200-220 GSM) with antimicrobial and wrinkle-free technology.',
+      'A sleek jogger silhouette with ribbed cuffs and yoga waistband. Made from ZYNA 92% Poly / 8% Spandex knitted fabric (200-220 GSM) with antimicrobial and wrinkle-free technology.',
     fabric: STANDARD_FABRIC,
     features: [...STANDARD_FEATURES, 'Yoga Waistband'],
     colors: [navy, black, teal, wine, ceilBlue],
@@ -204,7 +204,7 @@ export const PRODUCTS: Product[] = [
     bestSeller: false,
     newArrival: true,
     description:
-      'A clean crew-neck top with relaxed unisex cut. Built from ZYNEX 200-220 GSM knitted fabric for 4-way stretch flexibility and fluid repellency.',
+      'A clean crew-neck top with relaxed unisex cut. Built from ZYNA 200-220 GSM knitted fabric for 4-way stretch flexibility and fluid repellency.',
     fabric: STANDARD_FABRIC,
     features: [...STANDARD_FEATURES, 'Breathable Knit'],
     colors: [navy, teal, black, ceilBlue, royal, pewter],
@@ -240,7 +240,7 @@ export const TESTIMONIALS: Testimonial[] = [
     role: 'Surgical Resident',
     hospital: 'Johns Hopkins Medicine',
     content:
-      'I replaced all my old scrubs with ZYNEX. The 200-220 GSM weight strikes the perfect balance between durability and breathability.',
+      'I replaced all my old scrubs with ZYNA. The 200-220 GSM weight strikes the perfect balance between durability and breathability.',
     rating: 5,
     avatar: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (2).png',
   },

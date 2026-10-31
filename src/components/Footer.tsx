@@ -84,11 +84,11 @@ export default function Footer() {
         <div className="lg:col-span-2">
           <button onClick={() => navigate('/')} className="flex items-center gap-3 text-xl font-extrabold tracking-wider text-white">
             <img
-              src="/zynex-logo.png"
-              alt="ZYNEX Logo"
+              src="/zyna-logo.jpg"
+              alt="ZYNA Logo"
               className="h-9 w-9 rounded-lg object-cover ring-1 ring-white/20"
             />
-            <span className="font-display tracking-widest">ZYNEX</span>
+            <span className="font-display tracking-widest">ZYNA</span>
           </button>
           <p className="mt-4 text-sm text-ink-400 max-w-xs leading-relaxed">
             Engineered for clinical performance. Featuring 92% Polyester & 8% Spandex knitted fabric (200-220 GSM), 4-way stretch, antimicrobial protection, and fluid repellent finish.
@@ -129,7 +129,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div>
         <div className="container-px py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ink-500">
-          <p>© {new Date().getFullYear()} ZYNEX Medical Wear. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} ZYNA Medical Wear. All rights reserved.</p>
           <div className="flex gap-6">
             <button className="hover:text-ink-200 transition-colors">Privacy Policy</button>
             <button className="hover:text-ink-200 transition-colors">Terms of Service</button>

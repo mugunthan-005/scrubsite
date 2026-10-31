@@ -1,7 +1,7 @@
 {
-  "name": "zynex-scrubs-server",
+  "name": "zyna-scrubs-server",
   "version": "1.0.0",
-  "description": "Zynex Scrubs MERN Stack Backend API & Inventory Management Server",
+  "description": "Zyna Scrubs MERN Stack Backend API & Inventory Management Server",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

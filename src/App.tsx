@@ -65,7 +65,7 @@ function Routes() {
         </FuzzyText>
         
         <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-md leading-relaxed drop-shadow-md">
-          This ZYNEX medical apparel section is currently under active development.
+          This ZYNA medical apparel section is currently under active development.
         </p>
 
         <button

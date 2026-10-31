@@ -282,7 +282,7 @@ export default function ProductDetail({ slug }: { slug: string }) {
             {/* Fabric & Technical Specifications */}
             <div className="mt-8 rounded-2xl bg-slate-900 text-white p-6 shadow-md border border-slate-800">
               <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-                <h3 className="font-semibold text-base text-white tracking-wide">ZYNEX Technical Specifications</h3>
+                <h3 className="font-semibold text-base text-white tracking-wide">ZYNA Technical Specifications</h3>
                 <span className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-brand-500/20 text-brand-300 ring-1 ring-brand-400/30">
                   Sample A Spec
                 </span>

@@ -49,7 +49,7 @@ export default function Account() {
           COMING SOON
         </FuzzyText>
         <p className="mt-4 text-sm sm:text-base text-slate-300 font-medium tracking-wide max-w-md drop-shadow-md">
-          ZYNEX Clinical Member Portal & Orders Experience
+          ZYNA Clinical Member Portal & Orders Experience
         </p>
       </div>
     </div>

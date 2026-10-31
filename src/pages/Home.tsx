@@ -320,7 +320,7 @@ export default function Home() {
               transition={{ duration: 0.7, delay: 0.2 }}
             >
               <ShinyText
-                text="ZYNEX"
+                text="ZYNA"
                 speed={2.5}
                 color="rgba(255, 255, 255, 0.95)"
                 shineColor="#2DD4BF"
@@ -443,8 +443,8 @@ export default function Home() {
             <Lanyard
               position={[0, 0, 22]}
               gravity={[0, -40, 0]}
-              frontImage="/zynex-badge-logo.png"
-              backImage="/zynex-logo.png"
+              frontImage="/zyna-logo.jpg"
+              backImage="/zyna-logo.jpg"
               imageFit="cover"
               lanyardImage="/lanyard.png"
               lanyardWidth={1}

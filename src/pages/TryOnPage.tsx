@@ -164,7 +164,7 @@ export default function TryOnPage() {
   const handleDownload = () => {
     if (!canvasRef.current) return;
     const link = document.createElement('a');
-    link.download = `ZYNEX-AI-TryOn-${gender}-${selectedColor.name.replace(/\s+/g, '-')}.png`;
+    link.download = `ZYNA-AI-TryOn-${gender}-${selectedColor.name.replace(/\s+/g, '-')}.png`;
     link.href = canvasRef.current.toDataURL('image/png');
     link.click();
   };
@@ -191,7 +191,7 @@ export default function TryOnPage() {
         </button>
 
         <span className="font-display font-black text-lg tracking-widest text-white">
-          ZYNEX VIRTUAL TRY-ON
+          ZYNA VIRTUAL TRY-ON
         </span>
       </div>
 

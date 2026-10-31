@@ -21,7 +21,7 @@ export default function VirtualTryOn() {
           </h1>
 
           <p className="text-slate-200 text-lg sm:text-2xl font-medium max-w-2xl leading-relaxed">
-            See how ZYNEX clinical apparel fits your body before ordering. Upload your photo, pick your gender and scrub color, and generate your realistic preview in seconds.
+            See how ZYNA clinical apparel fits your body before ordering. Upload your photo, pick your gender and scrub color, and generate your realistic preview in seconds.
           </p>
 
           <div className="flex items-center gap-3 text-xs sm:text-sm text-slate-400 font-mono pt-2">
