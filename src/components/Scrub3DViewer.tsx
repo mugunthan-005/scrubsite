@@ -144,10 +144,22 @@ export default function Scrub3DViewer({
 
     window.addEventListener('resize', handleResize);
 
-    // Animation Loop
+    // Animation Loop with Intersection Observer (smooth 60fps, zero GPU lag off-screen)
     let animationFrameId: number;
+    let isVisible = true;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    }, { threshold: 0.05 });
+
+    observer.observe(container);
 
     const animate = () => {
+      if (!isVisible) return;
       animationFrameId = requestAnimationFrame(animate);
 
       if (model) {
@@ -158,9 +170,10 @@ export default function Scrub3DViewer({
       renderer.render(scene, camera);
     };
 
-    animate();
+    animationFrameId = requestAnimationFrame(animate);
 
     return () => {
+      observer.disconnect();
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleWindowMouseMove);
       cancelAnimationFrame(animationFrameId);

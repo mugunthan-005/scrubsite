@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, ChevronRight, ChevronLeft } from 'lucide-react';
 import ShinyText from '../components/ShinyText';
 import SideRays from '../components/SideRays';
 import SplitText from '../components/SplitText';
@@ -9,9 +9,7 @@ import VirtualTryOn from '../components/VirtualTryOn';
 import Footer from '../components/Footer';
 import Lanyard from '../components/Lanyard';
 
-
-
-// 5-Subscroll Feature Sequence Content Structure with Videos 1 through 5
+// 5 Feature beats with verified copy, patched ZYNA videos, and lightweight textures (~70KB)
 const FEATURE_STEPS = [
   {
     step: 1,
@@ -23,8 +21,8 @@ const FEATURE_STEPS = [
       'Tailored modern fit that looks professional without restricting movement.',
     ],
     video: '/Video%20One.mp4',
-    primaryImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5.png',
-    secondaryImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5.png',
+    primaryImage: '/scrub_feature_1.jpg',
+    secondaryImage: '/scrub_feature_1.jpg',
     fallbackImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5.png',
     imageFirst: true, // Scroll 1: Left Video 1, Right Text
   },
@@ -38,8 +36,8 @@ const FEATURE_STEPS = [
       'Wrinkle-resistant fabric that stays crisp throughout the day.',
     ],
     video: '/Video%20two.mp4',
-    primaryImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (1).png',
-    secondaryImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (1).png',
+    primaryImage: '/scrub_feature_2.jpg',
+    secondaryImage: '/scrub_feature_2.jpg',
     fallbackImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (1).png',
     imageFirst: false, // Scroll 2: Left Text, Right Video 2
   },
@@ -52,9 +50,9 @@ const FEATURE_STEPS = [
       'Reinforced stitching for durability in demanding environments.',
       'Breathable knitted fabric for all-day comfort across every shift.',
     ],
-    video: '/Video%20three.mp4',
-    primaryImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (2).png',
-    secondaryImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (2).png',
+    video: '/Video%20three.mp4', // Patched video with authentic ZYNA pocket badge
+    primaryImage: '/scrub_feature_3.jpg',
+    secondaryImage: '/scrub_feature_3.jpg',
     fallbackImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (2).png',
     imageFirst: true, // Scroll 3: Left Video 3, Right Text
   },
@@ -68,8 +66,8 @@ const FEATURE_STEPS = [
       'Soft-touch finish with excellent shape retention after repeated washes.',
     ],
     video: '/Video%20four.mp4',
-    primaryImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (3).png',
-    secondaryImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (3).png',
+    primaryImage: '/scrub_feature_4.jpg',
+    secondaryImage: '/scrub_feature_4.jpg',
     fallbackImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (3).png',
     imageFirst: false, // Scroll 4: Left Text, Right Video 4
   },
@@ -82,9 +80,9 @@ const FEATURE_STEPS = [
       'Clean silhouettes that balance style with workplace professionalism.',
       'Crafted to make healthcare professionals feel confident every day.',
     ],
-    video: '/Video%20five.mp4',
-    primaryImage: '/Gemini_Generated_Image_q6oe8eq6oe8eq6oe.png',
-    secondaryImage: '/Gemini_Generated_Image_q6oe8eq6oe8eq6oe.png',
+    video: '/Video%20five.mp4', // Patched video with authentic ZYNA pocket & collar badge
+    primaryImage: '/scrub_feature_5.jpg',
+    secondaryImage: '/scrub_feature_5.jpg',
     fallbackImage: '/Gemini_Generated_Image_q6oe8eq6oe8eq6oe.png',
     imageFirst: true, // Scroll 5: Left Video 5, Right Text
   },
@@ -92,7 +90,7 @@ const FEATURE_STEPS = [
 
 const TOTAL_SECTIONS = 4;
 
-// Smart Image loader that attempts /imageX.jpg or /imageX.png before falling back gracefully
+// Smart Image loader that attempts optimized image before falling back
 function SmartImage({ primary, secondary, fallback, alt, className }: { primary: string; secondary: string; fallback: string; alt: string; className?: string }) {
   const [imgSrc, setImgSrc] = useState(primary);
   const [attempt, setAttempt] = useState(0);
@@ -117,6 +115,7 @@ function SmartImage({ primary, secondary, fallback, alt, className }: { primary:
       src={imgSrc}
       alt={alt}
       onError={handleError}
+      loading="eager"
       className={className}
     />
   );
@@ -132,25 +131,26 @@ function FeatureMedia({ feature }: { feature: typeof FEATURE_STEPS[0] }) {
 
   if (feature.video && !videoError) {
     return (
-      <div className="relative h-[360px] sm:h-[440px] lg:h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl bg-[#041117]">
+      <div className="relative h-[360px] sm:h-[440px] lg:h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl bg-[#081E26] border border-[#CBD7D7]/15">
         <video
           key={feature.video}
           src={feature.video}
+          poster={feature.primaryImage}
           autoPlay
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           onError={() => setVideoError(true)}
           className="h-full w-full object-cover rounded-3xl"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#041117]/40 via-transparent to-transparent pointer-events-none rounded-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#041117]/60 via-transparent to-transparent pointer-events-none rounded-3xl" />
       </div>
     );
   }
 
   return (
-    <div className="relative h-[360px] sm:h-[440px] lg:h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl bg-[#041117]">
+    <div className="relative h-[360px] sm:h-[440px] lg:h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl bg-[#081E26] border border-[#CBD7D7]/15">
       <SmartImage
         primary={feature.primaryImage}
         secondary={feature.secondaryImage}
@@ -158,7 +158,7 @@ function FeatureMedia({ feature }: { feature: typeof FEATURE_STEPS[0] }) {
         alt={feature.headline}
         className="h-full w-full object-cover rounded-3xl transition-transform duration-700 hover:scale-105"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#041117]/50 via-transparent to-transparent pointer-events-none rounded-3xl" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#041117]/60 via-transparent to-transparent pointer-events-none rounded-3xl" />
     </div>
   );
 }
@@ -185,7 +185,7 @@ export default function Home() {
     setFeatureStep(validStep);
   }, []);
 
-  // Section & Sub-step scroll handler with synchronous ref lock
+  // Section & Sub-step scroll handler with fast responsive transition
   const handleScrollAction = useCallback((direction: 'next' | 'prev') => {
     if (isLockedRef.current) return;
 
@@ -222,16 +222,16 @@ export default function Home() {
       }
     }
 
-    // Unlock after transition timeout
+    // Snappy unlock after 480ms for fluid responsiveness
     setTimeout(() => {
       isLockedRef.current = false;
-    }, 700);
+    }, 480);
   }, [updateSectionAndStep]);
 
-  // Wheel listener
+  // Wheel listener with fine-tuned sensitivity
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
-      if (Math.abs(e.deltaY) < 20) return;
+      if (Math.abs(e.deltaY) < 18) return;
       
       if (e.deltaY > 0) {
         handleScrollAction('next');
@@ -270,7 +270,7 @@ export default function Home() {
     const touchEndY = e.changedTouches[0].clientY;
     const diff = touchStartY.current - touchEndY;
 
-    if (Math.abs(diff) > 40) {
+    if (Math.abs(diff) > 35) {
       if (diff > 0) {
         handleScrollAction('next');
       } else {
@@ -288,26 +288,54 @@ export default function Home() {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Full-Screen Section Transition Stack */}
+      {/* Floating Section Navigation Dots on Right Edge */}
+      <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3 pointer-events-auto hidden sm:flex">
+        {[
+          { label: 'Hero', sec: 0, step: 0 },
+          { label: 'Features', sec: 1, step: featureStep },
+          { label: 'Try-On', sec: 2, step: 0 },
+          { label: 'Identity', sec: 3, step: 0 },
+        ].map(({ label, sec, step }) => (
+          <button
+            key={sec}
+            onClick={() => updateSectionAndStep(sec, step)}
+            className="group flex items-center justify-end gap-2 text-right cursor-pointer"
+            title={label}
+          >
+            <span className="text-[10px] font-mono uppercase tracking-widest text-[#7E969B] opacity-0 group-hover:opacity-100 transition-opacity bg-[#041117]/90 px-2 py-0.5 rounded border border-[#CBD7D7]/15">
+              {label}
+            </span>
+            <span
+              className={`h-2 rounded-full transition-all ${
+                currentSection === sec
+                  ? 'w-6 bg-[#38A7B8] shadow-[0_0_8px_rgba(56,167,184,0.6)]'
+                  : 'w-2 bg-[#CBD7D7]/30 group-hover:bg-[#CBD7D7]/60'
+              }`}
+            />
+          </button>
+        ))}
+      </div>
+
+      {/* Full-Screen Section Transition Stack with Hardware Acceleration */}
       <div 
-        className="h-full w-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] bg-[#041117]"
+        className="h-full w-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform bg-[#041117]"
         style={{ transform: `translate3d(0, -${currentSection * 100}%, 0)` }}
       >
         {/* ==================== SECTION 1: HERO ==================== */}
         <section className="h-full w-full relative flex-none flex flex-col justify-center overflow-hidden bg-[#041117]">
           <div className="absolute inset-0 z-0 bg-[#041117]">
             <SideRays
-              speed={2.5}
+              speed={1.6}
               rayColor1="#134752"
               rayColor2="#287C8C"
-              intensity={2}
+              intensity={1.5}
               spread={2}
               origin="top-right"
               tilt={0}
-              saturation={1.5}
+              saturation={1.2}
               blend={0.75}
               falloff={1.6}
-              opacity={1.0}
+              opacity={0.8}
             />
           </div>
 
@@ -338,6 +366,22 @@ export default function Home() {
                 textAlign="left"
                 tag="p"
               />
+
+              <div className="pt-2 flex items-center gap-4">
+                <button
+                  onClick={() => updateSectionAndStep(1, 0)}
+                  className="btn-primary text-xs font-mono uppercase tracking-wider flex items-center gap-2 cursor-pointer shadow-lg shadow-[#38A7B8]/20"
+                >
+                  <span>Explore Garment</span>
+                  <ChevronRight size={14} />
+                </button>
+                <a
+                  href="#/model-3d"
+                  className="btn-secondary text-xs font-mono uppercase tracking-wider cursor-pointer"
+                >
+                  3D Studio
+                </a>
+              </div>
             </motion.div>
 
             {/* Right Column: 3D Scrub Model */}
@@ -354,7 +398,7 @@ export default function Home() {
 
 
 
-        {/* ==================== SECTION 3: 5-SUBSCROLL PINNED FEATURE SHOWCASE ==================== */}
+        {/* ==================== SECTION 2: 5-SUBSCROLL PINNED FEATURE SHOWCASE ==================== */}
         <section className="h-full w-full relative flex-none flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#041117] via-[#081E26] to-[#041117] py-4">
           
           {/* Animated Alternating Content */}
@@ -362,10 +406,10 @@ export default function Home() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentFeature.step}
-                initial={{ opacity: 0, x: currentFeature.imageFirst ? -50 : 50 }}
+                initial={{ opacity: 0, x: currentFeature.imageFirst ? -40 : 40 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: currentFeature.imageFirst ? 50 : -50 }}
-                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                exit={{ opacity: 0, x: currentFeature.imageFirst ? 40 : -40 }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-14 items-center w-full"
               >
                 {/* Render Column 1 (Media if imageFirst, otherwise Text) */}
@@ -374,12 +418,12 @@ export default function Home() {
                     <FeatureMedia feature={currentFeature} />
                   ) : (
                     /* Page Text Content - Enlarged Typography */
-                    <div className="flex flex-col justify-center text-left space-y-6">
+                    <div className="flex flex-col justify-center text-left space-y-5">
                       <span className="text-[#38A7B8] text-sm font-bold font-mono tracking-widest uppercase">
-                        {currentFeature.tag}
+                        STEP 0{currentFeature.step} // {currentFeature.tag}
                       </span>
 
-                      <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.15] text-balance drop-shadow-xl">
+                      <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-[#F0F5F5] tracking-tight leading-[1.15] text-balance drop-shadow-xl">
                         {currentFeature.headline}
                       </h2>
 
@@ -392,6 +436,47 @@ export default function Home() {
                             </p>
                           </div>
                         ))}
+                      </div>
+
+                      {/* Interactive Step Navigator Controls */}
+                      <div className="pt-3 flex flex-wrap items-center gap-3">
+                        {featureStep > 0 && (
+                          <button
+                            onClick={() => updateSectionAndStep(1, featureStep - 1)}
+                            className="px-4 py-2 rounded-full bg-[#081E26] text-[#CBD7D7] border border-[#CBD7D7]/20 text-xs font-mono uppercase tracking-wider hover:bg-[#0D2D37] hover:text-white cursor-pointer transition-colors flex items-center gap-1.5"
+                          >
+                            <ChevronLeft size={14} />
+                            <span>Prev</span>
+                          </button>
+                        )}
+                        <button
+                          onClick={() => {
+                            if (featureStep < FEATURE_STEPS.length - 1) {
+                              updateSectionAndStep(1, featureStep + 1);
+                            } else {
+                              updateSectionAndStep(2, 0);
+                            }
+                          }}
+                          className="px-5 py-2 rounded-full bg-[#38A7B8] text-[#041117] font-mono text-xs font-bold uppercase tracking-wider hover:bg-[#4EB8C9] cursor-pointer transition-all shadow-md shadow-[#38A7B8]/20 flex items-center gap-1.5"
+                        >
+                          <span>{featureStep < FEATURE_STEPS.length - 1 ? 'Next Beat' : 'Virtual Try-On'}</span>
+                          <ChevronRight size={14} />
+                        </button>
+
+                        <div className="flex items-center gap-1.5 ml-2">
+                          {FEATURE_STEPS.map((s, idx) => (
+                            <button
+                              key={s.step}
+                              onClick={() => updateSectionAndStep(1, idx)}
+                              className={`h-2 rounded-full transition-all cursor-pointer ${
+                                featureStep === idx
+                                  ? 'w-6 bg-[#38A7B8]'
+                                  : 'w-2 bg-[#CBD7D7]/30 hover:bg-[#CBD7D7]/60'
+                              }`}
+                              title={`Step ${s.step}: ${s.tag}`}
+                            />
+                          ))}
+                        </div>
                       </div>
                     </div>
                   )}
@@ -403,12 +488,12 @@ export default function Home() {
                     <FeatureMedia feature={currentFeature} />
                   ) : (
                     /* Page Text Content - Enlarged Typography */
-                    <div className="flex flex-col justify-center text-left space-y-6">
+                    <div className="flex flex-col justify-center text-left space-y-5">
                       <span className="text-[#38A7B8] text-sm font-bold font-mono tracking-widest uppercase">
-                        {currentFeature.tag}
+                        STEP 0{currentFeature.step} // {currentFeature.tag}
                       </span>
 
-                      <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.15] text-balance drop-shadow-xl">
+                      <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-[#F0F5F5] tracking-tight leading-[1.15] text-balance drop-shadow-xl">
                         {currentFeature.headline}
                       </h2>
 
@@ -422,6 +507,47 @@ export default function Home() {
                           </div>
                         ))}
                       </div>
+
+                      {/* Interactive Step Navigator Controls */}
+                      <div className="pt-3 flex flex-wrap items-center gap-3">
+                        {featureStep > 0 && (
+                          <button
+                            onClick={() => updateSectionAndStep(1, featureStep - 1)}
+                            className="px-4 py-2 rounded-full bg-[#081E26] text-[#CBD7D7] border border-[#CBD7D7]/20 text-xs font-mono uppercase tracking-wider hover:bg-[#0D2D37] hover:text-white cursor-pointer transition-colors flex items-center gap-1.5"
+                          >
+                            <ChevronLeft size={14} />
+                            <span>Prev</span>
+                          </button>
+                        )}
+                        <button
+                          onClick={() => {
+                            if (featureStep < FEATURE_STEPS.length - 1) {
+                              updateSectionAndStep(1, featureStep + 1);
+                            } else {
+                              updateSectionAndStep(2, 0);
+                            }
+                          }}
+                          className="px-5 py-2 rounded-full bg-[#38A7B8] text-[#041117] font-mono text-xs font-bold uppercase tracking-wider hover:bg-[#4EB8C9] cursor-pointer transition-all shadow-md shadow-[#38A7B8]/20 flex items-center gap-1.5"
+                        >
+                          <span>{featureStep < FEATURE_STEPS.length - 1 ? 'Next Beat' : 'Virtual Try-On'}</span>
+                          <ChevronRight size={14} />
+                        </button>
+
+                        <div className="flex items-center gap-1.5 ml-2">
+                          {FEATURE_STEPS.map((s, idx) => (
+                            <button
+                              key={s.step}
+                              onClick={() => updateSectionAndStep(1, idx)}
+                              className={`h-2 rounded-full transition-all cursor-pointer ${
+                                featureStep === idx
+                                  ? 'w-6 bg-[#38A7B8]'
+                                  : 'w-2 bg-[#CBD7D7]/30 hover:bg-[#CBD7D7]/60'
+                              }`}
+                              title={`Step ${s.step}: ${s.tag}`}
+                            />
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -432,7 +558,7 @@ export default function Home() {
 
 
         {/* ==================== SECTION 3: BROWSER-BASED VIRTUAL TRY-ON STUDIO ==================== */}
-        <section className="h-full w-full relative flex-none flex flex-col justify-center overflow-y-auto bg-[#041117] text-white">
+        <section className="h-full w-full relative flex-none flex flex-col justify-center overflow-y-auto bg-[#041117] text-[#F0F5F5]">
           <VirtualTryOn />
         </section>
 

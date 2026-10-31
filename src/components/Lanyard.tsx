@@ -87,6 +87,8 @@ function LanyardCanvas({
   lanyardWidth = 1
 }: LanyardProps) {
   const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768);
+  const [isVisible, setIsVisible] = useState(true);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -94,12 +96,23 @@ function LanyardCanvas({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsVisible(entry.isIntersecting);
+    }, { threshold: 0.05 });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="lanyard-wrapper">
+    <div ref={containerRef} className="lanyard-wrapper">
       <Canvas
+        frameloop={isVisible ? 'always' : 'never'}
         camera={{ position: position, fov: fov }}
-        dpr={[1, isMobile ? 1.5 : 2]}
-        gl={{ alpha: transparent, antialias: true }}
+        dpr={[1, isMobile ? 1.25 : 1.5]}
+        gl={{ alpha: transparent, antialias: true, powerPreference: 'high-performance' }}
         onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
       >
         <ambientLight intensity={Math.PI} />
