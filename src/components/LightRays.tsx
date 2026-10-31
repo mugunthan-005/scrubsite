@@ -10,7 +10,7 @@ export type RaysOrigin =
   | 'right'
   | 'bottom-left'
   | 'bottom-center'
-  | 'bottom-[#040D1A]'
+  | 'bottom-center'
   | 'bottom-right';
 
 export interface LightRaysProps {
@@ -29,7 +29,7 @@ export interface LightRaysProps {
   className?: string;
 }
 
-const DEFAULT_COLOR = '#00ffff';
+const DEFAULT_COLOR = '#38A7B8';
 
 const hexToRgb = (hex: string): [number, number, number] => {
   const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);

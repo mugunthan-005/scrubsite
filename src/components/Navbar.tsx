@@ -47,7 +47,11 @@ export default function Navbar() {
             alt="ZYNA Logo"
             className="h-9 w-9 rounded-lg object-cover ring-1 ring-[#38A7B8]/40 shadow-xs transition-transform group-hover:scale-105"
           />
-          <span className="font-display tracking-widest text-[#F0F5F5]">ZYNA</span>
+          <img
+            src="/zyna-wordmark-transparent.png"
+            alt="ZYNA"
+            className="h-5 sm:h-6 w-auto object-contain transition-transform group-hover:scale-105 filter brightness-110"
+          />
         </button>
 
         {/* Right Action Icons (Search, Account, Cart) */}

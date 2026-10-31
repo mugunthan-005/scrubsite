@@ -13,7 +13,7 @@ interface ColorOption {
 const COLOR_SWATCHES: ColorOption[] = [
   { name: 'Navy Blue', hex: '#0B192C', hsl: [215, 60, 11] },
   { name: 'Ceil Blue', hex: '#639CD9', hsl: [211, 60, 62] },
-  { name: 'Ocean Teal', hex: '#0DA39C', hsl: [177, 85, 35] },
+  { name: 'Ocean Teal', hex: '#38A7B8', hsl: [177, 85, 35] },
   { name: 'Royal Blue', hex: '#1C70F0', hsl: [216, 88, 52] },
   { name: 'Burgundy', hex: '#6D1F3C', hsl: [337, 56, 27] },
   { name: 'Hunter Green', hex: '#1F5E3A', hsl: [146, 50, 25] },

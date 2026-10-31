@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CheckCircle2, ChevronRight, ChevronLeft } from 'lucide-react';
-import ShinyText from '../components/ShinyText';
 import SideRays from '../components/SideRays';
 import SplitText from '../components/SplitText';
 import Scrub3DViewer from '../components/Scrub3DViewer';
@@ -347,14 +346,18 @@ export default function Home() {
               animate={currentSection === 0 ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              <ShinyText
-                text="ZYNA"
-                speed={2.5}
-                color="rgba(240, 245, 245, 0.98)"
-                shineColor="#38A7B8"
-                spread={140}
-                className="font-display text-6xl sm:text-8xl lg:text-9xl font-black uppercase tracking-widest select-none drop-shadow-2xl"
-              />
+              <span className="text-[11px] font-mono uppercase tracking-[0.22em] text-[#38A7B8] font-bold">
+                DESIGN-FIRST HEALTHCARE APPAREL
+              </span>
+
+              {/* Authentic ZYNA Logo Wordmark */}
+              <div className="py-1">
+                <img
+                  src="/zyna-wordmark-transparent.png"
+                  alt="ZYNA"
+                  className="w-full max-w-[340px] sm:max-w-[460px] lg:max-w-[560px] h-auto object-contain select-none drop-shadow-[0_15px_35px_rgba(0,0,0,0.85)] filter brightness-110"
+                />
+              </div>
               
               <SplitText
                 text="Engineered for Comfort. Designed for Performance."

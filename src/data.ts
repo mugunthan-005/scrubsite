@@ -32,7 +32,7 @@ export const BRAND_SPECIFICATION = {
 
 const navy: ColorOption = { name: 'Navy Blue', hex: '#0B192C' };
 const ceilBlue: ColorOption = { name: 'Ceil Blue', hex: '#7fb2d9' };
-const teal: ColorOption = { name: 'Teal', hex: '#0da39c' };
+const teal: ColorOption = { name: 'Teal', hex: '#38A7B8' };
 const black: ColorOption = { name: 'Black', hex: '#1a1a1a' };
 const pewter: ColorOption = { name: 'Pewter', hex: '#8a8d91' };
 const wine: ColorOption = { name: 'Wine', hex: '#6d1f3c' };

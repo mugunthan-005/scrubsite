@@ -166,7 +166,7 @@ export default function Model3D() {
       <div className="absolute inset-0 z-0 pointer-events-none opacity-60">
         <SideRays
           speed={1.8}
-          rayColor1="#0DA39C"
+          rayColor1="#38A7B8"
           rayColor2="#38BDF8"
           intensity={1.5}
           spread={2}
