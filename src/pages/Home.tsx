@@ -7,6 +7,7 @@ import Scrub3DViewer from '../components/Scrub3DViewer';
 import VirtualTryOn from '../components/VirtualTryOn';
 import Footer from '../components/Footer';
 import Lanyard from '../components/Lanyard';
+import FlyingButton from '../components/FlyingButton';
 
 // 5 Feature beats with verified copy, patched ZYNA videos, and lightweight textures (~70KB)
 const FEATURE_STEPS = [
@@ -87,7 +88,7 @@ const FEATURE_STEPS = [
   },
 ];
 
-const TOTAL_SECTIONS = 4;
+const TOTAL_SECTIONS = 5;
 
 // Smart Image loader that attempts optimized image before falling back
 function SmartImage({ primary, secondary, fallback, alt, className }: { primary: string; secondary: string; fallback: string; alt: string; className?: string }) {
@@ -196,28 +197,32 @@ export default function Home() {
 
     if (direction === 'next') {
       if (sec === 0) {
-        updateSectionAndStep(1, 0);
+        updateSectionAndStep(1, 0); // Hero -> Launchpad
       } else if (sec === 1) {
-        if (step < FEATURE_STEPS.length - 1) {
-          updateSectionAndStep(1, step + 1);
-        } else {
-          updateSectionAndStep(2, 0); // Advance to Virtual Try-On Section
-        }
+        updateSectionAndStep(2, 0); // Launchpad -> Feature Beat 1
       } else if (sec === 2) {
-        updateSectionAndStep(3, 0); // Advance to Lanyard 3D Section
+        if (step < FEATURE_STEPS.length - 1) {
+          updateSectionAndStep(2, step + 1);
+        } else {
+          updateSectionAndStep(3, 0); // Features -> Virtual Try-On Section
+        }
+      } else if (sec === 3) {
+        updateSectionAndStep(4, 0); // Virtual Try-On -> Identity/Lanyard 3D Section
       }
     } else {
       // Direction 'prev'
-      if (sec === 3) {
-        updateSectionAndStep(2, 0); // Back to Virtual Try-On Section
+      if (sec === 4) {
+        updateSectionAndStep(3, 0); // Identity -> Virtual Try-On
+      } else if (sec === 3) {
+        updateSectionAndStep(2, FEATURE_STEPS.length - 1); // Virtual Try-On -> Features Beat 5
       } else if (sec === 2) {
-        updateSectionAndStep(1, FEATURE_STEPS.length - 1); // Back to Step 5 of Section 1
-      } else if (sec === 1) {
         if (step > 0) {
-          updateSectionAndStep(1, step - 1);
+          updateSectionAndStep(2, step - 1);
         } else {
-          updateSectionAndStep(0, 0);
+          updateSectionAndStep(1, 0); // Features Beat 1 -> Launchpad
         }
+      } else if (sec === 1) {
+        updateSectionAndStep(0, 0); // Launchpad -> Hero
       }
     }
 
@@ -291,7 +296,7 @@ export default function Home() {
     >
       {/* Mobile Subtle Floating Section Indicator */}
       <div className="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 flex sm:hidden items-center gap-1.5 bg-[#041117]/90 border border-[#CBD7D7]/20 backdrop-blur-md px-3 py-1.5 rounded-full shadow-xl pointer-events-auto">
-        {[0, 1, 2, 3].map((sec) => (
+        {[0, 1, 2, 3, 4].map((sec) => (
           <button
             key={sec}
             onClick={() => updateSectionAndStep(sec, 0)}
@@ -304,16 +309,17 @@ export default function Home() {
           />
         ))}
         <span className="text-[10px] font-mono font-bold text-[#38A7B8] ml-1">
-          0{currentSection + 1}/04
+          0{currentSection + 1}/05
         </span>
       </div>
       {/* Floating Section Navigation Dots on Right Edge */}
       <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3 pointer-events-auto hidden sm:flex">
         {[
           { label: 'Hero', sec: 0, step: 0 },
-          { label: 'Features', sec: 1, step: featureStep },
-          { label: 'Try-On', sec: 2, step: 0 },
-          { label: 'Identity', sec: 3, step: 0 },
+          { label: 'Launch', sec: 1, step: 0 },
+          { label: 'Features', sec: 2, step: featureStep },
+          { label: 'Try-On', sec: 3, step: 0 },
+          { label: 'Identity', sec: 4, step: 0 },
         ].map(({ label, sec, step }) => (
           <button
             key={sec}
@@ -421,7 +427,95 @@ export default function Home() {
 
 
 
-        {/* ==================== SECTION 2: 5-SUBSCROLL PINNED FEATURE SHOWCASE ==================== */}
+        {/* ==================== SECTION 2: INTERACTIVE TAKEOFF LAUNCHPAD (FLYING BUTTON) ==================== */}
+        <section className="h-full w-full relative flex-none flex flex-col justify-center items-center overflow-hidden bg-gradient-to-b from-[#041117] via-[#081E26] to-[#041117] px-4 py-3 sm:py-6 text-center select-none">
+          {/* Subtle Ambient Radial Glow */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(56,167,184,0.15),transparent_65%)] pointer-events-none" />
+          <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(#CBD7D7_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+
+          <div className="relative z-10 max-w-2xl w-full flex flex-col items-center justify-center space-y-3 sm:space-y-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={currentSection === 1 ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="flex flex-col items-center space-y-1.5 sm:space-y-2.5"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#081E26] border border-[#38A7B8]/40 shadow-sm shadow-[#38A7B8]/10">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#38A7B8] animate-ping" />
+                <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.22em] text-[#38A7B8] font-bold">
+                  AERODYNAMIC CLINICAL APPAREL
+                </span>
+              </div>
+
+              <h2 className="font-display text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black text-[#F0F5F5] tracking-tight leading-tight text-balance">
+                Engineered for High-Velocity Shifts
+              </h2>
+
+              <p className="text-xs sm:text-sm lg:text-base text-[#CBD7D7] max-w-md font-medium leading-relaxed">
+                Touch or tap the thruster craft below to ignite flight mode. It will blast off with fluid smoke and automatically glide into the feature breakdown.
+              </p>
+            </motion.div>
+
+            {/* FlyingButton Interactive Container */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={currentSection === 1 ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative w-full max-w-xl h-[260px] xs:h-[300px] sm:h-[380px] lg:h-[400px] rounded-2xl bg-[#081E26]/40 border border-[#CBD7D7]/15 backdrop-blur-sm overflow-hidden shadow-2xl flex items-center justify-center pointer-events-auto"
+            >
+              <FlyingButton
+                theme="dark"
+                size="large"
+                altitude={180}
+                hoverTime={2.4}
+                jets={2}
+                thrusters={true}
+                trigger="hover"
+                carryCursor={true}
+                smoke={1.2}
+                turbulence={1.2}
+                wobble={1}
+                ramp={false}
+                thrustColor="#38A7B8"
+                smokeColor="#CBD7D7"
+                buttonColor="#081E26"
+                textColor="#F0F5F5"
+                onClick={() => {
+                  setTimeout(() => {
+                    updateSectionAndStep(2, 0);
+                  }, 450);
+                }}
+                onTouchLaunch={() => {
+                  setTimeout(() => {
+                    updateSectionAndStep(2, 0);
+                  }, 450);
+                }}
+              >
+                TOUCH TO LAUNCH // AUTO-SCROLL
+              </FlyingButton>
+            </motion.div>
+
+            {/* Hint / Direct navigation */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={currentSection === 1 ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex items-center gap-2 pt-1"
+            >
+              <button
+                onClick={() => updateSectionAndStep(2, 0)}
+                className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#7E969B] hover:text-[#38A7B8] transition-colors flex items-center gap-1.5 cursor-pointer bg-[#081E26]/70 px-3.5 py-1.5 rounded-full border border-[#CBD7D7]/15"
+              >
+                <span>Or glide directly to Features</span>
+                <ChevronRight size={12} className="text-[#38A7B8]" />
+              </button>
+            </motion.div>
+          </div>
+        </section>
+
+
+
+        {/* ==================== SECTION 3: 5-SUBSCROLL PINNED FEATURE SHOWCASE ==================== */}
         <section className="h-full w-full relative flex-none flex flex-col justify-center overflow-y-auto lg:overflow-hidden bg-gradient-to-b from-[#041117] via-[#081E26] to-[#041117] py-2 sm:py-4">
           
           {/* Animated Alternating Content */}
@@ -464,21 +558,29 @@ export default function Home() {
 
                     {/* Step Navigator Controls */}
                     <div className="pt-2 sm:pt-4 flex flex-wrap items-center gap-2 sm:gap-3">
-                      {featureStep > 0 && (
+                      {featureStep > 0 ? (
                         <button
-                          onClick={() => updateSectionAndStep(1, featureStep - 1)}
+                          onClick={() => updateSectionAndStep(2, featureStep - 1)}
                           className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#081E26] text-[#CBD7D7] border border-[#CBD7D7]/20 text-[10px] sm:text-xs font-mono uppercase tracking-wider hover:bg-[#0D2D37] hover:text-white cursor-pointer transition-colors flex items-center gap-1"
                         >
                           <ChevronLeft size={13} />
                           <span>Prev</span>
                         </button>
+                      ) : (
+                        <button
+                          onClick={() => updateSectionAndStep(1, 0)}
+                          className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#081E26] text-[#CBD7D7] border border-[#CBD7D7]/20 text-[10px] sm:text-xs font-mono uppercase tracking-wider hover:bg-[#0D2D37] hover:text-white cursor-pointer transition-colors flex items-center gap-1"
+                        >
+                          <ChevronLeft size={13} />
+                          <span>Launchpad</span>
+                        </button>
                       )}
                       <button
                         onClick={() => {
                           if (featureStep < FEATURE_STEPS.length - 1) {
-                            updateSectionAndStep(1, featureStep + 1);
+                            updateSectionAndStep(2, featureStep + 1);
                           } else {
-                            updateSectionAndStep(2, 0);
+                            updateSectionAndStep(3, 0);
                           }
                         }}
                         className="px-4 py-1.5 sm:px-5 sm:py-2 rounded-full bg-[#38A7B8] text-[#041117] font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider hover:bg-[#4EB8C9] cursor-pointer transition-all shadow-md shadow-[#38A7B8]/20 flex items-center gap-1"
@@ -491,7 +593,7 @@ export default function Home() {
                         {FEATURE_STEPS.map((s, idx) => (
                           <button
                             key={s.step}
-                            onClick={() => updateSectionAndStep(1, idx)}
+                            onClick={() => updateSectionAndStep(2, idx)}
                             className={`h-1.5 sm:h-2 rounded-full transition-all cursor-pointer ${
                               featureStep === idx
                                 ? 'w-5 sm:w-6 bg-[#38A7B8]'
