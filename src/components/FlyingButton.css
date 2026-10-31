@@ -13,7 +13,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 240px;
+  min-height: 100%;
   overflow: hidden;
   isolation: isolate;
   touch-action: manipulation;
@@ -72,7 +72,7 @@
   height: var(--fly-h);
   margin: 0;
   padding: 0 var(--fly-px);
-  border: 0;
+  border: 1px solid rgba(56, 167, 184, 0.45);
   border-radius: var(--fly-radius, calc(var(--fly-h) / 2));
   background: var(--fly-bg);
   color: var(--fly-ink);
@@ -80,7 +80,7 @@
   font-size: var(--fly-fs);
   font-weight: 500;
   line-height: 1;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.04em;
   white-space: nowrap;
   cursor: pointer;
   outline: none;
@@ -91,6 +91,8 @@
   transform-origin: 50% 50%;
   will-change: transform;
   visibility: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.55), 0 0 12px rgba(56, 167, 184, 0.25);
+  backdrop-filter: blur(8px);
 }
 
 .flying-button[data-ready] .flying-button__craft {
@@ -202,3 +204,4 @@
 .flying-button[data-carry] .flying-button__cursor {
   display: block;
 }
+

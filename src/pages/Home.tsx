@@ -9,7 +9,7 @@ import Footer from '../components/Footer';
 import Lanyard from '../components/Lanyard';
 import FlyingButton from '../components/FlyingButton';
 
-// 5 Feature beats with verified copy, patched ZYNA videos, and lightweight textures (~70KB)
+// 5 Feature beats with verified copy, patched ZYNA videos, and lightweight exact posters (~60KB)
 const FEATURE_STEPS = [
   {
     step: 1,
@@ -21,10 +21,7 @@ const FEATURE_STEPS = [
       'Tailored modern fit that looks professional without restricting movement.',
     ],
     video: '/Video%20One.mp4',
-    primaryImage: '/scrub_feature_1.jpg',
-    secondaryImage: '/scrub_feature_1.jpg',
-    fallbackImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5.png',
-    imageFirst: true, // Scroll 1: Left Video 1, Right Text
+    poster: '/scrub_feature_1.jpg',
   },
   {
     step: 2,
@@ -36,10 +33,7 @@ const FEATURE_STEPS = [
       'Wrinkle-resistant fabric that stays crisp throughout the day.',
     ],
     video: '/Video%20two.mp4',
-    primaryImage: '/scrub_feature_2.jpg',
-    secondaryImage: '/scrub_feature_2.jpg',
-    fallbackImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (1).png',
-    imageFirst: false, // Scroll 2: Left Text, Right Video 2
+    poster: '/scrub_feature_2.jpg',
   },
   {
     step: 3,
@@ -50,11 +44,8 @@ const FEATURE_STEPS = [
       'Reinforced stitching for durability in demanding environments.',
       'Breathable knitted fabric for all-day comfort across every shift.',
     ],
-    video: '/Video%20three.mp4', // Patched video with authentic ZYNA pocket badge
-    primaryImage: '/scrub_feature_3.jpg',
-    secondaryImage: '/scrub_feature_3.jpg',
-    fallbackImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (2).png',
-    imageFirst: true, // Scroll 3: Left Video 3, Right Text
+    video: '/Video%20three.mp4',
+    poster: '/scrub_feature_3.jpg',
   },
   {
     step: 4,
@@ -66,10 +57,7 @@ const FEATURE_STEPS = [
       'Soft-touch finish with excellent shape retention after repeated washes.',
     ],
     video: '/Video%20four.mp4',
-    primaryImage: '/scrub_feature_4.jpg',
-    secondaryImage: '/scrub_feature_4.jpg',
-    fallbackImage: '/Gemini_Generated_Image_nce5j3nce5j3nce5 (3).png',
-    imageFirst: false, // Scroll 4: Left Text, Right Video 4
+    poster: '/scrub_feature_4.jpg',
   },
   {
     step: 5,
@@ -80,85 +68,60 @@ const FEATURE_STEPS = [
       'Clean silhouettes that balance style with workplace professionalism.',
       'Crafted to make healthcare professionals feel confident every day.',
     ],
-    video: '/Video%20five.mp4', // Patched video with authentic ZYNA pocket & collar badge
-    primaryImage: '/scrub_feature_5.jpg',
-    secondaryImage: '/scrub_feature_5.jpg',
-    fallbackImage: '/Gemini_Generated_Image_q6oe8eq6oe8eq6oe.png',
-    imageFirst: true, // Scroll 5: Left Video 5, Right Text
+    video: '/Video%20five.mp4',
+    poster: '/scrub_feature_5.jpg',
   },
 ];
 
-const TOTAL_SECTIONS = 5;
+const TOTAL_SECTIONS = 4;
 
-// Smart Image loader that attempts optimized image before falling back
-function SmartImage({ primary, secondary, fallback, alt, className }: { primary: string; secondary: string; fallback: string; alt: string; className?: string }) {
-  const [imgSrc, setImgSrc] = useState(primary);
-  const [attempt, setAttempt] = useState(0);
-
-  useEffect(() => {
-    setImgSrc(primary);
-    setAttempt(0);
-  }, [primary]);
-
-  const handleError = () => {
-    if (attempt === 0) {
-      setAttempt(1);
-      setImgSrc(secondary);
-    } else if (attempt === 1) {
-      setAttempt(2);
-      setImgSrc(fallback);
-    }
-  };
-
-  return (
-    <img
-      src={imgSrc}
-      alt={alt}
-      onError={handleError}
-      loading="eager"
-      className={className}
-    />
-  );
-}
-
-// Media renderer with video preloading and seamless fallback handling
-function FeatureMedia({ feature }: { feature: typeof FEATURE_STEPS[0] }) {
-  const [videoError, setVideoError] = useState(false);
+// Persistent, preloaded video showcase ensuring zero-lag and zero-flicker transitions
+function PersistentFeatureVideos({ currentStep }: { currentStep: number }) {
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   useEffect(() => {
-    setVideoError(false);
-  }, [feature.video]);
-
-  if (feature.video && !videoError) {
-    return (
-      <div className="relative h-[190px] xs:h-[220px] sm:h-[360px] lg:h-[480px] w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl bg-[#081E26] border border-[#CBD7D7]/15">
-        <video
-          key={feature.video}
-          src={feature.video}
-          poster={feature.primaryImage}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          onError={() => setVideoError(true)}
-          className="h-full w-full object-cover rounded-3xl"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#041117]/60 via-transparent to-transparent pointer-events-none rounded-3xl" />
-      </div>
-    );
-  }
+    videoRefs.current.forEach((vid, idx) => {
+      if (!vid) return;
+      if (idx === currentStep) {
+        // Ensure active video is playing
+        vid.play().catch(() => {});
+      } else {
+        // Pause inactive videos after crossfade to conserve resources
+        setTimeout(() => {
+          if (idx !== currentStep && vid) {
+            vid.pause();
+          }
+        }, 550);
+      }
+    });
+  }, [currentStep]);
 
   return (
-    <div className="relative h-[190px] xs:h-[220px] sm:h-[360px] lg:h-[480px] w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl bg-[#081E26] border border-[#CBD7D7]/15">
-      <SmartImage
-        primary={feature.primaryImage}
-        secondary={feature.secondaryImage}
-        fallback={feature.fallbackImage}
-        alt={feature.headline}
-        className="h-full w-full object-cover rounded-3xl transition-transform duration-700 hover:scale-105"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#041117]/60 via-transparent to-transparent pointer-events-none rounded-3xl" />
+    <div className="relative h-[200px] xs:h-[240px] sm:h-[360px] lg:h-[480px] w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl bg-[#081E26] border border-[#CBD7D7]/15">
+      {FEATURE_STEPS.map((feature, idx) => {
+        const isActive = idx === currentStep;
+        return (
+          <div
+            key={feature.step}
+            className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+              isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+            }`}
+          >
+            <video
+              ref={el => { videoRefs.current[idx] = el; }}
+              src={feature.video}
+              poster={feature.poster}
+              autoPlay={idx === 0}
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="h-full w-full object-cover rounded-3xl"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#041117]/60 via-transparent to-transparent pointer-events-none rounded-3xl" />
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -197,32 +160,28 @@ export default function Home() {
 
     if (direction === 'next') {
       if (sec === 0) {
-        updateSectionAndStep(1, 0); // Hero -> Launchpad
+        updateSectionAndStep(1, 0); // Hero -> Feature Beat 1
       } else if (sec === 1) {
-        updateSectionAndStep(2, 0); // Launchpad -> Feature Beat 1
-      } else if (sec === 2) {
         if (step < FEATURE_STEPS.length - 1) {
-          updateSectionAndStep(2, step + 1);
+          updateSectionAndStep(1, step + 1);
         } else {
-          updateSectionAndStep(3, 0); // Features -> Virtual Try-On Section
+          updateSectionAndStep(2, 0); // Features -> Virtual Try-On Section
         }
-      } else if (sec === 3) {
-        updateSectionAndStep(4, 0); // Virtual Try-On -> Identity/Lanyard 3D Section
+      } else if (sec === 2) {
+        updateSectionAndStep(3, 0); // Virtual Try-On -> Identity/Lanyard 3D Section
       }
     } else {
       // Direction 'prev'
-      if (sec === 4) {
-        updateSectionAndStep(3, 0); // Identity -> Virtual Try-On
-      } else if (sec === 3) {
-        updateSectionAndStep(2, FEATURE_STEPS.length - 1); // Virtual Try-On -> Features Beat 5
+      if (sec === 3) {
+        updateSectionAndStep(2, 0); // Identity -> Virtual Try-On
       } else if (sec === 2) {
-        if (step > 0) {
-          updateSectionAndStep(2, step - 1);
-        } else {
-          updateSectionAndStep(1, 0); // Features Beat 1 -> Launchpad
-        }
+        updateSectionAndStep(1, FEATURE_STEPS.length - 1); // Virtual Try-On -> Features Beat 5
       } else if (sec === 1) {
-        updateSectionAndStep(0, 0); // Launchpad -> Hero
+        if (step > 0) {
+          updateSectionAndStep(1, step - 1);
+        } else {
+          updateSectionAndStep(0, 0); // Features Beat 1 -> Hero
+        }
       }
     }
 
@@ -294,9 +253,11 @@ export default function Home() {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Mobile Subtle Floating Section Indicator */}
-      <div className="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 flex sm:hidden items-center gap-1.5 bg-[#041117]/90 border border-[#CBD7D7]/20 backdrop-blur-md px-3 py-1.5 rounded-full shadow-xl pointer-events-auto">
-        {[0, 1, 2, 3, 4].map((sec) => (
+      {/* Mobile Subtle Floating Section Indicator (visible on sections 1-3, hidden on hero so the touch bar is completely unobstructed) */}
+      <div className={`fixed bottom-3 left-1/2 -translate-x-1/2 z-50 items-center gap-1.5 bg-[#041117]/90 border border-[#CBD7D7]/20 backdrop-blur-md px-3 py-1.5 rounded-full shadow-xl pointer-events-auto sm:hidden transition-opacity duration-300 ${
+        currentSection > 0 ? 'flex opacity-100' : 'hidden opacity-0 pointer-events-none'
+      }`}>
+        {[0, 1, 2, 3].map((sec) => (
           <button
             key={sec}
             onClick={() => updateSectionAndStep(sec, 0)}
@@ -309,17 +270,16 @@ export default function Home() {
           />
         ))}
         <span className="text-[10px] font-mono font-bold text-[#38A7B8] ml-1">
-          0{currentSection + 1}/05
+          0{currentSection + 1}/04
         </span>
       </div>
       {/* Floating Section Navigation Dots on Right Edge */}
       <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3 pointer-events-auto hidden sm:flex">
         {[
           { label: 'Hero', sec: 0, step: 0 },
-          { label: 'Launch', sec: 1, step: 0 },
-          { label: 'Features', sec: 2, step: featureStep },
-          { label: 'Try-On', sec: 3, step: 0 },
-          { label: 'Identity', sec: 4, step: 0 },
+          { label: 'Features', sec: 1, step: featureStep },
+          { label: 'Try-On', sec: 2, step: 0 },
+          { label: 'Identity', sec: 3, step: 0 },
         ].map(({ label, sec, step }) => (
           <button
             key={sec}
@@ -346,8 +306,8 @@ export default function Home() {
         className="h-full w-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform bg-[#041117]"
         style={{ transform: `translate3d(0, -${currentSection * 100}%, 0)` }}
       >
-        {/* ==================== SECTION 1: HERO ==================== */}
-        <section className="h-full w-full relative flex-none flex flex-col justify-center overflow-hidden bg-[#041117]">
+        {/* ==================== SECTION 1: HERO (FIRST PAGE WITH BLENDED TOUCH BAR) ==================== */}
+        <section className="h-full w-full relative flex-none flex flex-col justify-between overflow-hidden bg-[#041117]">
           <div className="absolute inset-0 z-0 bg-[#041117]">
             <SideRays
               speed={1.6}
@@ -364,7 +324,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="container-px relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-8 items-center w-full py-2 sm:py-6">
+          <div className="container-px relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-8 items-center w-full pt-2 sm:pt-6 my-auto">
             {/* Left Column: Brand title & Tagline */}
             <motion.div
               className="lg:col-span-6 text-left flex flex-col gap-2.5 sm:gap-5"
@@ -415,7 +375,7 @@ export default function Home() {
 
             {/* Right Column: 3D Scrub Model */}
             <motion.div
-              className="lg:col-span-6 h-[260px] xs:h-[300px] sm:h-[400px] lg:h-[500px] w-full relative flex items-center justify-center"
+              className="lg:col-span-6 h-[220px] xs:h-[260px] sm:h-[360px] lg:h-[460px] w-full relative flex items-center justify-center"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={currentSection === 0 ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.7, delay: 0.25 }}
@@ -423,120 +383,75 @@ export default function Home() {
               <Scrub3DViewer modelPath="/medical scrubs 3d model.glb" />
             </motion.div>
           </div>
-        </section>
 
-
-
-        {/* ==================== SECTION 2: INTERACTIVE TAKEOFF LAUNCHPAD (FLYING BUTTON) ==================== */}
-        <section className="h-full w-full relative flex-none flex flex-col justify-center items-center overflow-hidden bg-gradient-to-b from-[#041117] via-[#081E26] to-[#041117] px-4 py-3 sm:py-6 text-center select-none">
-          {/* Subtle Ambient Radial Glow */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(56,167,184,0.15),transparent_65%)] pointer-events-none" />
-          <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(#CBD7D7_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
-
-          <div className="relative z-10 max-w-2xl w-full flex flex-col items-center justify-center space-y-3 sm:space-y-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={currentSection === 1 ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex flex-col items-center space-y-1.5 sm:space-y-2.5"
-            >
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#081E26] border border-[#38A7B8]/40 shadow-sm shadow-[#38A7B8]/10">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#38A7B8] animate-ping" />
-                <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.22em] text-[#38A7B8] font-bold">
-                  AERODYNAMIC CLINICAL APPAREL
-                </span>
-              </div>
-
-              <h2 className="font-display text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black text-[#F0F5F5] tracking-tight leading-tight text-balance">
-                Engineered for High-Velocity Shifts
-              </h2>
-
-              <p className="text-xs sm:text-sm lg:text-base text-[#CBD7D7] max-w-md font-medium leading-relaxed">
-                Touch or tap the thruster craft below to ignite flight mode. It will blast off with fluid smoke and automatically glide into the feature breakdown.
-              </p>
-            </motion.div>
-
-            {/* FlyingButton Interactive Container */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={currentSection === 1 ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative w-full max-w-xl h-[260px] xs:h-[300px] sm:h-[380px] lg:h-[400px] rounded-2xl bg-[#081E26]/40 border border-[#CBD7D7]/15 backdrop-blur-sm overflow-hidden shadow-2xl flex items-center justify-center pointer-events-auto"
-            >
+          {/* Blended Touch Bar at Bottom of First Page */}
+          <motion.div 
+            initial={{ opacity: 0, y: 12 }}
+            animate={currentSection === 0 ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="relative z-20 w-full flex flex-col items-center justify-end pb-2 sm:pb-3 pointer-events-none"
+          >
+            <div className="relative w-full max-w-[260px] xs:max-w-[300px] sm:max-w-[340px] h-[85px] sm:h-[105px] flex items-end justify-center pointer-events-auto">
               <FlyingButton
                 theme="dark"
-                size="large"
-                altitude={180}
-                hoverTime={2.4}
+                size="medium"
+                altitude={50}
+                hoverTime={1.8}
                 jets={2}
                 thrusters={true}
                 trigger="hover"
-                carryCursor={true}
-                smoke={1.2}
-                turbulence={1.2}
-                wobble={1}
+                carryCursor={false}
+                smoke={0.8}
+                turbulence={0.9}
+                wobble={0.4}
                 ramp={false}
                 thrustColor="#38A7B8"
-                smokeColor="#CBD7D7"
-                buttonColor="#081E26"
+                smokeColor="#94A3B8"
+                buttonColor="#061820"
                 textColor="#F0F5F5"
                 onClick={() => {
                   setTimeout(() => {
-                    updateSectionAndStep(2, 0);
-                  }, 450);
+                    updateSectionAndStep(1, 0);
+                  }, 380);
                 }}
                 onTouchLaunch={() => {
                   setTimeout(() => {
-                    updateSectionAndStep(2, 0);
-                  }, 450);
+                    updateSectionAndStep(1, 0);
+                  }, 380);
                 }}
               >
-                TOUCH TO LAUNCH // AUTO-SCROLL
+                <span className="flex items-center gap-2 text-[11px] sm:text-xs font-mono font-medium tracking-wider">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#38A7B8] animate-pulse" />
+                  <span>TOUCH TO EXPLORE</span>
+                  <span className="text-[#38A7B8] text-xs">↓</span>
+                </span>
               </FlyingButton>
-            </motion.div>
-
-            {/* Hint / Direct navigation */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={currentSection === 1 ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex items-center gap-2 pt-1"
-            >
-              <button
-                onClick={() => updateSectionAndStep(2, 0)}
-                className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#7E969B] hover:text-[#38A7B8] transition-colors flex items-center gap-1.5 cursor-pointer bg-[#081E26]/70 px-3.5 py-1.5 rounded-full border border-[#CBD7D7]/15"
-              >
-                <span>Or glide directly to Features</span>
-                <ChevronRight size={12} className="text-[#38A7B8]" />
-              </button>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </section>
 
-
-
-        {/* ==================== SECTION 3: 5-SUBSCROLL PINNED FEATURE SHOWCASE ==================== */}
+        {/* ==================== SECTION 2: 5-SUBSCROLL PINNED FEATURE SHOWCASE ==================== */}
         <section className="h-full w-full relative flex-none flex flex-col justify-center overflow-y-auto lg:overflow-hidden bg-gradient-to-b from-[#041117] via-[#081E26] to-[#041117] py-2 sm:py-4">
           
-          {/* Animated Alternating Content */}
+          {/* Seamless Pinned Showcase with Preloaded Video Stack */}
           <div className="w-full container-px relative z-10 flex-1 flex items-center justify-center min-h-0 lg:min-h-[500px] py-1 sm:py-4">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentFeature.step}
-                initial={{ opacity: 0, x: currentFeature.imageFirst ? -40 : 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: currentFeature.imageFirst ? 40 : -40 }}
-                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-10 lg:gap-14 items-center w-full"
-              >
-                {/* Media Column: Always order-1 on mobile so it doesn't jump; alternates on desktop */}
-                <div className={`lg:col-span-6 order-1 ${currentFeature.imageFirst ? 'lg:order-1' : 'lg:order-2'}`}>
-                  <FeatureMedia feature={currentFeature} />
-                </div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-10 lg:gap-14 items-center w-full">
+              {/* Media Column: Stable, persistent preloaded videos with zero unmounting */}
+              <div className="lg:col-span-6 order-1">
+                <PersistentFeatureVideos currentStep={featureStep} />
+              </div>
 
-                {/* Text Content Column: Always order-2 on mobile */}
-                <div className={`lg:col-span-6 order-2 ${currentFeature.imageFirst ? 'lg:order-2' : 'lg:order-1'}`}>
-                  <div className="flex flex-col justify-center text-left space-y-2 sm:space-y-4">
+              {/* Text Content Column: Fluid animated content */}
+              <div className="lg:col-span-6 order-2">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentFeature.step}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -16 }}
+                    transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                    className="flex flex-col justify-center text-left space-y-2 sm:space-y-4"
+                  >
                     <span className="text-[#38A7B8] text-xs sm:text-sm font-bold font-mono tracking-widest uppercase">
                       STEP 0{currentFeature.step} // {currentFeature.tag}
                     </span>
@@ -560,7 +475,7 @@ export default function Home() {
                     <div className="pt-2 sm:pt-4 flex flex-wrap items-center gap-2 sm:gap-3">
                       {featureStep > 0 ? (
                         <button
-                          onClick={() => updateSectionAndStep(2, featureStep - 1)}
+                          onClick={() => updateSectionAndStep(1, featureStep - 1)}
                           className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#081E26] text-[#CBD7D7] border border-[#CBD7D7]/20 text-[10px] sm:text-xs font-mono uppercase tracking-wider hover:bg-[#0D2D37] hover:text-white cursor-pointer transition-colors flex items-center gap-1"
                         >
                           <ChevronLeft size={13} />
@@ -568,19 +483,19 @@ export default function Home() {
                         </button>
                       ) : (
                         <button
-                          onClick={() => updateSectionAndStep(1, 0)}
+                          onClick={() => updateSectionAndStep(0, 0)}
                           className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#081E26] text-[#CBD7D7] border border-[#CBD7D7]/20 text-[10px] sm:text-xs font-mono uppercase tracking-wider hover:bg-[#0D2D37] hover:text-white cursor-pointer transition-colors flex items-center gap-1"
                         >
                           <ChevronLeft size={13} />
-                          <span>Launchpad</span>
+                          <span>Hero</span>
                         </button>
                       )}
                       <button
                         onClick={() => {
                           if (featureStep < FEATURE_STEPS.length - 1) {
-                            updateSectionAndStep(2, featureStep + 1);
+                            updateSectionAndStep(1, featureStep + 1);
                           } else {
-                            updateSectionAndStep(3, 0);
+                            updateSectionAndStep(2, 0);
                           }
                         }}
                         className="px-4 py-1.5 sm:px-5 sm:py-2 rounded-full bg-[#38A7B8] text-[#041117] font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider hover:bg-[#4EB8C9] cursor-pointer transition-all shadow-md shadow-[#38A7B8]/20 flex items-center gap-1"
@@ -593,7 +508,7 @@ export default function Home() {
                         {FEATURE_STEPS.map((s, idx) => (
                           <button
                             key={s.step}
-                            onClick={() => updateSectionAndStep(2, idx)}
+                            onClick={() => updateSectionAndStep(1, idx)}
                             className={`h-1.5 sm:h-2 rounded-full transition-all cursor-pointer ${
                               featureStep === idx
                                 ? 'w-5 sm:w-6 bg-[#38A7B8]'
@@ -604,10 +519,10 @@ export default function Home() {
                         ))}
                       </div>
                     </div>
-                  </div>
-                </div>
-            </motion.div>
-            </AnimatePresence>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
           </div>
         </section>
 
