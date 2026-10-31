@@ -29,7 +29,8 @@ export default function Scrub3DViewer({
     const width = container.clientWidth || 500;
     const height = container.clientHeight || 500;
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-    camera.position.set(0, 0, 3.8);
+    const isSmall = width < 640;
+    camera.position.set(0, isSmall ? -0.05 : 0, isSmall ? 4.4 : 3.8);
 
     // 3. Renderer setup - Seamless background blending
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -132,12 +133,25 @@ export default function Scrub3DViewer({
 
     window.addEventListener('mousemove', handleWindowMouseMove);
 
+    const handleWindowTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        const x = (touch.clientX / window.innerWidth) * 2 - 1;
+        const y = -(touch.clientY / window.innerHeight) * 2 + 1;
+        targetRotationY = x * 0.5;
+        targetRotationX = y * 0.25;
+      }
+    };
+    window.addEventListener('touchmove', handleWindowTouchMove, { passive: true });
+
     // Resize Handler
     const handleResize = () => {
       if (!container) return;
       const w = container.clientWidth;
       const h = container.clientHeight;
       camera.aspect = w / h;
+      const small = w < 640;
+      camera.position.set(0, small ? -0.05 : 0, small ? 4.4 : 3.8);
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     };
@@ -176,6 +190,7 @@ export default function Scrub3DViewer({
       observer.disconnect();
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleWindowMouseMove);
+      window.removeEventListener('touchmove', handleWindowTouchMove);
       cancelAnimationFrame(animationFrameId);
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
@@ -187,18 +202,18 @@ export default function Scrub3DViewer({
   return (
     <div
       onClick={() => navigate('/model-3d')}
-      className={`relative w-full h-full min-h-[420px] sm:min-h-[500px] flex items-center justify-center cursor-pointer group ${className}`}
+      className={`relative w-full h-full min-h-[260px] xs:min-h-[300px] sm:min-h-[420px] lg:min-h-[500px] flex items-center justify-center cursor-pointer group ${className}`}
     >
       {/* Background Lighting Radial Glow */}
       <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
-        <div className="h-[280px] w-[280px] sm:h-[380px] sm:w-[380px] rounded-full bg-gradient-to-r from-[#184E59]/25 via-[#0D2D34]/20 to-transparent blur-3xl transition-transform group-hover:scale-110 duration-500" />
+        <div className="h-[220px] w-[220px] sm:h-[380px] sm:w-[380px] rounded-full bg-gradient-to-r from-[#184E59]/25 via-[#0D2D34]/20 to-transparent blur-3xl transition-transform group-hover:scale-110 duration-500" />
       </div>
 
       {/* Loading Progress Indicator */}
       {loading && (
-        <div className="relative z-20 flex flex-col items-center gap-3 text-slate-300 mx-auto">
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-[#38A7B8]/20 border-t-[#38A7B8]" />
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#38A7B8]">
+        <div className="relative z-20 flex flex-col items-center gap-2 text-slate-300 mx-auto">
+          <div className="h-8 w-8 sm:h-10 sm:w-10 animate-spin rounded-full border-4 border-[#38A7B8]/20 border-t-[#38A7B8]" />
+          <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-[#38A7B8]">
             Loading 3D Model {progress > 0 ? `(${progress}%)` : ''}
           </p>
         </div>
@@ -208,8 +223,8 @@ export default function Scrub3DViewer({
       <div ref={mountRef} className="relative z-10 w-full h-full flex items-center justify-center pointer-events-none" />
 
       {/* Bottom Overlay Badge attached to the bottom of the 3D image */}
-      <div className="absolute bottom-2 z-20 px-6 py-2.5 bg-[#081E26]/90 group-hover:bg-[#38A7B8] text-[#38A7B8] group-hover:text-[#041117] border border-[#38A7B8]/40 rounded-xl text-xs font-extrabold uppercase tracking-widest backdrop-blur-md shadow-2xl transition-all duration-300 flex items-center gap-2 group-hover:scale-105">
-        <Box size={16} className="text-[#38A7B8] group-hover:text-[#041117] animate-pulse" />
+      <div className="absolute bottom-1.5 sm:bottom-2 z-20 px-4 py-1.5 sm:px-6 sm:py-2.5 bg-[#081E26]/90 group-hover:bg-[#38A7B8] text-[#38A7B8] group-hover:text-[#041117] border border-[#38A7B8]/40 rounded-xl text-[10px] sm:text-xs font-extrabold uppercase tracking-widest backdrop-blur-md shadow-2xl transition-all duration-300 flex items-center gap-1.5 sm:gap-2 group-hover:scale-105">
+        <Box size={14} className="text-[#38A7B8] group-hover:text-[#041117] animate-pulse" />
         <span>3D View</span>
       </div>
     </div>

@@ -14,7 +14,7 @@ export default function Model3D() {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const [autoRotate, setAutoRotate] = useState(true);
-  const [showSpecs, setShowSpecs] = useState(true);
+  const [showSpecs, setShowSpecs] = useState(() => typeof window !== 'undefined' ? window.innerWidth >= 768 : false);
 
   useEffect(() => {
     const container = mountRef.current;
@@ -27,7 +27,8 @@ export default function Model3D() {
     const width = container.clientWidth || 800;
     const height = container.clientHeight || 600;
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-    camera.position.set(0.4, 0, 4.2);
+    const isSmall = width < 640;
+    camera.position.set(isSmall ? 0 : 0.4, 0, isSmall ? 4.8 : 4.2);
 
     // 3. Renderer setup - Seamless transparent WebGL canvas
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -180,37 +181,37 @@ export default function Model3D() {
       </div>
 
       {/* Top Controls Header Bar */}
-      <div className="relative z-20 container-px py-4 flex flex-wrap items-center justify-between gap-4 border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md">
+      <div className="relative z-20 container-px py-3 sm:py-4 flex flex-wrap items-center justify-between gap-2.5 sm:gap-4 border-b border-slate-800/80 bg-slate-900/80 backdrop-blur-md">
         <button
           onClick={() => navigate('/')}
-          className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-300 hover:text-white transition-colors"
+          className="flex items-center gap-1.5 text-[11px] sm:text-xs font-bold uppercase tracking-widest text-slate-300 hover:text-white transition-colors"
         >
-          <ArrowLeft size={16} /> Back to Home
+          <ArrowLeft size={15} /> <span>Home</span>
         </button>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3 flex-wrap">
           <button
             onClick={() => setShowSpecs((v) => !v)}
-            className="px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2"
+            className="px-2.5 sm:px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5"
           >
-            <Sliders size={14} /> Specs Panel {showSpecs ? 'Hide' : 'Show'}
+            <Sliders size={13} /> <span>Specs {showSpecs ? 'Hide' : 'Show'}</span>
           </button>
           <button
             onClick={() => setAutoRotate((v) => !v)}
-            className={`px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 border ${
+            className={`px-2.5 sm:px-3.5 py-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 border ${
               autoRotate
                 ? 'bg-[#38A7B8] text-[#041117] border-[#38A7B8] shadow-md'
                 : 'bg-slate-900 text-slate-300 border-slate-700 hover:bg-slate-800'
             }`}
           >
-            <RotateCw size={14} className={autoRotate ? 'animate-spin' : ''} />
-            Auto-Rotate 360° {autoRotate ? 'ON' : 'OFF'}
+            <RotateCw size={13} className={autoRotate ? 'animate-spin' : ''} />
+            <span>360° {autoRotate ? 'ON' : 'OFF'}</span>
           </button>
           <button
             onClick={resetView}
-            className="px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2"
+            className="px-2.5 sm:px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5"
           >
-            <Maximize2 size={14} /> Reset View
+            <Maximize2 size={13} /> <span>Reset</span>
           </button>
         </div>
       </div>
@@ -234,7 +235,7 @@ export default function Model3D() {
 
         {/* Floating Technical Specifications Card (Overlays without blocking 3D Model) */}
         {showSpecs && (
-          <div className="absolute left-4 top-4 lg:left-8 lg:top-8 z-20 max-w-xs sm:max-w-sm w-full bg-[#081E26]/80 border border-[#CBD7D7]/20 p-5 shadow-2xl backdrop-blur-xl animate-fade-in">
+          <div className="absolute inset-x-3 bottom-3 sm:bottom-auto sm:inset-x-auto sm:left-6 sm:top-6 lg:left-8 lg:top-8 z-20 max-w-sm w-auto sm:w-full bg-[#081E26]/95 border border-[#CBD7D7]/20 p-4 sm:p-5 rounded-2xl sm:rounded-none shadow-2xl backdrop-blur-xl animate-fade-in max-h-[70vh] overflow-y-auto">
             <div className="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
               <h1 className="font-display text-base font-bold uppercase tracking-wider text-white">
                 ZYNA Medical Scrub Set
